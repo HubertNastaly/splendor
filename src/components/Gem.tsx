@@ -7,11 +7,12 @@ type GemSize = 'small' | 'normal' | 'big'
 interface Props {
   size: GemSize
   color: Color
+  className?: string
 }
 
-export const Gem = ({ size, color }: Props) => {
+export const Gem = ({ size, color, className }: Props) => {
   return (
-    <GemBackground color={color} size={size}>
+    <GemBackground className={className} color={color} size={size}>
       <FaRegGem size={ICON_SIZES[size]} color={getIconColor(color)} />
     </GemBackground>
   )
@@ -51,7 +52,7 @@ const GemBackground = styled('div', {
         size: 32
       },
       big: {
-        size: 96
+        size: 72
       }
     }
   }
@@ -60,7 +61,7 @@ const GemBackground = styled('div', {
 const ICON_SIZES: Record<GemSize, number> = {
   small: 12,
   normal: 16,
-  big: 96
+  big: 42
 }
 
 function getIconColor(color: Color) {

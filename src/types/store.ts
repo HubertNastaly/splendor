@@ -1,6 +1,9 @@
-import { CardsCollection } from "./card"
+import { CardsCollection, Color } from "./card"
+
+type Tokens = Record<Color, number>
 
 export interface Store {
   decksByLevel: CardsCollection,
-  boardCardsByLevel: CardsCollection
+  boardCardsByLevel: CardsCollection,
+  bankTokens: Tokens
 }

@@ -1,4 +1,3 @@
-import { $$PropertyValue, css } from "@stitches/react";
 import { styled } from "../theme";
 import { CardData, Color } from "../types";
 import { Gem } from "./Gem";
@@ -87,14 +86,14 @@ const TopSectionBackground = styled('div', {
   zIndex: '$high',
   width: '100%',
   height: '100%',
-  background: "$white",
+  background: "white",
   opacity: 0.3
 })
 
 const CardValue = styled('span', {
   zIndex: '$highest',
   color: '#000',
-  fontSize: '$big',
+  fontSize: '$normal',
   fontWeight: 'bold',
 })
 

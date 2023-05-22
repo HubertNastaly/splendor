@@ -1,13 +1,14 @@
 import { Provider } from 'react-redux'
 import { store } from './store'
-import { Board } from './components'
+import { Board, TokensPanel } from './components'
 import { styled } from '@stitches/react'
 
 const App = () => {
   return (
     <Provider store={store}>
       <Page>
-        <BoardStyled />
+        <TokensPanel />
+        <Board />
       </Page>
     </Provider>
   )
@@ -18,9 +19,10 @@ export default App
 const Page = styled('div', {
   width: '100vw',
   height: '100vh',
-  paddingTop: 128
+  paddingTop: 64,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  rowGap: 64
 })
 
-const BoardStyled = styled(Board, {
-  margin: '0 auto',
-})
