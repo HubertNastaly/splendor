@@ -1,6 +1,6 @@
-import { css } from "@stitches/react";
 import { styled } from "../theme";
 import { CardData, Color } from "../types";
+import { Gem } from "./Gem";
 
 interface Props {
   card: CardData
@@ -24,13 +24,13 @@ export const Card = ({ card }: Props) => {
         <CardValue>
           {card.value || ''}
         </CardValue>
-        <Gem color={color} size='big' />
+        <Gem color={color} size="normal" />
       </TopSection>
       <Prices>
         {(Object.entries(prices) as [Color, number][]).map(([color, price], index) => (
           !!price && (
             <Price key={`price-${index}`}>
-              <Gem color={color} />
+              <Gem size="small" color={color} />
               {price}
             </Price>
           )
@@ -86,56 +86,14 @@ const TopSectionBackground = styled('div', {
   zIndex: '$high',
   width: '100%',
   height: '100%',
-  background: "$white",
+  background: "white",
   opacity: 0.3
-})
-
-const colorStyles = css({
-  variants: {
-    color: {
-      white: {
-        backgroundColor: '$white'
-      },
-      blue: {
-        backgroundColor: '$blue'
-      },
-      green: {
-        backgroundColor: '$green'
-      },
-      red: {
-        backgroundColor: '$red'
-      },
-      black: {
-        backgroundColor: '$black'
-      }
-    }
-  }
-})
-
-const Gem = styled('div', colorStyles, {
-  width: 24,
-  height: 24,
-  zIndex: '$highest',
-  borderRadius: '50%',
-
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-
-  variants: {
-    size: {
-      big: {
-        width: 32,
-        height: 32,
-      }
-    }
-  }
 })
 
 const CardValue = styled('span', {
   zIndex: '$highest',
   color: '#000',
-  fontSize: '$big',
+  fontSize: '$normal',
   fontWeight: 'bold',
 })
 

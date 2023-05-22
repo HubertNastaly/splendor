@@ -3,7 +3,7 @@ import { createStitches } from '@stitches/react'
 const { styled, theme } = createStitches({
   theme: {
     colors: {
-      white: 'white',
+      white: '#f7f7f7',
       bgWhite: '#d5d5d5',
       blue: '#0045db',
       bgBlue: '#89b1ff;',
@@ -15,12 +15,19 @@ const { styled, theme } = createStitches({
       bgBlack: '#998174'
     },
     fontSizes: {
-      big: '18px'
+      normal: '18px',
+      big: '32px'
     }, 
     zIndices: {
       highest: 3,
       high: 2
     }
+  },
+  utils: {
+    size: (value: number) => ({
+      width: value,
+      height: value
+    })
   }
 })
 
