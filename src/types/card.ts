@@ -1,4 +1,4 @@
-type Color = 'white' | 'blue' | 'green' | 'red' | 'black'
+export type Color = 'white' | 'blue' | 'green' | 'red' | 'black'
 export type Level = 1 | 2 | 3
 
 export interface CardData {
