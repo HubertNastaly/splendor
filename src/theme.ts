@@ -21,6 +21,12 @@ const { styled, theme } = createStitches({
       highest: 3,
       high: 2
     }
+  },
+  utils: {
+    size: (value: number) => ({
+      width: value,
+      height: value
+    })
   }
 })
 
