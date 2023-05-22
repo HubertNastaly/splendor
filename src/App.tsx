@@ -1,6 +1,12 @@
+import { Provider } from 'react-redux'
+import { store } from './store'
+import { Board } from './components'
+
 const App = () => {
   return (
-    <span>Splendor</span>
+    <Provider store={store}>
+      <Board />
+    </Provider>
   )
 }
 
