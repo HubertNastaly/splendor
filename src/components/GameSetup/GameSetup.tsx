@@ -3,6 +3,7 @@ import { FormEvent, useCallback, useState } from "react"
 import { PlayerInput } from "./PlayerInput"
 import { styled } from "../../theme"
 import { useAppDispatch } from "../../store"
+import { Button } from "../Button"
 
 const DEFAULT_NAMES = new Array(MAX_PLAYERS_NUMBER).fill('')
 
@@ -31,7 +32,7 @@ export const GameSetup = () => {
       {names.map((name, index) => (
         <PlayerInput key={`player-${index}`} name={name} setName={newName => setName(newName, index)} />
       ))}
-      <PlayButton disabled={!canPlay}>Play</PlayButton>
+      <Button disabled={!canPlay}>Play</Button>
     </Form>
   )
 }
@@ -42,23 +43,3 @@ const Form = styled('form', {
   alignItems: 'stretch',
   rowGap: 16,
 })
-
-const PlayButton = styled('button', {
-  height: 36,
-  fontSize: '$normal',
-  color: 'white',
-  background: 'black',
-  border: 'none',
-  borderRadius: 4,
-  cursor: 'pointer',
-
-  variants: {
-    disabled: {
-      true: {
-        background: '$disabled',
-        cursor: 'not-allowed'
-      }
-    }
-  }
-})
-
