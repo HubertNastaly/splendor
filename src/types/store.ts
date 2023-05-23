@@ -1,7 +1,8 @@
-import { CardsCollection, Color } from "./card"
+import { CardsCollection } from "./card"
+import { Color } from "./color"
 import { Player } from "./player"
 
-type Tokens = Record<Color, number>
+export type Tokens = Record<Color, number>
 type GameState = 'setup' | 'started' | 'ended'
 
 export interface Store {
