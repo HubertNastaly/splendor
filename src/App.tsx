@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import { store, useAppSelector } from './store'
-import { Board, GameSetup, TokensPanel } from './components'
+import { Board, GameSetup, TokensBank } from './components'
 import { styled } from '@stitches/react'
 import { useDevMode } from './hooks'
 import { TurnPanel } from './components/TurnPanel'
@@ -25,7 +25,7 @@ const AppContent = () => {
     case 'started':
       return (
         <>
-          <TokensPanel />
+          <TokensBank />
           <Board />
           <TurnPanelStyled />
         </>
