@@ -2,6 +2,7 @@ import { Provider } from 'react-redux'
 import { store, useAppSelector } from './store'
 import { Board, GameSetup, TokensPanel } from './components'
 import { styled } from '@stitches/react'
+import { useDevMode } from './hooks'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
 }
 
 const AppContent = () => {
+  useDevMode()
   const gameState = useAppSelector(({ gameState }) => gameState)
 
   switch(gameState) {
