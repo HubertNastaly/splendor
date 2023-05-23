@@ -12,7 +12,8 @@ const { styled, theme } = createStitches({
       red: '#bf0000',
       bgRed: '#f78692',
       black: '#210b00',
-      bgBlack: '#998174'
+      bgBlack: '#998174',
+      disabled: '#999999'
     },
     fontSizes: {
       normal: '18px',

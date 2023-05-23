@@ -10,5 +10,7 @@ export const DEFAULT_STATE: Store = {
     green: 10,
     red: 10,
     black: 10
-  }
+  },
+  gameState: 'setup',
+  players: []
 }

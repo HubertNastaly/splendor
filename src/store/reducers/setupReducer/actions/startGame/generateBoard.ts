@@ -1,12 +1,8 @@
-import { Action } from '@reduxjs/toolkit'
-import { CardData, CardsCollection, Level, Store } from '../../../../types'
-import { shuffle } from '../../../../utils/shuffle'
-import allCards from '../../../../data/cards.json'
-import { createCardsCollection } from '../../../../utils/createCardsCollection'
-
-const CARDS_PER_LEVEL = 4
-
-export type GenerateBoardAction = Action<'GENERATE_BOARD'>
+import { CardData, CardsCollection, Level, Store } from '../../../../../types'
+import { shuffle } from '../../../../../utils/shuffle'
+import allCards from '../../../../../data/cards.json'
+import { createCardsCollection } from '../../../../../utils/createCardsCollection'
+import { CARDS_PER_LEVEL } from '../../../../../constants';
 
 export function generateBoard(state: Store): Store {
   const decksByLevel: CardsCollection = createCardsCollection()

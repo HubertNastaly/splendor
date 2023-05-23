@@ -10,7 +10,7 @@ export const TokensPanel = () => {
   return (
     <Panel>
       {tokenEntries.map(([color, count]) => (
-        <Row>
+        <Row key={`token-row-${color}`}>
           <Token color={color} />
           <Count>{count}</Count>
         </Row>
