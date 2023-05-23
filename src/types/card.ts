@@ -1,4 +1,5 @@
-export type Color = 'white' | 'blue' | 'green' | 'red' | 'black'
+import { Color } from "./color"
+
 export type Level = 1 | 2 | 3
 
 export interface CardData {
