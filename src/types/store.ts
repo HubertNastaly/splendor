@@ -10,5 +10,6 @@ export interface Store {
   boardCardsByLevel: CardsCollection,
   bankTokens: Tokens,
   gameState: GameState,
-  players: Player[]
+  players: Player[],
+  currentPlayerIndex: number
 }

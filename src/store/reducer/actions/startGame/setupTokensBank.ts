@@ -1,4 +1,4 @@
-import { COLORS, Store, Tokens } from "../../../../../types";
+import { COLORS, Store, Tokens } from "../../../../types";
 
 export function setupTokensBank(state: Store) {
   const tokensNumber = getTokensNumber(state.players.length)

@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit"
-import { Store } from "../../../../../types"
+import { Store } from "../../../../types"
 import { setupPlayers } from "./setupPlayers"
 import { generateBoard } from "./generateBoard"
 import { setupTokensBank } from "./setupTokensBank"

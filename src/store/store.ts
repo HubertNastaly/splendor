@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux'
 import { Store } from '../types'
-import { SetupAction, setupReducer } from './reducers'
+import { reducer } from './reducer'
 import { DEFAULT_STATE } from './defaultState'
 import { Dispatch } from 'react'
+import { Action } from './reducer/actions'
 
-export type Action = SetupAction
 
-export const store = configureStore<Store, Action>({
+export const store = configureStore({
   preloadedState: DEFAULT_STATE,
-  reducer: setupReducer
+  reducer
 })
 
 export const useAppDispatch: () => Dispatch<Action> = useDispatch
