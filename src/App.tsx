@@ -1,17 +1,34 @@
 import { Provider } from 'react-redux'
-import { store } from './store'
-import { Board, TokensPanel } from './components'
+import { store, useAppSelector } from './store'
+import { Board, GameSetup, TokensPanel } from './components'
 import { styled } from '@stitches/react'
 
 const App = () => {
   return (
     <Provider store={store}>
       <Page>
-        <TokensPanel />
-        <Board />
+        <AppContent />
       </Page>
     </Provider>
   )
+}
+
+const AppContent = () => {
+  const gameState = useAppSelector(({ gameState }) => gameState)
+
+  switch(gameState) {
+    case 'setup':
+      return <GameSetup />
+    case 'started':
+      return (
+        <>
+          <TokensPanel />
+          <Board />
+        </>
+      )
+    case 'ended':
+      return null
+  }
 }
 
 export default App
@@ -23,6 +40,7 @@ const Page = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  rowGap: 64
+  rowGap: 64,
+  backgroundColor: '#faf1d7'
 })
 
