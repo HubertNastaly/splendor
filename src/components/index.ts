@@ -1,3 +1,3 @@
 export * from './Board'
-export * from './TokensPanel'
+export * from './TokensBank'
 export * from './GameSetup'
