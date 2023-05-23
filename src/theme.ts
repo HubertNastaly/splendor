@@ -22,6 +22,12 @@ const { styled, theme } = createStitches({
     zIndices: {
       highest: 3,
       high: 2
+    },
+    space: {
+      tiny: '8px',
+      small: '16px',
+      medium: '24px',
+      big: '32px'
     }
   },
   utils: {

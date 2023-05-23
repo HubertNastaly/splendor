@@ -12,5 +12,6 @@ export const DEFAULT_STATE: Store = {
     black: 0
   },
   gameState: 'setup',
-  players: []
+  players: [],
+  currentPlayerIndex: 0
 }

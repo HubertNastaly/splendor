@@ -3,6 +3,7 @@ import { store, useAppSelector } from './store'
 import { Board, GameSetup, TokensPanel } from './components'
 import { styled } from '@stitches/react'
 import { useDevMode } from './hooks'
+import { TurnPanel } from './components/TurnPanel'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const AppContent = () => {
         <>
           <TokensPanel />
           <Board />
+          <TurnPanelStyled />
         </>
       )
     case 'ended':
@@ -36,6 +38,7 @@ const AppContent = () => {
 export default App
 
 const Page = styled('div', {
+  position: 'relative',
   width: '100vw',
   height: '100vh',
   paddingTop: 64,
@@ -46,3 +49,8 @@ const Page = styled('div', {
   backgroundColor: '#faf1d7'
 })
 
+const TurnPanelStyled = styled(TurnPanel, {
+  position: 'absolute',
+  right: 32,
+  bottom: 32
+})
