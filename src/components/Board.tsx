@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../store'
+import { useAppSelector } from '../store'
 import { styled } from '../theme'
 import { Card } from './Card'
 
@@ -8,12 +7,7 @@ interface Props {
 }
 
 export const Board = ({ className }: Props) => {
-  const dispatch = useAppDispatch()
   const cardsByLevel = useAppSelector(({ boardCardsByLevel }) => boardCardsByLevel)
-
-  useEffect(() => {
-    dispatch({ type: 'GENERATE_BOARD' })
-  }, [dispatch])
 
   return (
     <Grid className={className}>
