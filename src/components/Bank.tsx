@@ -11,10 +11,10 @@ const ALLOWED_COLLECTING_PHASES: PlayerMovePhase['type'][] = [
   '2_DIFFERENT_TOKENS_COLLECTED'
 ]
 
-export const TokensBank = () => {
+export const Bank = () => {
   const dispatch = useAppDispatch()
-  const { bankTokens, players, currentPlayerIndex } = useAppSelector(state => state)
-  const tokenEntries = Object.entries(bankTokens) as [Color, number][]
+  const { bank: { tokens, gold }, players, currentPlayerIndex } = useAppSelector(state => state)
+  const tokenEntries = Object.entries(tokens) as [Color, number][]
 
   const currentPlayer = players[currentPlayerIndex]
   const canCollect = ALLOWED_COLLECTING_PHASES.includes(currentPlayer.movePhase.type)
@@ -26,8 +26,8 @@ export const TokensBank = () => {
     if(isToCollectDuplicatedThirdToken(currentPlayer, tokenColor)) {
       return true
     }
-    return !isEnoughTokensInBank(bankTokens, currentPlayer, tokenColor)
-  }, [canCollect, bankTokens, currentPlayer])
+    return !isEnoughTokensInBank(tokens, currentPlayer, tokenColor)
+  }, [canCollect, tokens, currentPlayer])
 
   const collectToken = (tokenColor: Color) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
 
@@ -43,6 +43,10 @@ export const TokensBank = () => {
           <Count>{count}</Count>
         </Row>
       ))}
+      <Row key="token-row-gold">
+        <Token color="gold" />
+        <Count>{gold}</Count>
+      </Row>
     </Panel>
   )
 }

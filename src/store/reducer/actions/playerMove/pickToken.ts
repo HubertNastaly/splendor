@@ -1,16 +1,15 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Color, Player, PlayerMovePhase, Store, Tokens } from '@/types'
+import { Color, Player, PlayerMovePhase, Store } from '@/types'
 import { clone, isEnoughTokensInBank, isToCollectDuplicatedThirdToken } from '@/utils'
 
 export type PickTokenAction = PayloadAction<{ tokenColor: Color }, 'PICK_TOKEN'>
 
 export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAction) {
-  const { currentPlayerIndex } = state
-  const players = [...state.players]
-  const currentPlayer = clone(players[currentPlayerIndex])
-  const bankTokens: Tokens = { ...state.bankTokens }
+  const newState = clone(state)
+  const { currentPlayerIndex, players, bank } = newState
+  const currentPlayer = players[currentPlayerIndex]
 
-  if(!isEnoughTokensInBank(bankTokens, currentPlayer, tokenColor)) {
+  if(!isEnoughTokensInBank(bank.tokens, currentPlayer, tokenColor)) {
     throw new Error('Not enough tokens in bank')
   }
 
@@ -19,17 +18,11 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
   }
   
   currentPlayer.tokens[tokenColor]++
-  bankTokens[tokenColor]--
+  bank.tokens[tokenColor]--
 
   currentPlayer.movePhase = getNextMovePhase(currentPlayer, tokenColor)
 
-  players[currentPlayerIndex] = currentPlayer
-
-  return {
-    ...state,
-    players,
-    bankTokens
-  }
+  return newState
 }
 
 function getNextMovePhase({ movePhase }: Player, tokenColor: Color): PlayerMovePhase {

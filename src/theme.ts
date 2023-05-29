@@ -13,6 +13,7 @@ const { styled, theme } = createStitches({
       bgRed: '#f78692',
       black: '#210b00',
       bgBlack: '#998174',
+      gold: '#de9102',
       disabled: '#999999'
     },
     fontSizes: {

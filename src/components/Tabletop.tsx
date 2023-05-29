@@ -1,7 +1,7 @@
 import { styled } from '@/theme'
 import { Board } from './Board'
 import { Page } from './common'
-import { TokensBank } from './TokensBank'
+import { Bank } from './Bank'
 import { TurnPanel } from './TurnPanel'
 import { useAppDispatch } from '@/store'
 
@@ -10,7 +10,7 @@ export const Tabletop = () => {
 
   return (
     <Page onClick={() => dispatch({ type: 'DESELECT_CARD' })}>
-      <TokensBank />
+      <Bank />
       <Board />
       <TurnPanelStyled />
     </Page>
