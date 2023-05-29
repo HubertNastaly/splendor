@@ -1,6 +1,7 @@
 import { styled } from '@/theme'
 import { GemColor } from '@/types'
 import { FaRegGem } from 'react-icons/fa'
+import { MdStar } from 'react-icons/md'
 
 type GemSize = 'small' | 'normal' | 'big'
 
@@ -15,7 +16,11 @@ export const Gem = ({ size, color, disabled, className }: Props) => {
   const deducedColor = disabled ? 'disabled' : color
   return (
     <GemBackground className={className} color={deducedColor} size={size}>
-      <FaRegGem size={ICON_SIZES[size]} color={getIconColor(deducedColor)} />
+      {color === 'gold' ? (
+        <MdStar size={ICON_SIZES[size]} color={getIconColor('gold')} />
+      ) : (
+        <FaRegGem size={ICON_SIZES[size]} color={getIconColor(deducedColor)} />
+      )}
     </GemBackground>
   )
 }
