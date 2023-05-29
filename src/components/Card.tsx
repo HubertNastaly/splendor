@@ -4,9 +4,11 @@ import { Gem } from './Gem';
 
 interface Props {
   card: CardData
+  isSelected: boolean
+  onSelect: () => void
 }
 
-export const Card = ({ card }: Props) => {
+export const Card = ({ card, isSelected, onSelect }: Props) => {
   const { color, price: { white, blue, green, red, black } } = card
 
   const prices: Record<Color, number> = {
@@ -18,7 +20,7 @@ export const Card = ({ card }: Props) => {
   }
 
   return (
-    <Container color={color}>
+    <Container color={color} selected={isSelected} onClick={onSelect}>
       <TopSection>
         <TopSectionBackground />
         <CardValue>
@@ -64,6 +66,12 @@ const Container = styled('div', {
       },
       black: {
         backgroundColor: '$bgBlack'
+      }
+    },
+
+    selected: {
+      true: {
+        outline: '2px solid black'
       }
     }
   }

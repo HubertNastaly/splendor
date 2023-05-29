@@ -1,3 +1,4 @@
+import { CardData } from './card'
 import { Color, Tokens } from './color'
 
 export type PlayerMovePhase = {
@@ -14,6 +15,9 @@ export type PlayerMovePhase = {
 } | {
   type: '3_TOKENS_COLLECTED',
   tokenColors: [Color, Color, Color]
+} | {
+  type: 'CARD_SELECTED',
+  selectedCard: CardData
 }
 
 export interface Player {

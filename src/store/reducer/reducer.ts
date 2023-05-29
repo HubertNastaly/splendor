@@ -1,5 +1,5 @@
 import { Store } from '@/types';
-import { Action, finishTurn, pickToken, startGame } from './actions';
+import { Action, finishTurn, pickToken, selectCard, startGame } from './actions';
 import { DEFAULT_STATE } from '@/store/defaultState';
 
 export function reducer (state: Store = DEFAULT_STATE, action: Action): Store {
@@ -9,6 +9,9 @@ export function reducer (state: Store = DEFAULT_STATE, action: Action): Store {
     }
     case 'PICK_TOKEN': {
       return pickToken(state, action)
+    }
+    case 'SELECT_CARD': {
+      return selectCard(state, action)
     }
     case 'FINISH_TURN': {
       return finishTurn(state)

@@ -1,4 +1,4 @@
-import { CardData, CardsCollection, Level, Store } from '@/types';
+import { CardData, CardsCollection, CardLevel, Store } from '@/types';
 import allCards from '@/data/cards.json'
 import { shuffle, createCardsCollection } from '@/utils';
 import { CARDS_PER_LEVEL } from '@/constants';
@@ -19,7 +19,7 @@ export function generateBoard(state: Store): Store {
 
 function shuffleDecks(decks: CardsCollection) {
   for(const key in decks) {
-    const level = parseInt(key) as Level
+    const level = parseInt(key) as CardLevel
     decks[level] = shuffle(decks[level])
   }
 
@@ -30,7 +30,7 @@ function dealCards(decks: CardsCollection) {
   const boardCards = createCardsCollection()
 
   for(const key in decks) {
-    const level = parseInt(key) as Level
+    const level = parseInt(key) as CardLevel
     const deck = decks[level]
 
     const newBoardCards = deck.slice(0, CARDS_PER_LEVEL)

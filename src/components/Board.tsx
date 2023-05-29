@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
 import { Card } from './Card'
 import { styled } from '@/theme'
 
@@ -8,17 +8,20 @@ interface Props {
 
 export const Board = ({ className }: Props) => {
   const cardsByLevel = useAppSelector(({ boardCardsByLevel }) => boardCardsByLevel)
+  const selectedCard = useAppSelector(({ selectedCard }) => selectedCard)
+  const dispatch = useAppDispatch()
+
+  const allCards = [...cardsByLevel[3], ...cardsByLevel[2], ...cardsByLevel[1]]
 
   return (
     <Grid className={className}>
-      {cardsByLevel[3].map((card, index) => (
-        <Card key={`card-3-${index}`} card={card} />
-      ))}
-      {cardsByLevel[2].map((card, index) => (
-        <Card key={`card-2-${index}`} card={card} />
-      ))}
-      {cardsByLevel[1].map((card, index) => (
-        <Card key={`card-1-${index}`} card={card} />
+      {allCards.map((card, index) => (
+        <Card
+          key={`card-${index}`}
+          card={card}
+          isSelected={selectedCard ? selectedCard.id === card.id : false}
+          onSelect={() => dispatch({ type: 'SELECT_CARD', payload: { selectedCard: card } })}
+        />
       ))}
     </Grid>
   )
