@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const Card = ({ card }: Props) => {
-  const { color, white, blue, green, red, black } = card
+  const { color, price: { white, blue, green, red, black } } = card
 
   const prices: Record<Color, number> = {
     white,
