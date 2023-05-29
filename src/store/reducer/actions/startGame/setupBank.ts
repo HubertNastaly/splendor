@@ -1,11 +1,14 @@
 import { COLORS, Store, Tokens } from '@/types'
 
-export function setupTokensBank(state: Store) {
+export function setupBank(state: Store): Store {
   const tokensNumber = getTokensNumber(state.players.length)
   const bankTokens = Object.fromEntries(COLORS.map(color => [color, tokensNumber])) as Tokens
   return {
     ...state,
-    bankTokens
+    bank: {
+      tokens: bankTokens,
+      gold: 5
+    }
   }
 }
 

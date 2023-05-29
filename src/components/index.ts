@@ -1,5 +1,5 @@
 export * from './Board'
-export * from './TokensBank'
+export * from './Bank'
 export * from './GameSetup'
 export * from './TurnPanel'
 export * from './Tabletop'

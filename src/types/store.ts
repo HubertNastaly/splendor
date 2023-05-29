@@ -1,5 +1,5 @@
+import { Bank } from './bank'
 import { CardData, CardsCollection } from './card'
-import { Tokens } from './color'
 import { Player } from './player'
 
 type GameState = 'setup' | 'started' | 'ended'
@@ -7,7 +7,7 @@ type GameState = 'setup' | 'started' | 'ended'
 export interface Store {
   decksByLevel: CardsCollection,
   boardCardsByLevel: CardsCollection,
-  bankTokens: Tokens,
+  bank: Bank,
   gameState: GameState,
   players: Player[],
   currentPlayerIndex: number,

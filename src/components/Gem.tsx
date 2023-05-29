@@ -1,12 +1,12 @@
 import { styled } from '@/theme'
-import { Color } from '@/types'
+import { GemColor } from '@/types'
 import { FaRegGem } from 'react-icons/fa'
 
 type GemSize = 'small' | 'normal' | 'big'
 
 interface Props {
   size: GemSize
-  color: Color
+  color: GemColor
   disabled?: boolean
   className?: string
 }
@@ -45,6 +45,9 @@ const GemBackground = styled('div', {
       black: {
         backgroundColor: '$black'
       },
+      gold: {
+        backgroundColor: '$gold',
+      },
       disabled: {
         backgroundColor: '$disabled'
       }
@@ -69,12 +72,13 @@ const ICON_SIZES: Record<GemSize, number> = {
   big: 42
 }
 
-function getIconColor(color: Color | 'disabled') {
+function getIconColor(color: GemColor | 'disabled') {
   switch(color) {
     case 'black':
     case 'blue':
     case 'green':
     case 'red':
+    case 'gold':
     case 'disabled':
       return 'rgba(255,255,255,0.6)'
     case 'white':
