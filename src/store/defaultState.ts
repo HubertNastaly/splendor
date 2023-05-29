@@ -7,5 +7,6 @@ export const DEFAULT_STATE: Store = {
   bankTokens: createTokensCollection(),
   gameState: 'setup',
   players: [],
-  currentPlayerIndex: 0
+  currentPlayerIndex: 0,
+  selectedCard: null
 }

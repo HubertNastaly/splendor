@@ -1,12 +1,15 @@
 import { CardData, Color } from '@/types';
 import { styled } from '@/theme';
 import { Gem } from './Gem';
+import { MouseEvent } from 'react';
 
 interface Props {
   card: CardData
+  isSelected: boolean
+  onSelect: () => void
 }
 
-export const Card = ({ card }: Props) => {
+export const Card = ({ card, isSelected, onSelect }: Props) => {
   const { color, price: { white, blue, green, red, black } } = card
 
   const prices: Record<Color, number> = {
@@ -17,8 +20,13 @@ export const Card = ({ card }: Props) => {
     black
   }
 
+  const handleClick = (event: MouseEvent) => {
+    event.stopPropagation()
+    onSelect()
+  }
+
   return (
-    <Container color={color}>
+    <Container color={color} selected={isSelected} onClick={handleClick}>
       <TopSection>
         <TopSectionBackground />
         <CardValue>
@@ -47,6 +55,7 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  cursor: 'pointer',
 
   variants: {
     color: {
@@ -64,6 +73,12 @@ const Container = styled('div', {
       },
       black: {
         backgroundColor: '$bgBlack'
+      }
+    },
+
+    selected: {
+      true: {
+        outline: '2px solid black'
       }
     }
   }

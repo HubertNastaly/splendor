@@ -1,4 +1,4 @@
-import { CardsCollection } from './card'
+import { CardData, CardsCollection } from './card'
 import { Tokens } from './color'
 import { Player } from './player'
 
@@ -10,5 +10,6 @@ export interface Store {
   bankTokens: Tokens,
   gameState: GameState,
   players: Player[],
-  currentPlayerIndex: number
+  currentPlayerIndex: number,
+  selectedCard: CardData | null
 }

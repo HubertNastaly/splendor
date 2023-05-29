@@ -1,4 +1,4 @@
-import { Button } from './Button'
+import { Button } from './common'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { styled } from '@/theme'
 
