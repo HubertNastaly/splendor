@@ -1,5 +1,5 @@
+import { styled } from '@/theme'
 import { MdMan } from 'react-icons/md'
-import { styled } from "../../theme"
 
 interface Props {
   name: string

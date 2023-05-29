@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from "../store"
-import { styled } from "../theme"
-import { Button } from "./Button"
+import { Button } from './Button'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { styled } from '@/theme'
 
 interface Props {
   className?: string

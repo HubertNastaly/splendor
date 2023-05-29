@@ -1,10 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux'
-import { Store } from '../types'
-import { reducer } from './reducer'
-import { DEFAULT_STATE } from './defaultState'
 import { Dispatch } from 'react'
-import { Action } from './reducer/actions'
+import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit'
+import { Store } from '@/types'
+import { reducer, Action } from './reducer'
+import { DEFAULT_STATE } from './defaultState'
 
 
 export const store = configureStore({

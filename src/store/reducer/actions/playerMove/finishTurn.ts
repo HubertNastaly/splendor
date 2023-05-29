@@ -1,5 +1,5 @@
-import { Action } from "@reduxjs/toolkit";
-import { Player, Store } from "../../../../types";
+import { Action } from '@reduxjs/toolkit';
+import { Player, Store } from '@/types';
 
 export type FinishTurnAction = Action<'FINISH_TURN'>
 

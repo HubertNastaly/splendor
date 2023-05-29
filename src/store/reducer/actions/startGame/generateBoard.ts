@@ -1,8 +1,7 @@
-import { CardData, CardsCollection, Level, Store } from '../../../../types'
-import { shuffle } from '../../../../utils/shuffle'
-import allCards from '../../../../data/cards.json'
-import { createCardsCollection } from '../../../../utils/createCardsCollection'
-import { CARDS_PER_LEVEL } from '../../../../constants';
+import { CardData, CardsCollection, Level, Store } from '@/types';
+import allCards from '@/data/cards.json'
+import { shuffle, createCardsCollection } from '@/utils';
+import { CARDS_PER_LEVEL } from '@/constants';
 
 export function generateBoard(state: Store): Store {
   const decksByLevel: CardsCollection = createCardsCollection()

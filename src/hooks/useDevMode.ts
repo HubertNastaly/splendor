@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { useAppDispatch } from "../store"
+import { useAppDispatch } from '@/store'
+import { useEffect } from 'react'
 
 const DEFAULT_NAMES: string[] = ['Szymon', 'Daniel', 'Ignacy']
 

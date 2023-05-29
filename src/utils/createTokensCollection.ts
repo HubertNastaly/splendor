@@ -1,4 +1,4 @@
-import { Tokens } from "../types";
+import { Tokens } from '@/types';
 
 export const createTokensCollection = (): Tokens => ({
   white: 0,

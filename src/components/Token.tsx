@@ -1,6 +1,6 @@
-import { styled } from "../theme";
-import { Color } from "../types";
-import { Gem } from "./Gem";
+import { Color } from '@/types';
+import { Gem } from './Gem';
+import { styled } from '@/theme';
 
 interface Props {
   color: Color

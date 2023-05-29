@@ -1,9 +1,9 @@
-import { MAX_PLAYERS_NUMBER, MIN_PLAYERS_NUMBER } from "../../constants"
-import { FormEvent, useCallback, useState } from "react"
-import { PlayerInput } from "./PlayerInput"
-import { styled } from "../../theme"
-import { useAppDispatch } from "../../store"
-import { Button } from "../Button"
+import { FormEvent, useCallback, useState } from 'react'
+import { MAX_PLAYERS_NUMBER, MIN_PLAYERS_NUMBER } from '@/constants'
+import { PlayerInput } from './PlayerInput'
+import { useAppDispatch } from '@/store'
+import { Button } from '@/components'
+import { styled } from '@/theme'
 
 const DEFAULT_NAMES = new Array(MAX_PLAYERS_NUMBER).fill('')
 

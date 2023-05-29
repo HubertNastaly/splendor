@@ -1,10 +1,9 @@
-import { useCallback } from "react"
-import { useAppDispatch, useAppSelector } from "../store"
-import { styled } from "../theme"
-import { Color, PlayerMovePhase } from "../types"
-import { isEnoughTokensInBank } from "../utils/isEnoughTokensInBank"
-import { Token } from "./Token"
-import { isToCollectDuplicatedThirdToken } from "../utils/isToCollectDuplicatedThirdToken"
+import { useCallback } from 'react'
+import { Token } from './Token'
+import { Color, PlayerMovePhase } from '@/types'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank  } from '@/utils'
+import { styled } from '@/theme'
 
 const ALLOWED_COLLECTING_PHASES: PlayerMovePhase['type'][] = [
   'NONE',

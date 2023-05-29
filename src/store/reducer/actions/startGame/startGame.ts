@@ -1,8 +1,8 @@
-import { PayloadAction } from "@reduxjs/toolkit"
-import { Store } from "../../../../types"
-import { setupPlayers } from "./setupPlayers"
-import { generateBoard } from "./generateBoard"
-import { setupTokensBank } from "./setupTokensBank"
+import { PayloadAction } from '@reduxjs/toolkit'
+import { setupPlayers } from './setupPlayers'
+import { generateBoard } from './generateBoard'
+import { setupTokensBank } from './setupTokensBank'
+import { Store } from '@/types'
 
 type Payload = { names: string[] }
 export type StartGameAction = PayloadAction<Payload, 'START_GAME'>

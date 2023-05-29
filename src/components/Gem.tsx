@@ -1,6 +1,6 @@
+import { styled } from '@/theme'
+import { Color } from '@/types'
 import { FaRegGem } from 'react-icons/fa'
-import { styled } from "../theme"
-import { Color } from "../types"
 
 type GemSize = 'small' | 'normal' | 'big'
 

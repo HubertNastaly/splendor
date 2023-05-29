@@ -1,7 +1,6 @@
-import { Store } from "../../types";
-import { DEFAULT_STATE } from "../defaultState";
-import { Action, finishTurn, pickToken } from "./actions";
-import { startGame } from "./actions/startGame";
+import { Store } from '@/types';
+import { Action, finishTurn, pickToken, startGame } from './actions';
+import { DEFAULT_STATE } from '@/store/defaultState';
 
 export function reducer (state: Store = DEFAULT_STATE, action: Action): Store {
   switch(action.type) {

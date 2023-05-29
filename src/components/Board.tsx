@@ -1,6 +1,6 @@
-import { useAppSelector } from '../store'
-import { styled } from '../theme'
+import { useAppSelector } from '@/store'
 import { Card } from './Card'
+import { styled } from '@/theme'
 
 interface Props {
   className?: string

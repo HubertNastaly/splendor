@@ -1,8 +1,6 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { Color, Player, PlayerMovePhase, Store, Tokens } from "../../../../types";
-import { clone } from "../../../../utils/clone";
-import { isEnoughTokensInBank } from "../../../../utils/isEnoughTokensInBank";
-import { isToCollectDuplicatedThirdToken } from "../../../../utils/isToCollectDuplicatedThirdToken";
+import { PayloadAction } from '@reduxjs/toolkit'
+import { Color, Player, PlayerMovePhase, Store, Tokens } from '@/types'
+import { clone, isEnoughTokensInBank, isToCollectDuplicatedThirdToken } from '@/utils'
 
 export type PickTokenAction = PayloadAction<{ tokenColor: Color }, 'PICK_TOKEN'>
 

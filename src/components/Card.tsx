@@ -1,6 +1,6 @@
-import { styled } from "../theme";
-import { CardData, Color } from "../types";
-import { Gem } from "./Gem";
+import { CardData, Color } from '@/types';
+import { styled } from '@/theme';
+import { Gem } from './Gem';
 
 interface Props {
   card: CardData
@@ -86,7 +86,7 @@ const TopSectionBackground = styled('div', {
   zIndex: '$high',
   width: '100%',
   height: '100%',
-  background: "white",
+  background: 'white',
   opacity: 0.3
 })
 

@@ -1,5 +1,5 @@
-import { Player, Store } from "../../../../types";
-import { createTokensCollection } from "../../../../utils/createTokensCollection";
+import { Player, Store } from '@/types';
+import { createTokensCollection } from '@/utils';
 
 export function setupPlayers(state: Store, playerNames: string[]): Store {
   const players: Player[] = playerNames.map(createPlayer)

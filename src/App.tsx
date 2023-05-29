@@ -1,9 +1,8 @@
 import { Provider } from 'react-redux'
-import { store, useAppSelector } from './store'
-import { Board, GameSetup, TokensBank } from './components'
 import { styled } from '@stitches/react'
-import { useDevMode } from './hooks'
-import { TurnPanel } from './components/TurnPanel'
+import { store, useAppSelector } from '@/store'
+import { Board, GameSetup, TokensBank, TurnPanel } from '@/components'
+import { useDevMode } from '@/hooks'
 
 const App = () => {
   return (

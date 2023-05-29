@@ -1,5 +1,4 @@
-import { Tokens } from "."
-import { Color } from "./color"
+import { Color, Tokens } from './color'
 
 export type PlayerMovePhase = {
   type: 'NONE'

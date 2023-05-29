@@ -1,4 +1,4 @@
-import { CardsCollection } from "../types";
+import { CardsCollection } from '@/types';
 
 export const createCardsCollection = (): CardsCollection => ({
   1: [],

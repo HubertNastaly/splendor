@@ -1,6 +1,5 @@
-import { Store } from "../types";
-import { createCardsCollection } from "../utils/createCardsCollection";
-import { createTokensCollection } from "../utils/createTokensCollection";
+import { Store } from '@/types';
+import { createCardsCollection, createTokensCollection } from '@/utils';
 
 export const DEFAULT_STATE: Store = {
   decksByLevel: createCardsCollection(),
