@@ -2,8 +2,8 @@ import { FormEvent, useCallback, useState } from 'react'
 import { MAX_PLAYERS_NUMBER, MIN_PLAYERS_NUMBER } from '@/constants'
 import { PlayerInput } from './PlayerInput'
 import { useAppDispatch } from '@/store'
-import { Button } from '@/components'
 import { styled } from '@/theme'
+import { Page, Button } from '@/components/common'
 
 const DEFAULT_NAMES = new Array(MAX_PLAYERS_NUMBER).fill('')
 
@@ -28,12 +28,14 @@ export const GameSetup = () => {
   const canPlay = names.filter(name => !!name).length >= MIN_PLAYERS_NUMBER
 
   return (
-    <Form onSubmit={submit}>
-      {names.map((name, index) => (
-        <PlayerInput key={`player-${index}`} name={name} setName={newName => setName(newName, index)} />
-      ))}
-      <Button disabled={!canPlay}>Play</Button>
-    </Form>
+    <Page>
+      <Form onSubmit={submit}>
+        {names.map((name, index) => (
+          <PlayerInput key={`player-${index}`} name={name} setName={newName => setName(newName, index)} />
+        ))}
+        <Button disabled={!canPlay}>Play</Button>
+      </Form>
+    </Page>
   )
 }
 

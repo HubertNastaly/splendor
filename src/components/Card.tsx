@@ -1,6 +1,7 @@
 import { CardData, Color } from '@/types';
 import { styled } from '@/theme';
 import { Gem } from './Gem';
+import { MouseEvent } from 'react';
 
 interface Props {
   card: CardData
@@ -19,8 +20,13 @@ export const Card = ({ card, isSelected, onSelect }: Props) => {
     black
   }
 
+  const handleClick = (event: MouseEvent) => {
+    event.stopPropagation()
+    onSelect()
+  }
+
   return (
-    <Container color={color} selected={isSelected} onClick={onSelect}>
+    <Container color={color} selected={isSelected} onClick={handleClick}>
       <TopSection>
         <TopSectionBackground />
         <CardValue>
@@ -49,6 +55,7 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  cursor: 'pointer',
 
   variants: {
     color: {
