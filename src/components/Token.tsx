@@ -4,19 +4,28 @@ import { Gem } from "./Gem";
 
 interface Props {
   color: Color
+  disabled?: boolean
   onClick?: () => void
 }
 
-export const Token = ({ color, onClick }: Props) => (
-  <ButtonWrapper onClick={onClick}>
-    <GemStyled size="big" color={color} />
+export const Token = ({ color, onClick, disabled }: Props) => (
+  <ButtonWrapper onClick={onClick} disabled={disabled}>
+    <GemStyled size="big" color={color} disabled={disabled} />
   </ButtonWrapper>
 )
 
 const ButtonWrapper = styled('button', {
   border: 'none',
   background: 'none',
-  cursor: 'pointer'
+  cursor: 'pointer',
+
+  variants: {
+    disabled: {
+      true: {
+        cursor: 'not-allowed'
+      }
+    }
+  }
 })
 
 const GemStyled = styled(Gem, {

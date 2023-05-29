@@ -1,7 +1,8 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { MIN_BANK_TOKENS_TO_PICK_TWO } from "../../../../constants";
 import { Color, Player, PlayerMovePhase, Store, Tokens } from "../../../../types";
 import { clone } from "../../../../utils/clone";
+import { isEnoughTokensInBank } from "../../../../utils/isEnoughTokensInBank";
+import { isToCollectDuplicatedThirdToken } from "../../../../utils/isToCollectDuplicatedThirdToken";
 
 export type PickTokenAction = PayloadAction<{ tokenColor: Color }, 'PICK_TOKEN'>
 
@@ -13,6 +14,10 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
 
   if(!isEnoughTokensInBank(bankTokens, currentPlayer, tokenColor)) {
     throw new Error('Not enough tokens in bank')
+  }
+
+  if(isToCollectDuplicatedThirdToken(currentPlayer, tokenColor)) {
+    throw new Error('All three tokens must be different')
   }
   
   currentPlayer.tokens[tokenColor]++
@@ -27,20 +32,6 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
     players,
     bankTokens
   }
-}
-
-function isEnoughTokensInBank(bankTokens: Tokens, { movePhase }: Player, tokenColor: Color) {
-  const bankTokensCount = bankTokens[tokenColor]
-  if(bankTokensCount === 0) {
-    return false
-  }
-
-  const isPickingTwoSameTokens = movePhase.type === '1_TOKEN_COLLECTED' && tokenColor === movePhase.tokenColor
-  if(isPickingTwoSameTokens && bankTokensCount < MIN_BANK_TOKENS_TO_PICK_TWO) {
-    return false
-  }
-
-  return true
 }
 
 function getNextMovePhase({ movePhase }: Player, tokenColor: Color): PlayerMovePhase {

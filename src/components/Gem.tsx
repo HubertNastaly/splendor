@@ -7,13 +7,15 @@ type GemSize = 'small' | 'normal' | 'big'
 interface Props {
   size: GemSize
   color: Color
+  disabled?: boolean
   className?: string
 }
 
-export const Gem = ({ size, color, className }: Props) => {
+export const Gem = ({ size, color, disabled, className }: Props) => {
+  const deducedColor = disabled ? 'disabled' : color
   return (
-    <GemBackground className={className} color={color} size={size}>
-      <FaRegGem size={ICON_SIZES[size]} color={getIconColor(color)} />
+    <GemBackground className={className} color={deducedColor} size={size}>
+      <FaRegGem size={ICON_SIZES[size]} color={getIconColor(deducedColor)} />
     </GemBackground>
   )
 }
@@ -42,6 +44,9 @@ const GemBackground = styled('div', {
       },
       black: {
         backgroundColor: '$black'
+      },
+      disabled: {
+        backgroundColor: '$disabled'
       }
     },
     size: {
@@ -64,12 +69,13 @@ const ICON_SIZES: Record<GemSize, number> = {
   big: 42
 }
 
-function getIconColor(color: Color) {
+function getIconColor(color: Color | 'disabled') {
   switch(color) {
     case 'black':
     case 'blue':
     case 'green':
     case 'red':
+    case 'disabled':
       return 'rgba(255,255,255,0.6)'
     case 'white':
       return '#888888'

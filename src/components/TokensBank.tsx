@@ -1,20 +1,46 @@
+import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "../store"
 import { styled } from "../theme"
-import { Color } from "../types"
+import { Color, PlayerMovePhase } from "../types"
+import { isEnoughTokensInBank } from "../utils/isEnoughTokensInBank"
 import { Token } from "./Token"
+import { isToCollectDuplicatedThirdToken } from "../utils/isToCollectDuplicatedThirdToken"
+
+const ALLOWED_COLLECTING_PHASES: PlayerMovePhase['type'][] = [
+  'NONE',
+  '1_TOKEN_COLLECTED',
+  '2_DIFFERENT_TOKENS_COLLECTED'
+]
 
 export const TokensBank = () => {
   const dispatch = useAppDispatch()
-  const tokens = useAppSelector(({ bankTokens }) => bankTokens)
-  const tokenEntries = Object.entries(tokens) as [Color, number][]
+  const { bankTokens, players, currentPlayerIndex } = useAppSelector(state => state)
+  const tokenEntries = Object.entries(bankTokens) as [Color, number][]
 
-  const collectToken = (tokenColor: Color) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }}) 
+  const currentPlayer = players[currentPlayerIndex]
+  const canCollect = ALLOWED_COLLECTING_PHASES.includes(currentPlayer.movePhase.type)
+
+  const isTokenDisabled = useCallback((tokenColor: Color) => {
+    if(!canCollect) {
+      return true
+    }
+    if(isToCollectDuplicatedThirdToken(currentPlayer, tokenColor)) {
+      return true
+    }
+    return !isEnoughTokensInBank(bankTokens, currentPlayer, tokenColor)
+  }, [canCollect, bankTokens, currentPlayer])
+
+  const collectToken = (tokenColor: Color) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
 
   return (
     <Panel>
       {tokenEntries.map(([color, count]) => (
         <Row key={`token-row-${color}`}>
-          <Token color={color} onClick={() => collectToken(color)} />
+          <Token
+            color={color}
+            onClick={() => collectToken(color)}
+            disabled={isTokenDisabled(color)}
+          />
           <Count>{count}</Count>
         </Row>
       ))}
