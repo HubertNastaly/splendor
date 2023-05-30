@@ -1,5 +1,5 @@
 import { styled } from '@/theme'
-import { GemColor } from '@/types'
+import { Color } from '@/types'
 import { FaRegGem } from 'react-icons/fa'
 import { MdStar } from 'react-icons/md'
 
@@ -7,7 +7,7 @@ type GemSize = 'small' | 'normal' | 'big'
 
 interface Props {
   size: GemSize
-  color: GemColor
+  color: Color
   disabled?: boolean
   className?: string
 }
@@ -77,7 +77,7 @@ const ICON_SIZES: Record<GemSize, number> = {
   big: 42
 }
 
-function getIconColor(color: GemColor | 'disabled') {
+function getIconColor(color: Color | 'disabled') {
   switch(color) {
     case 'black':
     case 'blue':

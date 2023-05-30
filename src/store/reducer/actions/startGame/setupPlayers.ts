@@ -6,7 +6,6 @@ export function setupPlayers(state: Store, playerNames: string[]): Store {
     name,
     movePhase: { type: 'NONE' },
     tokens: createTokensCollection(),
-    gold: 0,
     reservedCards: []
   }))
 

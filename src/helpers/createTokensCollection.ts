@@ -5,5 +5,6 @@ export const createTokensCollection = (): Tokens => ({
   blue: 0,
   green: 0,
   red: 0,
-  black: 0
+  black: 0,
+  gold: 0
 })

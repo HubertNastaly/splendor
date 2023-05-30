@@ -1,20 +1,20 @@
 import { CardData } from './card'
-import { Color, Tokens } from './color'
+import { BasicColor, Tokens } from './color'
 
 export type PlayerMovePhase = {
   type: 'NONE'
 } | {
   type: '1_TOKEN_COLLECTED',
-  tokenColor: Color
+  tokenColor: BasicColor
 } | {
   type: '2_SAME_TOKENS_COLLECTED',
-  tokenColor: Color
+  tokenColor: BasicColor
 } | {
   type: '2_DIFFERENT_TOKENS_COLLECTED',
-  tokenColors: [Color, Color]
+  tokenColors: [BasicColor, BasicColor]
 } | {
   type: '3_TOKENS_COLLECTED',
-  tokenColors: [Color, Color, Color]
+  tokenColors: [BasicColor, BasicColor, BasicColor]
 } | {
   type: 'CARD_SELECTED',
   selectedCard: CardData
@@ -26,6 +26,5 @@ export interface Player {
   name: string
   tokens: Tokens
   movePhase: PlayerMovePhase
-  gold: number
   reservedCards: CardData[]
 }

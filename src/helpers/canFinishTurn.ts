@@ -15,5 +15,5 @@ export function canFinishTurn(player: Player) {
 }
 
 function isInTokensLimit(player: Player) {
-  return sum(Object.values(player.tokens)) + player.gold <= MAX_TOKENS_LIMIT
+  return sum(Object.values(player.tokens)) <= MAX_TOKENS_LIMIT
 }

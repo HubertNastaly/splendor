@@ -1,4 +1,4 @@
-import { CardData, Color } from '@/types';
+import { CardData, BasicColor } from '@/types';
 import { styled } from '@/theme';
 import { Gem } from './common';
 import { withStopPropagation } from '@/utils';
@@ -12,7 +12,7 @@ interface Props {
 export const Card = ({ card, isSelected, onSelect }: Props) => {
   const { color, price: { white, blue, green, red, black } } = card
 
-  const prices: Record<Color, number> = {
+  const prices: Record<BasicColor, number> = {
     white,
     blue,
     green,
@@ -30,7 +30,7 @@ export const Card = ({ card, isSelected, onSelect }: Props) => {
         <Gem color={color} size="normal" />
       </TopSection>
       <Prices>
-        {(Object.entries(prices) as [Color, number][]).map(([color, price], index) => (
+        {(Object.entries(prices) as [BasicColor, number][]).map(([color, price], index) => (
           !!price && (
             <Price key={`price-${index}`}>
               <Gem size="small" color={color} />

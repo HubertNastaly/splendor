@@ -1,10 +1,10 @@
-import { GemColor } from '@/types';
+import { Color } from '@/types';
 import { Gem } from './Gem';
 import { styled } from '@/theme';
 import { withStopPropagation } from '@/utils';
 
 export interface TokenProps {
-  color: GemColor
+  color: Color
   disabled?: boolean
   onClick?: () => void
 }

@@ -20,7 +20,7 @@ export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveC
 
   if(bank.gold > 0) {
     bank.gold--
-    currentPlayer.gold++
+    currentPlayer.tokens.gold++
   }
 
   return { ...state, players, boardCardsByLevel, bank }

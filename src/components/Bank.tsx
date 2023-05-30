@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { Color } from '@/types'
+import { BasicColor, Color } from '@/types'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank, canCollectToken  } from '@/helpers'
 import { styled } from '@/theme'
@@ -7,7 +7,7 @@ import { TokenCounter } from './common'
 
 export const Bank = () => {
   const dispatch = useAppDispatch()
-  const { bank: { tokens, gold }, currentPlayer } = useAppSelector(({ bank, players, currentPlayerIndex }) => {
+  const { bank, currentPlayer } = useAppSelector(({ bank, players, currentPlayerIndex }) => {
     const currentPlayer = players[currentPlayerIndex]
     return {
       bank,
@@ -16,19 +16,19 @@ export const Bank = () => {
     }
   })
 
-  const isTokenDisabled = useCallback((tokenColor: Color) => {
+  const isTokenDisabled = useCallback((tokenColor: BasicColor) => {
     if(!canCollectToken(currentPlayer)) {
       return true
     }
     if(isToCollectDuplicatedThirdToken(currentPlayer, tokenColor)) {
       return true
     }
-    return !isEnoughTokensInBank(tokens, currentPlayer, tokenColor)
-  }, [tokens, currentPlayer])
+    return !isEnoughTokensInBank(bank, currentPlayer, tokenColor)
+  }, [bank, currentPlayer])
 
-  const collectToken = (tokenColor: Color) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
+  const collectToken = (tokenColor: BasicColor) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
 
-  const tokenEntries = Object.entries(tokens) as [Color, number][]
+  const tokenEntries = Object.entries(bank) as [Color, number][]
 
   return (
     <Panel>
@@ -37,11 +37,12 @@ export const Bank = () => {
           key={`token-row-${color}`}
           color={color}
           count={count}
-          onClick={() => collectToken(color)}
-          disabled={isTokenDisabled(color)}
+          {...color !== 'gold' && {
+            onClick: () => collectToken(color),
+            disabled: isTokenDisabled(color)
+          }}
         />
       ))}
-      <TokenCounter color="gold" count={gold} />
     </Panel>
   )
 }
