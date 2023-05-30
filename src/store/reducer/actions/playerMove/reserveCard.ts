@@ -1,3 +1,4 @@
+import { transfer } from '@/helpers';
 import { CardData, Store } from '@/types';
 import { clone } from '@/utils';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -19,8 +20,7 @@ export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveC
   boardCardsByLevel[reservedCard.level][reservedCardIndex] = null
 
   if(bank.gold > 0) {
-    bank.gold--
-    currentPlayer.tokens.gold++
+    transfer.toPlayer(currentPlayer.tokens, bank, 'gold', 1)
   }
 
   return { ...state, players, boardCardsByLevel, bank }

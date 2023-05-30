@@ -1,14 +1,14 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { BasicColor, Player, PlayerMovePhase, Store } from '@/types'
 import { clone } from '@/utils'
-import { canCollectToken, isEnoughTokensInBank, isToCollectDuplicatedThirdToken } from '@/helpers'
+import { canCollectToken, isEnoughTokensInBank, isToCollectDuplicatedThirdToken, transfer } from '@/helpers'
 
 export type PickTokenAction = PayloadAction<{ tokenColor: BasicColor }, 'PICK_TOKEN'>
 
-export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAction) {
-  const newState = clone(state)
-  const { currentPlayerIndex, players, bank } = newState
-  const currentPlayer = players[currentPlayerIndex]
+export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAction): Store {
+  const players = clone(state.players)
+  const bank = clone(state.bank)
+  const currentPlayer = players[state.currentPlayerIndex]
 
   if(!canCollectToken(currentPlayer)) {
     throw new Error('Not allowed to pick token in current phase')
@@ -22,12 +22,14 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
     throw new Error('All three tokens must be different')
   }
   
-  currentPlayer.tokens[tokenColor]++
-  bank[tokenColor]--
-
+  transfer.toPlayer(currentPlayer.tokens, bank, tokenColor, 1)
   currentPlayer.movePhase = getNextMovePhase(currentPlayer, tokenColor)
 
-  return newState
+  return {
+    ...state,
+    players,
+    bank
+  }
 }
 
 function getNextMovePhase({ movePhase }: Player, tokenColor: BasicColor): PlayerMovePhase {
