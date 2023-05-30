@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { Card } from './Card'
 import { styled } from '@/theme'
 import { CardData } from '@/types'
-import { canSelectCard } from '@/utils/canSelectCard'
+import { canSelectCard } from '@/helpers'
 
 interface Props {
   className?: string
