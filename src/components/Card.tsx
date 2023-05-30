@@ -1,6 +1,6 @@
 import { CardData, Color } from '@/types';
 import { styled } from '@/theme';
-import { Gem } from './Gem';
+import { Gem } from './common';
 import { MouseEvent } from 'react';
 
 interface Props {
