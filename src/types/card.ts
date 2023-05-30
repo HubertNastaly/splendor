@@ -1,11 +1,11 @@
-import { Color, Tokens } from './color'
+import { BasicColor, Tokens } from './color'
 
 export type CardLevel = 1 | 2 | 3
 
 export interface CardData {
   id: number
   level: CardLevel,
-  color: Color,
+  color: BasicColor,
   value: number,
   price: Tokens
 }

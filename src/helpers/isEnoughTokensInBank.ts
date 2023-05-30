@@ -1,7 +1,7 @@
 import { MIN_BANK_TOKENS_TO_PICK_TWO } from '@/constants'
-import { Color, Player, Tokens } from '@/types'
+import { BasicColor, Player, Tokens } from '@/types'
 
-export function isEnoughTokensInBank(bankTokens: Tokens, { movePhase }: Player, tokenColor: Color) {
+export function isEnoughTokensInBank(bankTokens: Tokens, { movePhase }: Player, tokenColor: BasicColor) {
   const bankTokensCount = bankTokens[tokenColor]
   if(bankTokensCount === 0) {
     return false

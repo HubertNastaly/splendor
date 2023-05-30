@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { Color } from '@/types'
+import { BasicColor } from '@/types'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank, canCollectToken  } from '@/helpers'
 import { styled } from '@/theme'
@@ -16,7 +16,7 @@ export const Bank = () => {
     }
   })
 
-  const isTokenDisabled = useCallback((tokenColor: Color) => {
+  const isTokenDisabled = useCallback((tokenColor: BasicColor) => {
     if(!canCollectToken(currentPlayer)) {
       return true
     }
@@ -26,9 +26,9 @@ export const Bank = () => {
     return !isEnoughTokensInBank(tokens, currentPlayer, tokenColor)
   }, [tokens, currentPlayer])
 
-  const collectToken = (tokenColor: Color) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
+  const collectToken = (tokenColor: BasicColor) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
 
-  const tokenEntries = Object.entries(tokens) as [Color, number][]
+  const tokenEntries = Object.entries(tokens) as [BasicColor, number][]
 
   return (
     <Panel>

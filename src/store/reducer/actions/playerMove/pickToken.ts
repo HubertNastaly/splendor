@@ -1,9 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Color, Player, PlayerMovePhase, Store } from '@/types'
+import { BasicColor, Player, PlayerMovePhase, Store } from '@/types'
 import { clone } from '@/utils'
 import { canCollectToken, isEnoughTokensInBank, isToCollectDuplicatedThirdToken } from '@/helpers'
 
-export type PickTokenAction = PayloadAction<{ tokenColor: Color }, 'PICK_TOKEN'>
+export type PickTokenAction = PayloadAction<{ tokenColor: BasicColor }, 'PICK_TOKEN'>
 
 export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAction) {
   const newState = clone(state)
@@ -30,7 +30,7 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
   return newState
 }
 
-function getNextMovePhase({ movePhase }: Player, tokenColor: Color): PlayerMovePhase {
+function getNextMovePhase({ movePhase }: Player, tokenColor: BasicColor): PlayerMovePhase {
   switch(movePhase.type) {
     case 'NONE':
       return { type: '1_TOKEN_COLLECTED', tokenColor }
