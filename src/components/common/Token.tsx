@@ -1,6 +1,7 @@
 import { GemColor } from '@/types';
 import { Gem } from './Gem';
 import { styled } from '@/theme';
+import { withStopPropagation } from '@/utils';
 
 export interface TokenProps {
   color: GemColor
@@ -9,7 +10,7 @@ export interface TokenProps {
 }
 
 export const Token = ({ color, onClick, disabled }: TokenProps) => (
-  <ButtonWrapper clickable={!!onClick} onClick={onClick} disabled={disabled}>
+  <ButtonWrapper clickable={!!onClick} onClick={withStopPropagation(onClick)} disabled={disabled}>
     <GemStyled size="big" color={color} disabled={disabled} />
   </ButtonWrapper>
 )
