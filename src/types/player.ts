@@ -26,6 +26,5 @@ export interface Player {
   name: string
   tokens: Tokens
   movePhase: PlayerMovePhase
-  gold: number
   reservedCards: CardData[]
 }

@@ -3,7 +3,7 @@ import { Row, TokenCounter } from '@/components/common'
 import { useCurrentPlayer } from '@/hooks'
 
 export const PlayerTokens = () => {
-  const { tokens, gold } = useCurrentPlayer()
+  const { tokens } = useCurrentPlayer()
   const tokenEntries = Object.entries(tokens) as [BasicColor, number][]
 
   return (
@@ -11,7 +11,6 @@ export const PlayerTokens = () => {
       {tokenEntries.map(([color, count]) => (
         <TokenCounter key={`player-token-${color}`} color={color} count={count} />
       ))}
-      <TokenCounter color="gold" count={gold} />
     </Row>
   )
 }

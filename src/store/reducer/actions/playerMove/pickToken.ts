@@ -14,7 +14,7 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
     throw new Error('Not allowed to pick token in current phase')
   }
 
-  if(!isEnoughTokensInBank(bank.tokens, currentPlayer, tokenColor)) {
+  if(!isEnoughTokensInBank(bank, currentPlayer, tokenColor)) {
     throw new Error('Not enough tokens in bank')
   }
 
@@ -23,7 +23,7 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
   }
   
   currentPlayer.tokens[tokenColor]++
-  bank.tokens[tokenColor]--
+  bank[tokenColor]--
 
   currentPlayer.movePhase = getNextMovePhase(currentPlayer, tokenColor)
 
