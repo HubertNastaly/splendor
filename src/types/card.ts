@@ -11,3 +11,4 @@ export interface CardData {
 }
 
 export type CardsCollection = Record<CardLevel, CardData[]>
+export type NullableCardsCollection = Record<CardLevel, (CardData|null)[]>

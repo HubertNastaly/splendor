@@ -18,6 +18,8 @@ export type PlayerMovePhase = {
 } | {
   type: 'CARD_SELECTED',
   selectedCard: CardData
+} | {
+  type: 'CARD_RESERVED'
 }
 
 export interface Player {
@@ -25,4 +27,5 @@ export interface Player {
   tokens: Tokens
   movePhase: PlayerMovePhase
   gold: number
+  reservedCards: CardData[]
 }
