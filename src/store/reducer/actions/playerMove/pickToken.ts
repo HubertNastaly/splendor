@@ -1,7 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Color, Player, PlayerMovePhase, Store } from '@/types'
-import { clone, isEnoughTokensInBank, isToCollectDuplicatedThirdToken } from '@/utils'
-import { ALLOWED_COLLECTING_PHASES } from '@/constants'
+import { canCollectToken, clone, isEnoughTokensInBank, isToCollectDuplicatedThirdToken } from '@/utils'
 
 export type PickTokenAction = PayloadAction<{ tokenColor: Color }, 'PICK_TOKEN'>
 
@@ -10,7 +9,7 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
   const { currentPlayerIndex, players, bank } = newState
   const currentPlayer = players[currentPlayerIndex]
 
-  if(!ALLOWED_COLLECTING_PHASES.includes(currentPlayer.movePhase.type)) {
+  if(!canCollectToken(currentPlayer)) {
     throw new Error('Not allowed to pick token in current phase')
   }
 
