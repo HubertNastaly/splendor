@@ -3,11 +3,11 @@ import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { Store } from '@/types'
 import { reducer, Action } from './reducer'
-import { DEFAULT_STATE } from './defaultState'
-
+import { defaultState } from './defaultState'
+import { mockState } from '@/mocks'
 
 export const store = configureStore({
-  preloadedState: DEFAULT_STATE,
+  preloadedState: import.meta.env.VITE_MODE === 'dev' ? mockState : defaultState,
   reducer
 })
 
