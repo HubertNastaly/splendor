@@ -1,5 +1,6 @@
+import { useCurrentPlayer } from '@/hooks'
 import { Button, Column } from './common'
-import { useAppDispatch, useAppSelector } from '@/store'
+import { useAppDispatch } from '@/store'
 import { styled } from '@/theme'
 
 interface Props {
@@ -7,9 +8,8 @@ interface Props {
 }
 
 export const TurnPanel = ({ className }: Props) => {
-  const { players, currentPlayerIndex } = useAppSelector(({ players, currentPlayerIndex }) => ({ players, currentPlayerIndex }))
   const dispatch = useAppDispatch()
-  const currentPlayer = players[currentPlayerIndex]
+  const currentPlayer = useCurrentPlayer()
 
   const finishTurn = () => dispatch({ type: 'FINISH_TURN' })
 

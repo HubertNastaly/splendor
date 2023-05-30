@@ -1,6 +1,7 @@
 import { styled } from '@/theme'
 import { Button, Column } from './common'
-import { useAppDispatch, useAppSelector } from '@/store'
+import { useAppDispatch } from '@/store'
+import { useCurrentPlayer } from '@/hooks'
 
 interface Props {
   className?: string
@@ -8,9 +9,7 @@ interface Props {
 
 export const ActionsPanel = ({ className }: Props) => {
   const dispatch = useAppDispatch()
-  const { currentPlayer: { movePhase } } = useAppSelector(({ players, currentPlayerIndex }) => ({
-    currentPlayer: players[currentPlayerIndex]
-  }))
+  const { movePhase } = useCurrentPlayer()
   const shouldShowActionsPanel = movePhase.type === 'CARD_SELECTED'
 
   if(!shouldShowActionsPanel) {

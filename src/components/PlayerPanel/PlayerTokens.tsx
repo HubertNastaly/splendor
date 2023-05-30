@@ -1,10 +1,9 @@
-import { useAppSelector } from '@/store'
 import { Color } from '@/types'
 import { Row, TokenCounter } from '@/components/common'
+import { useCurrentPlayer } from '@/hooks'
 
 export const PlayerTokens = () => {
-  const currentPlayer = useAppSelector(({ players, currentPlayerIndex }) => players[currentPlayerIndex])
-  const { tokens, gold } = currentPlayer
+  const { tokens, gold } = useCurrentPlayer()
   const tokenEntries = Object.entries(tokens) as [Color, number][]
 
   return (
