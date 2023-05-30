@@ -1,6 +1,8 @@
 import { BasicColor, Tokens } from './color'
 
-export type CardLevel = 1 | 2 | 3
+export const CARD_LEVELS = [1, 2, 3] as const
+
+export type CardLevel = typeof CARD_LEVELS[number]
 
 export interface CardData {
   id: number
