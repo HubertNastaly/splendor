@@ -1,12 +1,12 @@
 import { CardData, Color } from '@/types';
 import { styled } from '@/theme';
 import { Gem } from './common';
-import { MouseEvent } from 'react';
+import { withStopPropagation } from '@/utils';
 
 interface Props {
   card: CardData
   isSelected: boolean
-  onSelect: () => void
+  onSelect?: () => void
 }
 
 export const Card = ({ card, isSelected, onSelect }: Props) => {
@@ -20,13 +20,8 @@ export const Card = ({ card, isSelected, onSelect }: Props) => {
     black
   }
 
-  const handleClick = (event: MouseEvent) => {
-    event.stopPropagation()
-    onSelect()
-  }
-
   return (
-    <Container color={color} selected={isSelected} onClick={handleClick}>
+    <Container color={color} selected={isSelected} clickable={!!onSelect} onClick={withStopPropagation(onSelect)}>
       <TopSection>
         <TopSectionBackground />
         <CardValue>
@@ -55,7 +50,6 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  cursor: 'pointer',
 
   variants: {
     color: {
@@ -79,6 +73,12 @@ const Container = styled('div', {
     selected: {
       true: {
         outline: '2px solid black'
+      }
+    },
+
+    clickable: {
+      true: {
+        cursor: 'pointer'
       }
     }
   }

@@ -1,6 +1,19 @@
 import { styled } from '@/theme';
+import { withStopPropagation } from '@/utils';
+import { PropsWithChildren } from 'react';
 
-export const Button = styled('button', {
+interface Props {
+  onClick?: () => void
+  disabled?: boolean
+}
+
+export const Button = ({ onClick, disabled, children }: PropsWithChildren<Props>) => (
+  <ButtonComponent disabled={disabled} onClick={withStopPropagation(onClick)}>
+    {children}
+  </ButtonComponent>
+)
+
+const ButtonComponent = styled('button', {
   height: 36,
   fontSize: '$normal',
   color: 'white',

@@ -1,24 +1,27 @@
 import { styled } from '@/theme'
 import { Button, Column } from './common'
-import { useAppSelector } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
 
 interface Props {
   className?: string
 }
 
 export const ActionsPanel = ({ className }: Props) => {
-  const { currentPlayer } = useAppSelector(({ players, currentPlayerIndex }) => ({
+  const dispatch = useAppDispatch()
+  const { currentPlayer: { movePhase } } = useAppSelector(({ players, currentPlayerIndex }) => ({
     currentPlayer: players[currentPlayerIndex]
   }))
-  const shouldShowActionsPanel = currentPlayer.movePhase.type === 'CARD_SELECTED'
+  const shouldShowActionsPanel = movePhase.type === 'CARD_SELECTED'
 
   if(!shouldShowActionsPanel) {
     return <></>
   }
+
+  const reserveCard = () => dispatch({ type: 'RESERVE_CARD', payload: { reservedCard: movePhase.selectedCard } })
   
   return (
     <Container className={className} gap="tiny">
-      <Button>Reserve card</Button>
+      <Button onClick={reserveCard}>Reserve card</Button>
       <Button>Buy card</Button>
     </Container>
   )

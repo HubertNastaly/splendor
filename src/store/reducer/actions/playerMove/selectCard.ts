@@ -7,6 +7,10 @@ export type SelectCardAction = PayloadAction<{ selectedCard: CardData }, 'SELECT
 export function selectCard(state: Store, { payload: { selectedCard } }: SelectCardAction): Store {
   const players = clone(state.players)
   const currentPlayer = players[state.currentPlayerIndex]
+
+  if(currentPlayer.movePhase.type !== 'NONE') {
+    throw new Error('Cannot select card')
+  }
   currentPlayer.movePhase = { type: 'CARD_SELECTED', selectedCard }
 
   return {
