@@ -28,7 +28,8 @@ const { styled, theme } = createStitches({
       tiny: '8px',
       small: '16px',
       medium: '24px',
-      big: '32px'
+      big: '32px',
+      large: '96px'
     }
   },
   utils: {

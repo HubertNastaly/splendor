@@ -2,13 +2,13 @@ import { GemColor } from '@/types';
 import { Gem } from './Gem';
 import { styled } from '@/theme';
 
-interface Props {
+export interface TokenProps {
   color: GemColor
   disabled?: boolean
   onClick?: () => void
 }
 
-export const Token = ({ color, onClick, disabled }: Props) => (
+export const Token = ({ color, onClick, disabled }: TokenProps) => (
   <ButtonWrapper clickable={!!onClick} onClick={onClick} disabled={disabled}>
     <GemStyled size="big" color={color} disabled={disabled} />
   </ButtonWrapper>

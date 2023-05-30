@@ -1,17 +1,21 @@
 import { styled } from '@/theme'
 import { Board } from './Board'
-import { Page } from './common'
+import { Page, Row } from './common'
 import { Bank } from './Bank'
 import { TurnPanel } from './TurnPanel'
 import { useAppDispatch } from '@/store'
+import { PlayerPanel } from './PlayerPanel'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
 
   return (
     <Page onClick={() => dispatch({ type: 'DESELECT_CARD' })}>
-      <Bank />
-      <Board />
+      <Row gap="large">
+        <Board />
+        <Bank />
+      </Row>
+      <PlayerPanel />
       <TurnPanelStyled />
     </Page>
   )

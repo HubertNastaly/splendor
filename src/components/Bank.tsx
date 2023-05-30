@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { Token } from './Token'
 import { Color, PlayerMovePhase } from '@/types'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank  } from '@/utils'
 import { styled } from '@/theme'
+import { TokenCounter } from './common'
 
 const ALLOWED_COLLECTING_PHASES: PlayerMovePhase['type'][] = [
   'NONE',
@@ -34,34 +34,21 @@ export const Bank = () => {
   return (
     <Panel>
       {tokenEntries.map(([color, count]) => (
-        <Row key={`token-row-${color}`}>
-          <Token
-            color={color}
-            onClick={() => collectToken(color)}
-            disabled={isTokenDisabled(color)}
-          />
-          <Count>{count}</Count>
-        </Row>
+        <TokenCounter
+          key={`token-row-${color}`}
+          color={color}
+          count={count}
+          onClick={() => collectToken(color)}
+          disabled={isTokenDisabled(color)}
+        />
       ))}
-      <Row key="token-row-gold">
-        <Token color="gold" />
-        <Count>{gold}</Count>
-      </Row>
+      <TokenCounter color="gold" count={gold} />
     </Panel>
   )
 }
 
 const Panel = styled('div', {
   display: 'flex',
-  columnGap: 32
-})
-
-const Row = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  columnGap: 8
-})
-
-const Count = styled('span', {
-  fontSize: '$big'
+  flexDirection: 'column',
+  rowGap: '$big'
 })
