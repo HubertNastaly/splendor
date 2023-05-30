@@ -13,6 +13,7 @@ function createPlayer(name: string): Player {
   return {
     name,
     movePhase: { type: 'NONE' },
-    tokens: createTokensCollection()
+    tokens: createTokensCollection(),
+    gold: 0
   }
 }

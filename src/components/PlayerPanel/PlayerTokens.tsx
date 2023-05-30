@@ -3,8 +3,8 @@ import { Color } from '@/types'
 import { Row, TokenCounter } from '@/components/common'
 
 export const PlayerTokens = () => {
-  const { players, currentPlayerIndex } = useAppSelector(state => state)
-  const { tokens } = players[currentPlayerIndex]
+  const currentPlayer = useAppSelector(({ players, currentPlayerIndex }) => players[currentPlayerIndex])
+  const { tokens, gold } = currentPlayer
   const tokenEntries = Object.entries(tokens) as [Color, number][]
 
   return (
@@ -12,6 +12,7 @@ export const PlayerTokens = () => {
       {tokenEntries.map(([color, count]) => (
         <TokenCounter key={`player-token-${color}`} color={color} count={count} />
       ))}
+      <TokenCounter color="gold" count={gold} />
     </Row>
   )
 }
