@@ -1,4 +1,4 @@
-import { Button } from './common'
+import { Button, Column } from './common'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { styled } from '@/theme'
 
@@ -21,9 +21,8 @@ export const TurnPanel = ({ className }: Props) => {
   )
 }
 
-const Container = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
+const Container = styled(Column, {
+  alignItems: 'stretch',
   rowGap: '$small',
   width: 256
 })

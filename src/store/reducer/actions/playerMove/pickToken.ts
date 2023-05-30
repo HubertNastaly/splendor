@@ -1,6 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Color, Player, PlayerMovePhase, Store } from '@/types'
 import { clone, isEnoughTokensInBank, isToCollectDuplicatedThirdToken } from '@/utils'
+import { ALLOWED_COLLECTING_PHASES } from '@/constants'
 
 export type PickTokenAction = PayloadAction<{ tokenColor: Color }, 'PICK_TOKEN'>
 
@@ -8,6 +9,10 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
   const newState = clone(state)
   const { currentPlayerIndex, players, bank } = newState
   const currentPlayer = players[currentPlayerIndex]
+
+  if(!ALLOWED_COLLECTING_PHASES.includes(currentPlayer.movePhase.type)) {
+    throw new Error('Not allowed to pick token in current phase')
+  }
 
   if(!isEnoughTokensInBank(bank.tokens, currentPlayer, tokenColor)) {
     throw new Error('Not enough tokens in bank')
@@ -37,8 +42,6 @@ function getNextMovePhase({ movePhase }: Player, tokenColor: Color): PlayerMoveP
       }
     case '2_DIFFERENT_TOKENS_COLLECTED':
       return { type: '3_TOKENS_COLLECTED', tokenColors: [...movePhase.tokenColors, tokenColor] }
-    case '2_SAME_TOKENS_COLLECTED':
-    case '3_TOKENS_COLLECTED':
     default:
       throw new Error('Forbidden move phase achieved')
   }

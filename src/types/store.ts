@@ -1,5 +1,5 @@
 import { Bank } from './bank'
-import { CardData, CardsCollection } from './card'
+import { CardsCollection } from './card'
 import { Player } from './player'
 
 type GameState = 'setup' | 'started' | 'ended'
@@ -10,6 +10,5 @@ export interface Store {
   bank: Bank,
   gameState: GameState,
   players: Player[],
-  currentPlayerIndex: number,
-  selectedCard: CardData | null
+  currentPlayerIndex: number
 }

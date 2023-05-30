@@ -7,8 +7,13 @@ interface Props {
 }
 
 export const Board = ({ className }: Props) => {
-  const cardsByLevel = useAppSelector(({ boardCardsByLevel }) => boardCardsByLevel)
-  const selectedCard = useAppSelector(({ selectedCard }) => selectedCard)
+  const { cardsByLevel, selectedCard } = useAppSelector(({ boardCardsByLevel, players, currentPlayerIndex }) => {
+    const { movePhase } = players[currentPlayerIndex]
+    return {
+      cardsByLevel: boardCardsByLevel,
+      selectedCard: movePhase.type === 'CARD_SELECTED' ? movePhase.selectedCard : null
+    }
+  })
   const dispatch = useAppDispatch()
 
   const allCards = [...cardsByLevel[3], ...cardsByLevel[2], ...cardsByLevel[1]]

@@ -1,23 +1,23 @@
 import { useCallback } from 'react'
-import { Color, PlayerMovePhase } from '@/types'
+import { Color } from '@/types'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank  } from '@/utils'
 import { styled } from '@/theme'
 import { TokenCounter } from './common'
-
-const ALLOWED_COLLECTING_PHASES: PlayerMovePhase['type'][] = [
-  'NONE',
-  '1_TOKEN_COLLECTED',
-  '2_DIFFERENT_TOKENS_COLLECTED'
-]
+import { ALLOWED_COLLECTING_PHASES } from '@/constants'
 
 export const Bank = () => {
   const dispatch = useAppDispatch()
-  const { bank: { tokens, gold }, players, currentPlayerIndex } = useAppSelector(state => state)
-  const tokenEntries = Object.entries(tokens) as [Color, number][]
-
-  const currentPlayer = players[currentPlayerIndex]
-  const canCollect = ALLOWED_COLLECTING_PHASES.includes(currentPlayer.movePhase.type)
+  const { bank: { tokens, gold }, currentPlayer, movePhase } = useAppSelector(({ bank, players, currentPlayerIndex }) => {
+    const currentPlayer = players[currentPlayerIndex]
+    return {
+      bank,
+      currentPlayer,
+      movePhase: currentPlayer.movePhase.type
+    }
+  })
+  
+  const canCollect = ALLOWED_COLLECTING_PHASES.includes(movePhase)
 
   const isTokenDisabled = useCallback((tokenColor: Color) => {
     if(!canCollect) {
@@ -30,6 +30,8 @@ export const Bank = () => {
   }, [canCollect, tokens, currentPlayer])
 
   const collectToken = (tokenColor: Color) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
+
+  const tokenEntries = Object.entries(tokens) as [Color, number][]
 
   return (
     <Panel>

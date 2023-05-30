@@ -10,6 +10,5 @@ export const DEFAULT_STATE: Store = {
   },
   gameState: 'setup',
   players: [],
-  currentPlayerIndex: 0,
-  selectedCard: null
+  currentPlayerIndex: 0
 }

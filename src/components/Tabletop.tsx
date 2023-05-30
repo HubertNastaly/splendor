@@ -5,12 +5,14 @@ import { Bank } from './Bank'
 import { TurnPanel } from './TurnPanel'
 import { useAppDispatch } from '@/store'
 import { PlayerPanel } from './PlayerPanel'
+import { ActionsPanel } from './ActionsPanel'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
 
   return (
     <Page onClick={() => dispatch({ type: 'DESELECT_CARD' })}>
+      <ActionsPanelStyled />
       <Row gap="large">
         <Board />
         <Bank />
@@ -25,4 +27,10 @@ const TurnPanelStyled = styled(TurnPanel, {
   position: 'absolute',
   right: 32,
   bottom: 32
+})
+
+const ActionsPanelStyled = styled(ActionsPanel, {
+  position: 'absolute',
+  top: 32,
+  right: 32,
 })
