@@ -2,7 +2,7 @@ import { BasicColor, Color } from '@/types'
 import { Row, TokenCounter } from '@/components/common'
 import { useCurrentPlayer } from '@/hooks'
 import { isOverTokensLimit } from '@/helpers'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch } from '@/store/hooks'
 
 export const PlayerTokens = () => {
   const dispatch = useAppDispatch()

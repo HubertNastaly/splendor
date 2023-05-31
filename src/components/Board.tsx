@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { Card } from './Card'
 import { styled } from '@/theme'
 import { CardData } from '@/types'

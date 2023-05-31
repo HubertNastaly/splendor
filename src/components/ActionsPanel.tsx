@@ -1,6 +1,6 @@
 import { styled } from '@/theme'
 import { Button, Column } from './common'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch } from '@/store/hooks'
 import { useCurrentPlayer } from '@/hooks'
 
 interface Props {

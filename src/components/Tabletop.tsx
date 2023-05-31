@@ -3,7 +3,7 @@ import { Board } from './Board'
 import { Page, Row } from './common'
 import { Bank } from './Bank'
 import { TurnPanel } from './TurnPanel'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch } from '@/store/hooks'
 import { PlayerPanel } from './PlayerPanel'
 import { ActionsPanel } from './ActionsPanel'
 

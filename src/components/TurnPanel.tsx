@@ -1,6 +1,6 @@
 import { useCurrentPlayer } from '@/hooks'
 import { Button, Column } from './common'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch } from '@/store/hooks'
 import { styled } from '@/theme'
 import { canFinishTurn } from '@/helpers'
 
