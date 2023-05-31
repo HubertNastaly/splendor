@@ -11,5 +11,5 @@ export interface Store {
   gameState: GameState
   players: Player[]
   currentPlayerIndex: number
-  purchaseTokensPool: Tokens
+  purchaseTokens: Tokens
 }

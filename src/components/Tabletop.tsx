@@ -6,22 +6,32 @@ import { TurnPanel } from './TurnPanel'
 import { useAppDispatch } from '@/store/hooks'
 import { PlayerPanel } from './PlayerPanel'
 import { ActionsPanel } from './ActionsPanel'
+import { PurchasePanel } from './PurchasePanel'
+import { useCurrentPlayer } from '@/hooks'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
+  const currentPlayer = useCurrentPlayer()
+
+  const shouldShowPurchasePanel = currentPlayer.movePhase.type === 'CARD_PURCHASE_STARTED'
 
   return (
     <Page onClick={() => dispatch({ type: 'DESELECT_CARD' })}>
       <ActionsPanelStyled />
-      <Row gap="large">
+      <MainSection gap="large">
         <Board />
         <Bank />
-      </Row>
+        {shouldShowPurchasePanel && <PurchasePanel />}
+      </MainSection>
       <PlayerPanel />
       <TurnPanelStyled />
     </Page>
   )
 }
+
+const MainSection = styled(Row, {
+  alignItems: 'stretch'
+})
 
 const TurnPanelStyled = styled(TurnPanel, {
   position: 'absolute',

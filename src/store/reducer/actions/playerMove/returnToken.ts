@@ -16,7 +16,7 @@ export function returnToken(state: Store, { payload: { tokenColor }}: ReturnToke
     throw new Error('No tokens to return')
   }
 
-  transfer.toBank(currentPlayer.tokens, bank, tokenColor, 1)
+  transfer(currentPlayer.tokens, bank, tokenColor, 1)
 
   return {
     ...state,

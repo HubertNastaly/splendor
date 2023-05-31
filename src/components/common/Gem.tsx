@@ -1,3 +1,4 @@
+import { TOKEN_SIZE } from '@/constants'
 import { styled } from '@/theme'
 import { Color } from '@/types'
 import { FaRegGem } from 'react-icons/fa'
@@ -65,7 +66,7 @@ const GemBackground = styled('div', {
         size: 32
       },
       big: {
-        size: 72
+        size: TOKEN_SIZE
       }
     }
   }

@@ -20,7 +20,7 @@ export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveC
   boardCardsByLevel[reservedCard.level][reservedCardIndex] = null
 
   if(bank.gold > 0) {
-    transfer.toPlayer(currentPlayer.tokens, bank, 'gold', 1)
+    transfer(bank, currentPlayer.tokens, 'gold', 1)
   }
 
   return { ...state, players, boardCardsByLevel, bank }
