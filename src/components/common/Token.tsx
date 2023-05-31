@@ -10,7 +10,7 @@ export interface TokenProps {
 }
 
 export const Token = ({ color, onClick, disabled }: TokenProps) => (
-  <ButtonWrapper clickable={!!onClick} onClick={withStopPropagation(onClick)} disabled={disabled}>
+  <ButtonWrapper clickable={!!onClick} onClick={withStopPropagation(onClick)} disabled={disabled} data-testid={`token-${color}`}>
     <GemStyled size="big" color={color} disabled={disabled} />
   </ButtonWrapper>
 )

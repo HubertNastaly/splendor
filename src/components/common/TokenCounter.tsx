@@ -10,7 +10,7 @@ export const TokenCounter = ({ count, ...tokenProps }: Props) => {
   return (
     <Row>
       <Token {...tokenProps} />
-      <Counter>{count}</Counter>
+      <Counter data-testid={`token-counter-${tokenProps.color}`}>{count}</Counter>
     </Row>
   )
 }
