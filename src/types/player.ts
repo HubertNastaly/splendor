@@ -20,6 +20,9 @@ export type PlayerMovePhase = {
   selectedCard: CardData
 } | {
   type: 'CARD_RESERVED'
+} | {
+  type: 'CARD_PURCHASE_STARTED'
+  selectedCard: CardData
 }
 
 export interface Player {

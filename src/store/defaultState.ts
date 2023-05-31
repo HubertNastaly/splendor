@@ -7,5 +7,6 @@ export const getDefaultState = (): Store => ({
   bank: createTokensCollection(),
   gameState: 'setup',
   players: [],
-  currentPlayerIndex: 0
+  currentPlayerIndex: 0,
+  purchaseTokensPool: createTokensCollection()
 })

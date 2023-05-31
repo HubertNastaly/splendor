@@ -17,11 +17,12 @@ export const ActionsPanel = ({ className }: Props) => {
   }
 
   const reserveCard = () => dispatch({ type: 'RESERVE_CARD', payload: { reservedCard: movePhase.selectedCard } })
+  const startPurchase = () => dispatch({ type: 'START_PURCHASE', payload: { selectedCard: movePhase.selectedCard } })
   
   return (
     <Container className={className} gap="tiny">
       <Button onClick={reserveCard}>Reserve card</Button>
-      <Button>Buy card</Button>
+      <Button onClick={startPurchase}>Buy card</Button>
     </Container>
   )
 }

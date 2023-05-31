@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { Card } from './Card'
 import { styled } from '@/theme'
 import { CardData } from '@/types'
-import { canSelectCard } from '@/helpers'
+import { canSelectCard, getSelectedCard } from '@/helpers'
 
 interface Props {
   className?: string
@@ -11,10 +11,9 @@ interface Props {
 export const Board = ({ className }: Props) => {
   const { cardsByLevel, selectedCard, currentPlayer } = useAppSelector(({ boardCardsByLevel, players, currentPlayerIndex }) => {
     const currentPlayer = players[currentPlayerIndex]
-    const { movePhase } = currentPlayer
     return {
       cardsByLevel: boardCardsByLevel,
-      selectedCard: movePhase.type === 'CARD_SELECTED' ? movePhase.selectedCard : null,
+      selectedCard: getSelectedCard(currentPlayer),
       currentPlayer
     }
   })

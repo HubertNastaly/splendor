@@ -5,10 +5,11 @@ import { Player } from './player'
 export type GameState = 'setup' | 'started' | 'ended'
 
 export interface Store {
-  decksByLevel: CardsCollection,
-  boardCardsByLevel: NullableCardsCollection,
-  bank: Tokens,
-  gameState: GameState,
-  players: Player[],
+  decksByLevel: CardsCollection
+  boardCardsByLevel: NullableCardsCollection
+  bank: Tokens
+  gameState: GameState
+  players: Player[]
   currentPlayerIndex: number
+  purchaseTokensPool: Tokens
 }
