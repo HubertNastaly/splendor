@@ -1,8 +1,8 @@
 import { Store } from '@/types';
 import { Action, deselectCard, finishTurn, pickToken, reserveCard, returnToken, selectCard, startGame } from './actions';
-import { defaultState } from '@/store/defaultState';
+import { getDefaultState } from '@/store/defaultState';
 
-export function reducer (state: Store = defaultState, action: Action): Store {
+export function reducer (state: Store = getDefaultState(), action: Action): Store {
   switch(action.type) {
     case 'START_GAME': {
       return startGame(state, action)
