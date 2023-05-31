@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { BasicColor, Color } from '@/types'
-import { useAppDispatch, useAppSelector } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank, canCollectToken  } from '@/helpers'
 import { styled } from '@/theme'
 import { TokenCounter } from './common'
@@ -31,7 +31,7 @@ export const Bank = () => {
   const tokenEntries = Object.entries(bank) as [Color, number][]
 
   return (
-    <Panel>
+    <Panel data-testid="bank">
       {tokenEntries.map(([color, count]) => (
         <TokenCounter
           key={`token-row-${color}`}

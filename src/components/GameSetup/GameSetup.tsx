@@ -1,7 +1,7 @@
 import { FormEvent, useCallback, useState } from 'react'
 import { MAX_PLAYERS_NUMBER, MIN_PLAYERS_NUMBER } from '@/constants'
 import { PlayerInput } from './PlayerInput'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch } from '@/store/hooks'
 import { styled } from '@/theme'
 import { Page, Button } from '@/components/common'
 

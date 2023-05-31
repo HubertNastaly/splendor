@@ -3,7 +3,7 @@ import { PlayerTokens } from './PlayerTokens'
 
 export const PlayerPanel = () => {
   return (
-    <Container>
+    <Container data-testid="player-panel">
       <PlayerTokens />
     </Container>
   )

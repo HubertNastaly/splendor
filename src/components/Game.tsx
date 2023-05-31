@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/store'
+import { useAppSelector } from '@/store/hooks'
 import { GameSetup } from './GameSetup'
 import { Tabletop } from './Tabletop'
 
