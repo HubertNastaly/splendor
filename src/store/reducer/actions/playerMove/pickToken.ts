@@ -22,7 +22,7 @@ export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAct
     throw new Error('All three tokens must be different')
   }
   
-  transfer.toPlayer(currentPlayer.tokens, bank, tokenColor, 1)
+  transfer(bank, currentPlayer.tokens, tokenColor, 1)
   currentPlayer.movePhase = getNextMovePhase(currentPlayer, tokenColor)
 
   return {

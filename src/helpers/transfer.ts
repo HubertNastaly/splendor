@@ -1,22 +1,12 @@
 import { Color, Tokens } from '@/types';
 
-export const transfer = {
-  toBank: (playerTokens: Tokens, bank: Tokens, tokenColor: Color, amount: number) => {
-    if(playerTokens[tokenColor] < amount) {
-      throw new Error('Not enough tokens')
-    }
-    playerTokens[tokenColor] -= amount
-    bank[tokenColor] += amount
+export function transfer(from: Tokens, to: Tokens, tokenColor: Color, amount: number): [Tokens, Tokens] {
+  if(from[tokenColor] < amount) {
+    throw new Error('Not enough tokens')
+  }
 
-    return { playerTokens, bank }
-  },
-  toPlayer: (playerTokens: Tokens, bank: Tokens, tokenColor: Color, amount: number) => {
-    if(bank[tokenColor] < amount) {
-      throw new Error('Not enough tokens in bank')
-    }
-    bank[tokenColor] -= amount
-    playerTokens[tokenColor] += amount
+  from[tokenColor] -= amount
+  to[tokenColor] += amount
 
-    return { playerTokens, bank }
-  },
+  return [from, to]
 }
