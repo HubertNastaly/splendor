@@ -9,22 +9,23 @@ export interface TokenProps {
   onClick?: () => void
 }
 
-export const Token = ({ color, onClick, disabled }: TokenProps) => (
-  <ButtonWrapper clickable={!!onClick} onClick={withStopPropagation(onClick)} disabled={disabled} data-testid={`token-${color}`}>
-    <GemStyled size="big" color={color} disabled={disabled} />
-  </ButtonWrapper>
-)
+export const Token = ({ color, onClick, disabled }: TokenProps) => {
+  return (
+    <ButtonWrapper clickable={!!onClick} onClick={withStopPropagation(onClick)} disabled={disabled} data-testid={`token-${color}`}>
+      <GemStyled size="big" color={color} disabled={disabled} />
+    </ButtonWrapper>
+  )
+}
 
 const ButtonWrapper = styled('button', {
   border: 'none',
   background: 'none',
 
+  '&[disabled]': {
+    cursor: 'not-allowed'
+  },
+
   variants: {
-    disabled: {
-      true: {
-        cursor: 'not-allowed'
-      }
-    },
     clickable: {
       true: {
         cursor: 'pointer'
