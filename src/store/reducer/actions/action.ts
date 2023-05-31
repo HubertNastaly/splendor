@@ -1,4 +1,4 @@
-import { DeselectCardAction, FinishTurnAction, PickTokenAction, ReserveCardAction, ReturnTokenAction, SelectCardAction } from './playerMove';
+import { DeselectCardAction, FinishTurnAction, PickTokenAction, ReserveCardAction, ReturnTokenAction, SelectCardAction, StartPurchaseAction } from './playerMove';
 import { StartGameAction } from './startGame';
 
 export type Action = 
@@ -7,5 +7,6 @@ export type Action =
   SelectCardAction |
   DeselectCardAction |
   ReserveCardAction |
+  StartPurchaseAction |
   ReturnTokenAction |
   FinishTurnAction

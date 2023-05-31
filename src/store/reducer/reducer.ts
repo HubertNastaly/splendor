@@ -1,5 +1,5 @@
 import { Store } from '@/types';
-import { Action, deselectCard, finishTurn, pickToken, reserveCard, returnToken, selectCard, startGame } from './actions';
+import { Action, deselectCard, finishTurn, pickToken, reserveCard, returnToken, selectCard, startGame, startPurchase } from './actions';
 import { getDefaultState } from '@/store/defaultState';
 
 export function reducer (state: Store = getDefaultState(), action: Action): Store {
@@ -18,6 +18,9 @@ export function reducer (state: Store = getDefaultState(), action: Action): Stor
     }
     case 'RESERVE_CARD': {
       return reserveCard(state, action)
+    }
+    case 'START_PURCHASE': {
+      return startPurchase(state, action)
     }
     case 'RETURN_TOKEN': {
       return returnToken(state, action)
