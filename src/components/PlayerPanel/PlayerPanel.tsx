@@ -1,17 +1,10 @@
-import { styled } from '@/theme'
 import { PlayerTokens } from './PlayerTokens'
+import { Panel } from '@/components/common'
 
 export const PlayerPanel = () => {
   return (
-    <Container data-testid="player-panel">
+    <Panel data-testid="player-panel">
       <PlayerTokens />
-    </Container>
+    </Panel>
   )
 }
-
-const Container = styled('div', {
-  padding: '$big',
-  borderRadius: 8,
-  outline: '2px solid white',
-  backgroundColor: '$panel'
-})

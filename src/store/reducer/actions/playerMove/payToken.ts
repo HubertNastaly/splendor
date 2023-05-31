@@ -1,7 +1,7 @@
-import { canPayToken, transfer } from "@/helpers";
-import { Color, Store } from "@/types";
-import { clone } from "@/utils";
-import { PayloadAction } from "@reduxjs/toolkit";
+import { canPayToken, transfer } from '@/helpers';
+import { Color, Store } from '@/types';
+import { clone } from '@/utils';
+import { PayloadAction } from '@reduxjs/toolkit';
 
 export type PayTokenAction = PayloadAction<{ tokenColor: Color }, 'PAY_TOKEN'>
 
