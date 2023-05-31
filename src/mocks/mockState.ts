@@ -8,5 +8,5 @@ export const mockState = (): Store => ({
   players: DEFAULT_NAMES.map(createPlayer),
   gameState: 'started',
   currentPlayerIndex: 0,
-  purchaseTokensPool: createTokensCollection()
+  purchaseTokens: createTokensCollection()
 })
