@@ -1,15 +1,17 @@
 import { CardData, BasicColor } from '@/types';
 import { styled } from '@/theme';
-import { Gem } from './common';
+import { Gem } from './Gem';
 import { withStopPropagation } from '@/utils';
+import { CARD_HEIGHT, CARD_TOPBAR_HEIGHT, CARD_WIDTH } from '@/constants';
 
 interface Props {
   card: CardData
-  isSelected: boolean
+  isSelected?: boolean
   onSelect?: () => void
+  className?: string
 }
 
-export const Card = ({ card, isSelected, onSelect }: Props) => {
+export const Card = ({ card, isSelected, onSelect, className }: Props) => {
   const { color, price: { white, blue, green, red, black } } = card
 
   const prices: Record<BasicColor, number> = {
@@ -21,7 +23,7 @@ export const Card = ({ card, isSelected, onSelect }: Props) => {
   }
 
   return (
-    <Container color={color} selected={isSelected} clickable={!!onSelect} onClick={withStopPropagation(onSelect)}>
+    <Container className={className} color={color} selected={isSelected} clickable={!!onSelect} onClick={withStopPropagation(onSelect)}>
       <TopSection>
         <TopSectionBackground />
         <CardValue>
@@ -44,8 +46,8 @@ export const Card = ({ card, isSelected, onSelect }: Props) => {
 }
 
 const Container = styled('div', {
-  width: 128,
-  height: 196,
+  width: CARD_WIDTH,
+  height: CARD_HEIGHT,
   borderRadius: 8,
   display: 'flex',
   flexDirection: 'column',
@@ -87,7 +89,7 @@ const Container = styled('div', {
 const TopSection = styled('div', {
   position: 'relative',
   width: '100%',
-  height: 48,
+  height: CARD_TOPBAR_HEIGHT,
   padding: '0 8px',
   display: 'flex',
   alignItems: 'center',
