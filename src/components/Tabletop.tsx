@@ -7,13 +7,9 @@ import { useAppDispatch } from '@/store/hooks'
 import { PlayerPanel } from './PlayerPanel'
 import { ActionsPanel } from './ActionsPanel'
 import { PurchasePanel } from './PurchasePanel'
-import { useCurrentPlayer } from '@/hooks'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
-  const currentPlayer = useCurrentPlayer()
-
-  const shouldShowPurchasePanel = currentPlayer.movePhase.type === 'CARD_PURCHASE_STARTED'
 
   return (
     <Page onClick={() => dispatch({ type: 'DESELECT_CARD' })}>
@@ -21,7 +17,7 @@ export const Tabletop = () => {
       <MainSection gap="large">
         <Board />
         <Bank />
-        {shouldShowPurchasePanel && <PurchasePanel />}
+        <PurchasePanel />
       </MainSection>
       <PlayerPanel />
       <TurnPanelStyled />

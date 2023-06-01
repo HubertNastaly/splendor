@@ -5,10 +5,11 @@ import { PropsWithChildren } from 'react';
 interface Props {
   onClick?: () => void
   disabled?: boolean
+  view?: 'primary' | 'secondary'
 }
 
-export const Button = ({ onClick, disabled, children }: PropsWithChildren<Props>) => (
-  <ButtonComponent disabled={disabled} onClick={withStopPropagation(onClick)}>
+export const Button = ({ onClick, disabled, view, children }: PropsWithChildren<Props>) => (
+  <ButtonComponent view={view} disabled={disabled} onClick={withStopPropagation(onClick)}>
     {children}
   </ButtonComponent>
 )
@@ -16,18 +17,30 @@ export const Button = ({ onClick, disabled, children }: PropsWithChildren<Props>
 const ButtonComponent = styled('button', {
   height: 36,
   fontSize: '$normal',
-  color: 'white',
-  background: 'black',
   border: 'none',
   borderRadius: 4,
   cursor: 'pointer',
 
+  '&[disabled]': {
+    background: '$disabled',
+    cursor: 'not-allowed'
+  },
+
   variants: {
-    disabled: {
-      true: {
-        background: '$disabled',
-        cursor: 'not-allowed'
+    view: {
+      primary: {
+        color: 'white',
+        background: 'black',
+      },
+      secondary: {
+        color: 'black',
+        background: 'none',
+        border: '2px solid black'
       }
     }
+  },
+
+  defaultVariants: {
+    view: 'primary'
   }
 })
