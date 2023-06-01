@@ -8,6 +8,8 @@ export function canFinishTurn(player: Player) {
     case '3_TOKENS_COLLECTED':
     case 'CARD_RESERVED':
       return !isOverTokensLimit(player)
+    case 'CARD_BOUGHT':
+      return true
     default:
       return false
   }

@@ -14,3 +14,5 @@ export interface CardData {
 
 export type CardsByLevel = Record<CardLevel, CardData[]>
 export type NullableCardsByLevel = Record<CardLevel, (CardData|null)[]>
+
+export type CardsByColor = Record<BasicColor, CardData[]>

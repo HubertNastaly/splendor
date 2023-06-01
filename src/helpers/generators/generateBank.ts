@@ -1,8 +1,8 @@
-import { COLORS, Tokens } from '@/types'
+import { BASIC_COLORS, Tokens } from '@/types'
 
 export function generateBank(playersNumber: number): Tokens {
   const basicTokensNumber = getBasicTokensNumber(playersNumber)
-  const basicTokens = Object.fromEntries(COLORS.map(color => [color, basicTokensNumber]))
+  const basicTokens = Object.fromEntries(BASIC_COLORS.map(color => [color, basicTokensNumber]))
   return {
     ...basicTokens,
     gold: 5

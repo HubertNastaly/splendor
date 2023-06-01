@@ -1,5 +1,15 @@
-import { CancelPurchaseAction, DeselectCardAction, FinishTurnAction, PickTokenAction, ReserveCardAction, ReturnTokenAction, SelectCardAction, StartPurchaseAction } from './playerMove';
-import { PayTokenAction } from './playerMove/payToken';
+import {
+  CancelPurchaseAction,
+  DeselectCardAction,
+  FinishTurnAction,
+  PickTokenAction,
+  ReserveCardAction,
+  ReturnTokenAction,
+  SelectCardAction,
+  StartPurchaseAction,
+  PayTokenAction,
+  FinalizePurchaseAction
+} from './playerMove';
 import { StartGameAction } from './startGame';
 
 export type Action = 
@@ -11,5 +21,6 @@ export type Action =
   StartPurchaseAction |
   PayTokenAction |
   CancelPurchaseAction |
+  FinalizePurchaseAction |
   ReturnTokenAction |
   FinishTurnAction
