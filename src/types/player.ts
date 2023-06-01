@@ -1,4 +1,4 @@
-import { CardData } from './card'
+import { CardData, CardsByColor } from './card'
 import { BasicColor, Tokens } from './color'
 
 export type PlayerMovePhase = {
@@ -29,5 +29,6 @@ export interface Player {
   name: string
   tokens: Tokens
   movePhase: PlayerMovePhase
+  cards: CardsByColor
   reservedCards: CardData[]
 }
