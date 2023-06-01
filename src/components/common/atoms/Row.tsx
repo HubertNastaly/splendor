@@ -21,10 +21,22 @@ export const Row = styled('div', {
       large: {
         columnGap: '$large'
       }
+    },
+    align: {
+      center: {
+        alignItems: 'center'
+      },
+      start: {
+        alignItems: 'flex-start'
+      },
+      stretch: {
+        alignItems: 'stretch'
+      }
     }
   },
 
   defaultVariants: {
-    gap: 'small'
+    gap: 'small',
+    align: 'center'
   }
 })

@@ -7,6 +7,9 @@ export const Column = styled('div', {
 
   variants: {
     gap: {
+      none: {
+        rowGap: '0px'
+      },
       tiny: {
         rowGap: '$tiny'
       },

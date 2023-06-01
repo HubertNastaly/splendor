@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { Card } from './Card'
+import { Card } from './common'
 import { styled } from '@/theme'
 import { CardData } from '@/types'
 import { canSelectCard, getSelectedCard } from '@/helpers'

@@ -14,20 +14,16 @@ export const Tabletop = () => {
   return (
     <Page onClick={() => dispatch({ type: 'DESELECT_CARD' })}>
       <ActionsPanelStyled />
-      <MainSection gap="large">
+      <Row gap="large" align="stretch">
         <Board />
         <Bank />
         <PurchasePanel />
-      </MainSection>
+      </Row>
       <PlayerPanel />
       <TurnPanelStyled />
     </Page>
   )
 }
-
-const MainSection = styled(Row, {
-  alignItems: 'stretch'
-})
 
 const TurnPanelStyled = styled(TurnPanel, {
   position: 'absolute',
