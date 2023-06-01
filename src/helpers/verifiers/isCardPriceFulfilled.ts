@@ -1,4 +1,4 @@
-import { COLORS, CardsByColor, Tokens } from '@/types';
+import { BASIC_COLORS, CardsByColor, Tokens } from '@/types';
 import { sum } from '@/utils';
 import { createTokensCollection } from '..';
 
@@ -6,12 +6,12 @@ export function isCardPriceFulfilled(playerCards: CardsByColor, purchaseTokens: 
   const reducedPrice = createTokensCollection()
 
   // use cards gems
-  for(const tokenColor of COLORS) {
+  for(const tokenColor of BASIC_COLORS) {
     reducedPrice[tokenColor] = Math.max(0, cardPrice[tokenColor] - playerCards[tokenColor].length)
   }
 
   // use basic tokens
-  for(const tokenColor of COLORS) {
+  for(const tokenColor of BASIC_COLORS) {
     if(purchaseTokens[tokenColor] > cardPrice[tokenColor]) {
       return false
     }

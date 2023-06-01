@@ -22,6 +22,7 @@ export const PurchasePanel = () => {
   const canBuy = isCardPriceFulfilled(cards, purchaseTokens, movePhase.selectedCard.price)
 
   const cancel = () => dispatch({ type: 'CANCEL_PURCHASE' })
+  const finalizePurchase = () => dispatch({ type: 'FINALIZE_PURCHASE' })
 
   return (
     <Container>
@@ -31,7 +32,7 @@ export const PurchasePanel = () => {
         ))}
       </TokensGrid>
       <Button view="secondary" onClick={cancel}>Cancel</Button>
-      <Button disabled={!canBuy}>Buy</Button>
+      <Button disabled={!canBuy} onClick={finalizePurchase}>Buy</Button>
     </Container>
   )
 }

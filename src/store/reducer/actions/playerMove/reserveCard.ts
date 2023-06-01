@@ -1,4 +1,4 @@
-import { transfer } from '@/helpers';
+import { pickCardFromBoard, transfer } from '@/helpers';
 import { CardData, Store } from '@/types';
 import { clone } from '@/utils';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -16,8 +16,7 @@ export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveC
   currentPlayer.movePhase = { type: 'CARD_RESERVED' }
   currentPlayer.reservedCards.push(reservedCard)
 
-  const reservedCardIndex = boardCardsByLevel[reservedCard.level].findIndex(card => card ? card.id === reservedCard.id : false)
-  boardCardsByLevel[reservedCard.level][reservedCardIndex] = null
+  pickCardFromBoard(boardCardsByLevel, reservedCard)
 
   if(bank.gold > 0) {
     transfer(bank, currentPlayer.tokens, 'gold', 1)
