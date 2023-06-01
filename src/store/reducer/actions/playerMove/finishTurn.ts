@@ -1,5 +1,5 @@
 import { Action } from '@reduxjs/toolkit';
-import { CARD_LEVELS, CardLevel, NullableCardsCollection, Store } from '@/types';
+import { CARD_LEVELS, CardLevel, NullableCardsByLevel, Store } from '@/types';
 import { clone } from '@/utils';
 
 export type FinishTurnAction = Action<'FINISH_TURN'>
@@ -45,7 +45,7 @@ function fillBoard({ boardCardsByLevel, decksByLevel }: Store): Pick<Store, 'boa
   }
 }
 
-function findEmptyPlace(boardCards: NullableCardsCollection): [CardLevel, number] | undefined {
+function findEmptyPlace(boardCards: NullableCardsByLevel): [CardLevel, number] | undefined {
   for(const level of CARD_LEVELS) {
     const cards = boardCards[level]
 

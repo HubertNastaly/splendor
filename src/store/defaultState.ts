@@ -1,9 +1,9 @@
 import { Store } from '@/types';
-import { createCardsCollection, createTokensCollection } from '@/helpers';
+import { createCardsByLevelCollection, createTokensCollection } from '@/helpers';
 
 export const getDefaultState = (): Store => ({
-  decksByLevel: createCardsCollection(),
-  boardCardsByLevel: createCardsCollection(),
+  decksByLevel: createCardsByLevelCollection(),
+  boardCardsByLevel: createCardsByLevelCollection(),
   bank: createTokensCollection(),
   gameState: 'setup',
   players: [],

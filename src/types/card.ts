@@ -12,5 +12,5 @@ export interface CardData {
   price: Tokens
 }
 
-export type CardsCollection = Record<CardLevel, CardData[]>
-export type NullableCardsCollection = Record<CardLevel, (CardData|null)[]>
+export type CardsByLevel = Record<CardLevel, CardData[]>
+export type NullableCardsByLevel = Record<CardLevel, (CardData|null)[]>

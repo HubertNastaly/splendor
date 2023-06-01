@@ -1,10 +1,10 @@
 import allCards from '@/data/cards.json'
-import { CardData, CardLevel, CardsCollection } from '@/types';
-import { createCardsCollection } from '@/helpers';
+import { CardData, CardLevel, CardsByLevel } from '@/types';
+import { createCardsByLevelCollection } from '@/helpers';
 import { CARDS_PER_LEVEL } from '@/constants';
 import { shuffle } from '@/utils';
 
-export function generateBoard(): { decksByLevel: CardsCollection, boardCardsByLevel: CardsCollection } {
+export function generateBoard(): { decksByLevel: CardsByLevel, boardCardsByLevel: CardsByLevel } {
   const decksByLevel = generateDecks()
   const shuffledDecks = shuffleDecks(decksByLevel)
   const [decksAfterDeal, boardCards] = dealCards(shuffledDecks)
@@ -15,15 +15,15 @@ export function generateBoard(): { decksByLevel: CardsCollection, boardCardsByLe
   }
 }
 
-function generateDecks(): CardsCollection {
-  const decksByLevel: CardsCollection = createCardsCollection()
+function generateDecks(): CardsByLevel {
+  const decksByLevel: CardsByLevel = createCardsByLevelCollection()
   ;(allCards as CardData[]).forEach(card => decksByLevel[card.level].push(card))
 
   return decksByLevel
 }
 
-function dealCards(decks: CardsCollection): [decks: CardsCollection, boardCards: CardsCollection] {
-  const boardCards = createCardsCollection()
+function dealCards(decks: CardsByLevel): [decks: CardsByLevel, boardCards: CardsByLevel] {
+  const boardCards = createCardsByLevelCollection()
 
   for(const key in decks) {
     const level = parseInt(key) as CardLevel
@@ -39,7 +39,7 @@ function dealCards(decks: CardsCollection): [decks: CardsCollection, boardCards:
   return [decks, boardCards]
 }
 
-function shuffleDecks(decks: CardsCollection) {
+function shuffleDecks(decks: CardsByLevel) {
   for(const key in decks) {
     const level = parseInt(key) as CardLevel
     decks[level] = shuffle(decks[level])

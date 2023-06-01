@@ -1,12 +1,12 @@
 import { Tokens } from './color'
-import { CardsCollection, NullableCardsCollection } from './card'
+import { CardsByLevel, NullableCardsByLevel } from './card'
 import { Player } from './player'
 
 export type GameState = 'setup' | 'started' | 'ended'
 
 export interface Store {
-  decksByLevel: CardsCollection
-  boardCardsByLevel: NullableCardsCollection
+  decksByLevel: CardsByLevel
+  boardCardsByLevel: NullableCardsByLevel
   bank: Tokens
   gameState: GameState
   players: Player[]
