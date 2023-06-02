@@ -1,6 +1,6 @@
 import { DEFAULT_NAMES } from '@/constants';
 import { createPlayer, createTokensCollection, generateBank, generateBoard } from '@/helpers';
-import { Store } from '@/types';
+import { Store, History } from '@/types';
 
 export const mockState = (): Store => ({
   ...generateBoard(),
@@ -9,4 +9,10 @@ export const mockState = (): Store => ({
   gameState: 'started',
   currentPlayerIndex: 0,
   purchaseTokens: createTokensCollection()
+})
+
+export const mockHistory = (): History<Store> => ({
+  past: [],
+  present: { state: mockState() },
+  future: []
 })

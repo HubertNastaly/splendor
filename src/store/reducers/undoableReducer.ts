@@ -1,21 +1,33 @@
-import { History } from "@/types";
+import { History, StateObject } from "@/types";
 import { AnyAction, Reducer } from "@reduxjs/toolkit";
 import { HistoryAction, undo } from "@/store/actions";
 import { clone } from "@/utils";
 
-export function undoableReducer<S extends object, A extends AnyAction>(reducer: Reducer<S, Exclude<A, HistoryAction>>) {
-  return (history: History<S> = {} as History<S>, action: A): History<S> => {
+type DecoratedReducer<S extends StateObject, A extends AnyAction> = Reducer<S, Exclude<A, HistoryAction>>
+
+export function undoableReducer<S extends StateObject, A extends AnyAction>(
+  reducer: DecoratedReducer<S, A>,
+  excludedActions: A['type'][]
+) {
+  return function (history: History<S> = {} as History<S>, action: A): History<S> {
     switch(action.type) {
       case 'UNDO':
         return undo(history)
       default: {
         // TODO: figure out why the action type is not narrowed here
-        const present = reducer(history.present, action as Exclude<A, HistoryAction>)
-        const newHistory = clone(history)
-        newHistory.past.push(history.present)
-        newHistory.present = present
-        return newHistory
+        const present = reducer(history.present.state, action as Exclude<A, HistoryAction>)
+        const undoable = !excludedActions.includes(action.type)
+        return updatePresentState(history, present, undoable)
       }
     }
   }
+}
+
+function updatePresentState<S extends StateObject>(history: History<S>, present: S, undoable: boolean): History<S> {
+  const newHistory = clone(history)
+  if(history.present.undoable) {
+    newHistory.past.push(history.present.state)
+  }
+  newHistory.present = { state: present, undoable }
+  return newHistory
 }

@@ -13,6 +13,6 @@ export const getDefaultState = (): Store => ({
 
 export const getDefaultHistory = (): History<Store> => ({
   past: [],
-  present: getDefaultState(),
+  present: { state: getDefaultState() },
   future: []
 })

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { Game } from '@/components'
-import { mockState } from '@/mocks'
-import { reducer } from '@/store/reducer'
+import { mockHistory } from '@/mocks'
+import { mainReducer } from '@/store/mainReducer'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import { Color } from '@/types'
@@ -9,12 +9,13 @@ import { pickTokens } from './utils/pickTokens'
 import { expectTokensAmount } from './utils'
 
 describe('pick tokens', () => {
-  const defaultState = mockState()
+  const defaultState = mockHistory()
+  const { present } = defaultState
 
   const renderGame = (preloadedState = defaultState) => {
     const store = configureStore({
       preloadedState,
-      reducer
+      reducer: mainReducer
     })
 
     render(
@@ -31,7 +32,7 @@ describe('pick tokens', () => {
     pickTokens(tokenColors)
 
     for(const tokenColor of tokenColors) {
-      expectTokensAmount('bank', tokenColor, defaultState.bank[tokenColor] - 1)
+      expectTokensAmount('bank', tokenColor, present.state.bank[tokenColor] - 1)
     }
 
     for(const tokenColor of tokenColors) {
@@ -45,7 +46,7 @@ describe('pick tokens', () => {
     const tokenColor: Color = 'green'
     pickTokens([tokenColor, tokenColor])
 
-    expectTokensAmount('bank', 'green', defaultState.bank.green - 2)
+    expectTokensAmount('bank', 'green', present.state.bank.green - 2)
     expectTokensAmount('player', 'green', 2)
   })
 
@@ -54,10 +55,10 @@ describe('pick tokens', () => {
 
     pickTokens(['green', 'red', 'green'])
 
-    expectTokensAmount('bank', 'green', defaultState.bank.green - 1)
+    expectTokensAmount('bank', 'green', present.state.bank.green - 1)
     expectTokensAmount('player', 'green', 1)
 
-    expectTokensAmount('bank', 'red', defaultState.bank.red - 1)
+    expectTokensAmount('bank', 'red', present.state.bank.red - 1)
     expectTokensAmount('player', 'red', 1)
   })
 
@@ -68,7 +69,7 @@ describe('pick tokens', () => {
     pickTokens(tokenColors)
 
     for(const tokenColor of tokenColors.slice(0, -1)) {
-      expectTokensAmount('bank', tokenColor, defaultState.bank[tokenColor] - 1)
+      expectTokensAmount('bank', tokenColor, present.state.bank[tokenColor] - 1)
     }
 
     for(const tokenColor of tokenColors.slice(0, -1)) {
@@ -76,7 +77,7 @@ describe('pick tokens', () => {
     }
 
     const lastColor = tokenColors[tokenColors.length - 1]
-    expectTokensAmount('bank', lastColor, defaultState.bank[lastColor])
+    expectTokensAmount('bank', lastColor, present.state.bank[lastColor])
     expectTokensAmount('player', lastColor, 0)
   })
 
@@ -86,7 +87,7 @@ describe('pick tokens', () => {
     const tokenColor: Color = 'gold'
     pickTokens([tokenColor])
 
-    expectTokensAmount('bank', tokenColor, defaultState.bank.gold)
+    expectTokensAmount('bank', tokenColor, present.state.bank.gold)
     expectTokensAmount('player', tokenColor, 0)
   })
 })

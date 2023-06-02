@@ -7,5 +7,5 @@ export const useAppDispatch: () => Dispatch<Action> = useDispatch
 
 export const useHistorySelector: TypedUseSelectorHook<History<Store>> = useSelector
 export const useAppSelector = <T>(selector: (store: Store) => T) => {
-  return useHistorySelector(({ present }) => selector(present))
+  return useHistorySelector(({ present }) => selector(present.state))
 }

@@ -1,11 +1,11 @@
-import { History } from "@/types";
+import { History, StateObject } from "@/types";
 import { clone } from "@/utils";
 import { createAction } from "@reduxjs/toolkit";
 
 export const undoAction = createAction('UNDO')
 export type UndoAction = ReturnType<typeof undoAction>
 
-export function undo<S extends object>(history: History<S>): History<S> {
+export function undo<S extends StateObject>(history: History<S>): History<S> {
   const newHistory = clone(history)
 
   const lastState = newHistory.past.pop()
@@ -15,8 +15,8 @@ export function undo<S extends object>(history: History<S>): History<S> {
 
   const currentState = clone(newHistory.present)
 
-  newHistory.present = lastState
-  newHistory.future.unshift(currentState)
+  newHistory.present = { state: lastState, undoable: false }
+  newHistory.future.unshift(currentState.state)
 
   return newHistory
 }
