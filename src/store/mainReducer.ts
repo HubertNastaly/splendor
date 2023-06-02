@@ -1,6 +1,6 @@
-import { Store } from "@/types"
-import { Action } from "./actions"
-import { gameReducer, undoableReducer } from "./reducers"
+import { Store } from '@/types'
+import { Action } from './actions'
+import { gameReducer, undoableReducer } from './reducers'
 
 const EXCLUDED_ACTIONS: Action['type'][] = [
   'CANCEL_PURCHASE',

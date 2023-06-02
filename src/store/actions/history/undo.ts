@@ -1,6 +1,6 @@
-import { History, StateObject } from "@/types";
-import { clone } from "@/utils";
-import { createAction } from "@reduxjs/toolkit";
+import { History, StateObject } from '@/types';
+import { clone } from '@/utils';
+import { createAction } from '@reduxjs/toolkit';
 
 export const undoAction = createAction('UNDO')
 export type UndoAction = ReturnType<typeof undoAction>
