@@ -1,6 +1,7 @@
 import { Button, Panel, Token } from '@/components/common'
 import { TOKEN_SIZE } from '@/constants'
 import { isCardPriceFulfilled } from '@/helpers'
+import { cancelPurchaseAction, finalizePurchaseAction } from '@/store/actions'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { styled } from '@/theme'
 import { Color, Tokens } from '@/types'
@@ -21,8 +22,8 @@ export const PurchasePanel = () => {
 
   const canBuy = isCardPriceFulfilled(cards, purchaseTokens, movePhase.selectedCard.price)
 
-  const cancel = () => dispatch({ type: 'CANCEL_PURCHASE' })
-  const finalizePurchase = () => dispatch({ type: 'FINALIZE_PURCHASE' })
+  const cancel = () => dispatch(cancelPurchaseAction())
+  const finalizePurchase = () => dispatch(finalizePurchaseAction())
 
   return (
     <Container>

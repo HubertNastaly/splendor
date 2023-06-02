@@ -1,9 +1,10 @@
 import { pickCardFromBoard, transfer } from '@/helpers';
 import { CardData, Store } from '@/types';
 import { clone } from '@/utils';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-export type ReserveCardAction = PayloadAction<{ reservedCard: CardData }, 'RESERVE_CARD'>
+export const reserveCardAction = createAction('RESERVE_CARD', (reservedCard: CardData) => ({ payload: { reservedCard }}))
+export type ReserveCardAction = ReturnType<typeof reserveCardAction>
 
 export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveCardAction): Store {
   const { players, boardCardsByLevel, bank } = clone(state)

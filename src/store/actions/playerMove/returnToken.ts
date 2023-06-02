@@ -1,9 +1,10 @@
 import { transfer } from '@/helpers';
 import { Color, Store } from '@/types';
 import { clone } from '@/utils';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-export type ReturnTokenAction = PayloadAction<{ tokenColor: Color }, 'RETURN_TOKEN'>
+export const returnTokenAction = createAction('RETURN_TOKEN', (tokenColor: Color) => ({ payload: { tokenColor }}))
+export type ReturnTokenAction = ReturnType<typeof returnTokenAction>
 
 export function returnToken(state: Store, { payload: { tokenColor }}: ReturnTokenAction): Store {
   const { currentPlayerIndex } = state

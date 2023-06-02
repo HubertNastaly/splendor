@@ -1,9 +1,10 @@
 import { isCardPriceFulfilled, pickCardFromBoard, transfer } from '@/helpers';
 import { Store, TOKEN_COLORS } from '@/types';
 import { clone } from '@/utils';
-import { Action } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-export type FinalizePurchaseAction = Action<'FINALIZE_PURCHASE'>
+export const finalizePurchaseAction = createAction('FINALIZE_PURCHASE')
+export type FinalizePurchaseAction = ReturnType<typeof finalizePurchaseAction>
 
 export function finalizePurchase(state: Store): Store {
   const bank = clone(state.bank)

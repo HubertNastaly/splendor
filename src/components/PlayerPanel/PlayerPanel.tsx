@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/store/hooks'
 import { Color } from '@/types'
 import { canPayToken, isOverTokensLimit } from '@/helpers'
 import { styled } from '@/theme'
+import { payTokenAction, returnTokenAction } from '@/store/actions'
 
 export const PlayerPanel = () => {
   const dispatch = useAppDispatch()
@@ -12,8 +13,8 @@ export const PlayerPanel = () => {
   const { tokens, cards } = currentPlayer
   const tokenEntries = Object.entries(tokens) as [Color, number][]
 
-  const returnToken = (tokenColor: Color) => dispatch({ type: 'RETURN_TOKEN', payload: { tokenColor }})
-  const payToken = (tokenColor: Color) => dispatch({ type: 'PAY_TOKEN', payload: { tokenColor }})
+  const returnToken = (tokenColor: Color) => dispatch(returnTokenAction(tokenColor))
+  const payToken = (tokenColor: Color) => dispatch(payTokenAction(tokenColor))
 
   const getOnTokenClick = (color: Color) =>
     canPayToken(currentPlayer) ? () => payToken(color) :

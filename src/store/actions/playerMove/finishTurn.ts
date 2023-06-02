@@ -1,8 +1,9 @@
-import { Action } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 import { CARD_LEVELS, CardLevel, NullableCardsByLevel, Store } from '@/types';
 import { clone } from '@/utils';
 
-export type FinishTurnAction = Action<'FINISH_TURN'>
+export const finishTurnAction = createAction('FINISH_TURN')
+export type FinishTurnAction = ReturnType<typeof finishTurnAction>
 
 export function finishTurn(state: Store): Store {
   const { currentPlayerIndex } = state

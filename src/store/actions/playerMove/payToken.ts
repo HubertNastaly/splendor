@@ -1,9 +1,10 @@
 import { canPayToken, transfer } from '@/helpers';
 import { Color, Store } from '@/types';
 import { clone } from '@/utils';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-export type PayTokenAction = PayloadAction<{ tokenColor: Color }, 'PAY_TOKEN'>
+export const payTokenAction = createAction('PAY_TOKEN', (tokenColor: Color) => ({ payload: { tokenColor }}))
+export type PayTokenAction = ReturnType<typeof payTokenAction>
 
 export function payToken(state: Store, { payload: { tokenColor }}: PayTokenAction): Store {
   const players = clone(state.players)

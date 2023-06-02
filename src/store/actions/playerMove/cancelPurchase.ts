@@ -1,9 +1,10 @@
 import { transfer } from '@/helpers';
 import { Color, Store } from '@/types';
 import { clone } from '@/utils';
-import { Action } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-export type CancelPurchaseAction = Action<'CANCEL_PURCHASE'>
+export const cancelPurchaseAction = createAction('CANCEL_PURCHASE')
+export type CancelPurchaseAction = ReturnType<typeof cancelPurchaseAction>
 
 export function cancelPurchase(state: Store): Store {
   const purchaseTokens = clone(state.purchaseTokens)
