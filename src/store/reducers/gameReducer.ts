@@ -12,7 +12,7 @@ import {
   selectCard,
   startGame,
   startPurchase
-} from '../actions';
+} from '@/store/actions';
 import { getDefaultState } from '@/store/defaultState';
 
 export function gameReducer (state: Store = getDefaultState(), action: GameAction): Store {

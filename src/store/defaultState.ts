@@ -1,4 +1,4 @@
-import { Store } from '@/types';
+import { Store, History } from '@/types';
 import { createCardsByLevelCollection, createTokensCollection } from '@/helpers';
 
 export const getDefaultState = (): Store => ({
@@ -9,4 +9,10 @@ export const getDefaultState = (): Store => ({
   players: [],
   currentPlayerIndex: 0,
   purchaseTokens: createTokensCollection()
+})
+
+export const getDefaultHistory = (): History<Store> => ({
+  past: [],
+  present: getDefaultState(),
+  future: []
 })

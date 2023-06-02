@@ -1,3 +1,3 @@
-export * from './startGame'
-export * from './playerMove'
-export * from './gameAction'
+export * from './game'
+export * from './history'
+export * from './action'
