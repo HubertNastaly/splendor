@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank, canCollectToken  } from '@/helpers'
 import { styled } from '@/theme'
 import { TokenCounter } from './common'
+import { pickTokenAction } from '@/store/actions'
 
 export const Bank = () => {
   const dispatch = useAppDispatch()
@@ -26,7 +27,7 @@ export const Bank = () => {
     return !isEnoughTokensInBank(bank, currentPlayer, tokenColor)
   }, [bank, currentPlayer])
 
-  const collectToken = (tokenColor: BasicColor) => dispatch({ type: 'PICK_TOKEN', payload: { tokenColor }})
+  const collectToken = (tokenColor: BasicColor) => dispatch(pickTokenAction(tokenColor))
 
   const tokenEntries = Object.entries(bank) as [Color, number][]
 

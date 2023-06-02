@@ -7,12 +7,13 @@ import { useAppDispatch } from '@/store/hooks'
 import { PlayerPanel } from './PlayerPanel'
 import { ActionsPanel } from './ActionsPanel'
 import { PurchasePanel } from './PurchasePanel'
+import { deselectCardAction } from '@/store/actions'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
 
   return (
-    <Page onClick={() => dispatch({ type: 'DESELECT_CARD' })}>
+    <Page onClick={() => dispatch(deselectCardAction())}>
       <ActionsPanelStyled />
       <Row gap="large" align="stretch">
         <Board />

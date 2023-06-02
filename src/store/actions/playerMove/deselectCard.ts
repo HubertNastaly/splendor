@@ -1,8 +1,9 @@
 import { Store } from '@/types';
 import { clone } from '@/utils';
-import { Action } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-export type DeselectCardAction = Action<'DESELECT_CARD'>
+export const deselectCardAction = createAction('DESELECT_CARD')
+export type DeselectCardAction = ReturnType<typeof deselectCardAction>
 
 export function deselectCard(state: Store): Store {
   const players = clone(state.players)

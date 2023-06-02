@@ -1,6 +1,6 @@
 import { Store } from '@/types';
 import {
-  Action,
+  GameAction,
   cancelPurchase,
   deselectCard,
   finalizePurchase,
@@ -15,7 +15,7 @@ import {
 } from './actions';
 import { getDefaultState } from '@/store/defaultState';
 
-export function reducer (state: Store = getDefaultState(), action: Action): Store {
+export function reducer (state: Store = getDefaultState(), action: GameAction): Store {
   switch(action.type) {
     case 'START_GAME': {
       return startGame(state, action)

@@ -2,6 +2,7 @@ import { styled } from '@/theme'
 import { Button, Column } from './common'
 import { useAppDispatch } from '@/store/hooks'
 import { useCurrentPlayer } from '@/hooks'
+import { reserveCardAction, startPurchaseAction } from '@/store/actions'
 
 interface Props {
   className?: string
@@ -16,8 +17,8 @@ export const ActionsPanel = ({ className }: Props) => {
     return <></>
   }
 
-  const reserveCard = () => dispatch({ type: 'RESERVE_CARD', payload: { reservedCard: movePhase.selectedCard } })
-  const startPurchase = () => dispatch({ type: 'START_PURCHASE', payload: { selectedCard: movePhase.selectedCard } })
+  const reserveCard = () => dispatch(reserveCardAction(movePhase.selectedCard))
+  const startPurchase = () => dispatch(startPurchaseAction(movePhase.selectedCard))
   
   return (
     <Container className={className} gap="tiny">

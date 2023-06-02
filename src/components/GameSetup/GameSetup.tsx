@@ -4,6 +4,7 @@ import { PlayerInput } from './PlayerInput'
 import { useAppDispatch } from '@/store/hooks'
 import { styled } from '@/theme'
 import { Page, Button } from '@/components/common'
+import { startGameAction } from '@/store/actions'
 
 const DEFAULT_NAMES = new Array(MAX_PLAYERS_NUMBER).fill('')
 
@@ -22,7 +23,7 @@ export const GameSetup = () => {
   const submit = (event: FormEvent) => {
     event.preventDefault()
     const nonEmptyNames = names.filter(name => !!name)
-    dispatch({ type: 'START_GAME', payload: { names: nonEmptyNames }})
+    dispatch(startGameAction(nonEmptyNames))
   }
 
   const canPlay = names.filter(name => !!name).length >= MIN_PLAYERS_NUMBER

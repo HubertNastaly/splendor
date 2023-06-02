@@ -1,9 +1,10 @@
-import { PayloadAction } from '@reduxjs/toolkit'
+import { createAction } from '@reduxjs/toolkit'
 import { BasicColor, Player, PlayerMovePhase, Store } from '@/types'
 import { clone } from '@/utils'
 import { canCollectToken, isEnoughTokensInBank, isToCollectDuplicatedThirdToken, transfer } from '@/helpers'
 
-export type PickTokenAction = PayloadAction<{ tokenColor: BasicColor }, 'PICK_TOKEN'>
+export const pickTokenAction = createAction('PICK_TOKEN', (tokenColor: BasicColor) => ({ payload: { tokenColor }}))
+export type PickTokenAction = ReturnType<typeof pickTokenAction>
 
 export function pickToken(state: Store, { payload: { tokenColor }}: PickTokenAction): Store {
   const players = clone(state.players)

@@ -1,8 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { Card } from './common'
+import { Card } from './common/Card'
 import { styled } from '@/theme'
 import { CardData } from '@/types'
 import { canSelectCard, getSelectedCard } from '@/helpers'
+import { selectCardAction } from '@/store/actions'
 
 interface Props {
   className?: string
@@ -21,7 +22,7 @@ export const Board = ({ className }: Props) => {
 
   const allCards = [...cardsByLevel[3], ...cardsByLevel[2], ...cardsByLevel[1]]
 
-  const select = (card: CardData) => dispatch({ type: 'SELECT_CARD', payload: { selectedCard: card } })
+  const select = (card: CardData) => dispatch(selectCardAction(card))
   const canSelect = canSelectCard(currentPlayer)
 
   return (

@@ -3,6 +3,7 @@ import { Button, Column } from './common'
 import { useAppDispatch } from '@/store/hooks'
 import { styled } from '@/theme'
 import { canFinishTurn } from '@/helpers'
+import { finishTurnAction } from '@/store/actions'
 
 interface Props {
   className?: string
@@ -12,7 +13,7 @@ export const TurnPanel = ({ className }: Props) => {
   const dispatch = useAppDispatch()
   const currentPlayer = useCurrentPlayer()
 
-  const finishTurn = () => dispatch({ type: 'FINISH_TURN' })
+  const finishTurn = () => dispatch(finishTurnAction())
 
   return (
     <Container className={className}>

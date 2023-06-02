@@ -12,15 +12,15 @@ import {
 } from './playerMove';
 import { StartGameAction } from './startGame';
 
-export type Action = 
-  StartGameAction |
-  PickTokenAction |
-  SelectCardAction |
-  DeselectCardAction |
-  ReserveCardAction |
-  StartPurchaseAction |
-  PayTokenAction |
-  CancelPurchaseAction |
-  FinalizePurchaseAction |
-  ReturnTokenAction |
-  FinishTurnAction
+export type GameAction = 
+  | StartGameAction
+  | PickTokenAction
+  | SelectCardAction
+  | DeselectCardAction
+  | ReserveCardAction
+  | StartPurchaseAction
+  | PayTokenAction
+  | CancelPurchaseAction
+  | FinalizePurchaseAction
+  | ReturnTokenAction
+  | FinishTurnAction

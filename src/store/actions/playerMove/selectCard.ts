@@ -1,8 +1,9 @@
 import { CardData, Store } from '@/types';
 import { clone } from '@/utils';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
-export type SelectCardAction = PayloadAction<{ selectedCard: CardData }, 'SELECT_CARD'>
+export const selectCardAction = createAction('SELECT_CARD', (selectedCard: CardData) => ({ payload: { selectedCard }}))
+export type SelectCardAction = ReturnType<typeof selectCardAction>
 
 export function selectCard(state: Store, { payload: { selectedCard } }: SelectCardAction): Store {
   const players = clone(state.players)
