@@ -1,4 +1,4 @@
-import { isCardPriceFulfilled, pickCardFromBoard, transfer } from '@/helpers';
+import { isCardPriceFulfilled, pickCardFromBoard, pickCardFromPlayer, transfer } from '@/helpers';
 import { Store, TOKEN_COLORS } from '@/types';
 import { clone } from '@/utils';
 import { createAction } from '@reduxjs/toolkit';
@@ -18,9 +18,9 @@ export function finalizePurchase(state: Store): Store {
     throw new Error('Cannot buy card in current phase')
   }
 
-  const { selectedCard } = movePhase
+  const { selectedCard: { card, location } } = movePhase
 
-  if(!isCardPriceFulfilled(currentPlayer.cards, purchaseTokens, selectedCard.price)) {
+  if(!isCardPriceFulfilled(currentPlayer.cards, purchaseTokens, card.price)) {
     throw new Error('Price is not fulfilled')
   }
 
@@ -28,9 +28,13 @@ export function finalizePurchase(state: Store): Store {
     transfer(purchaseTokens, bank, tokenColor, purchaseTokens[tokenColor])
   }
 
-  pickCardFromBoard(boardCardsByLevel, selectedCard)
-  currentPlayer.cards[selectedCard.color].push(selectedCard)
+  if(location === 'board') {
+    pickCardFromBoard(boardCardsByLevel, card)
+  } else {
+    pickCardFromPlayer(currentPlayer.reservedCards, card)
+  }
 
+  currentPlayer.cards[card.color].push(card)
   currentPlayer.movePhase = { type: 'CARD_BOUGHT' }
 
   return {

@@ -20,7 +20,7 @@ export const PurchasePanel = () => {
     return <></>
   }
 
-  const canBuy = isCardPriceFulfilled(cards, purchaseTokens, movePhase.selectedCard.price)
+  const canBuy = isCardPriceFulfilled(cards, purchaseTokens, movePhase.selectedCard.card.price)
 
   const cancel = () => dispatch(cancelPurchaseAction())
   const finalizePurchase = () => dispatch(finalizePurchaseAction())

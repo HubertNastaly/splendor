@@ -1,3 +1,4 @@
+import { canSelectCard } from '@/helpers';
 import { SelectedCard, Store } from '@/types';
 import { clone } from '@/utils';
 import { createAction } from '@reduxjs/toolkit';
@@ -9,7 +10,7 @@ export function selectCard(state: Store, { payload: { selectedCard } }: SelectCa
   const players = clone(state.players)
   const currentPlayer = players[state.currentPlayerIndex]
 
-  if(currentPlayer.movePhase.type !== 'NONE') {
+  if(!canSelectCard(currentPlayer)) {
     throw new Error('Cannot select card')
   }
   currentPlayer.movePhase = { type: 'CARD_SELECTED', selectedCard }
