@@ -1,7 +1,11 @@
 import { Dispatch } from 'react'
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux'
-import { GameAction } from './actions'
-import { Store } from '@/types'
+import { Action } from './actions'
+import { Store, History } from '@/types'
 
-export const useAppDispatch: () => Dispatch<GameAction> = useDispatch
-export const useAppSelector: TypedUseSelectorHook<Store> = useSelector
+export const useAppDispatch: () => Dispatch<Action> = useDispatch
+
+export const useHistorySelector: TypedUseSelectorHook<History<Store>> = useSelector
+export const useAppSelector = <T>(selector: (store: Store) => T) => {
+  return useHistorySelector(({ present }) => selector(present.state))
+}

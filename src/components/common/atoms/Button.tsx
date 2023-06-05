@@ -16,6 +16,11 @@ export const Button = ({ onClick, disabled, view, children }: PropsWithChildren<
 
 const ButtonComponent = styled('button', {
   height: 36,
+  paddingLeft: '$small',
+  paddingRight: '$small',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   fontSize: '$normal',
   border: 'none',
   borderRadius: 4,

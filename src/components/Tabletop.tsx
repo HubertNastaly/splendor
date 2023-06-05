@@ -8,6 +8,7 @@ import { PlayerPanel } from './PlayerPanel'
 import { ActionsPanel } from './ActionsPanel'
 import { PurchasePanel } from './PurchasePanel'
 import { deselectCardAction } from '@/store/actions'
+import { HistoryNavigation } from './HistoryNavigation'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
@@ -21,6 +22,7 @@ export const Tabletop = () => {
         <PurchasePanel />
       </Row>
       <PlayerPanel />
+      <HistoryNavigationStyled />
       <TurnPanelStyled />
     </Page>
   )
@@ -36,4 +38,10 @@ const ActionsPanelStyled = styled(ActionsPanel, {
   position: 'absolute',
   top: 32,
   right: 32,
+})
+
+const HistoryNavigationStyled = styled(HistoryNavigation, {
+  position: 'absolute',
+  left: 32,
+  bottom: 32
 })
