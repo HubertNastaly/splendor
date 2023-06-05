@@ -3,7 +3,7 @@ import { BasicColor, Color } from '@/types'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank, canCollectToken  } from '@/helpers'
 import { styled } from '@/theme'
-import { TokenCounter } from './common'
+import { Column, TokenCounter } from './common'
 import { pickTokenAction } from '@/store/actions'
 
 export const Bank = () => {
@@ -32,7 +32,7 @@ export const Bank = () => {
   const tokenEntries = Object.entries(bank) as [Color, number][]
 
   return (
-    <Panel data-testid="bank">
+    <Column data-testid="bank">
       {tokenEntries.map(([color, count]) => (
         <TokenCounter
           key={`token-row-${color}`}
@@ -44,12 +44,6 @@ export const Bank = () => {
           }}
         />
       ))}
-    </Panel>
+    </Column>
   )
 }
-
-const Panel = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  rowGap: '$big'
-})

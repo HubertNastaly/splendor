@@ -45,8 +45,12 @@ export const GoldGroup = ({ goldCount, reservedCards, onGoldClick }: Props) => {
 }
 
 const CardPlaceholder = styled('div', {
-  width: CARD_WIDTH,
-  height: CARD_HEIGHT,
+  width: CARD_WIDTH.highResolution,
+  height: CARD_HEIGHT.highResolution,
+  '@lowResolution': {
+    width: CARD_WIDTH.lowResolution,
+    height: CARD_HEIGHT.lowResolution,
+  },
   borderRadius: 8,
   border: '2px solid white',
   background: 'none'

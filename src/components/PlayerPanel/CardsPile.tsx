@@ -27,8 +27,11 @@ const Pile = styled(Column, {
 
 const indexVariants = Object.fromEntries(
   [...new Array(10)].map((_, idx) => [idx, {
-    marginTop: -idx * CARD_HEIGHT + CARD_TOPBAR_HEIGHT * idx + idx,
-    zIndex: idx
+    marginTop: -idx * CARD_HEIGHT.highResolution + CARD_TOPBAR_HEIGHT.highResolution * idx + idx,
+    zIndex: idx,
+    '@lowResolution': {
+      marginTop: -idx * CARD_HEIGHT.lowResolution + CARD_TOPBAR_HEIGHT.lowResolution * idx + idx
+    }
   }])
 )
 

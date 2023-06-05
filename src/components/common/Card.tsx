@@ -46,8 +46,12 @@ export const Card = ({ card, isSelected, onSelect, className }: Props) => {
 }
 
 const Container = styled('div', {
-  width: CARD_WIDTH,
-  height: CARD_HEIGHT,
+  width: CARD_WIDTH.highResolution,
+  height: CARD_HEIGHT.highResolution,
+  '@lowResolution': {
+    width: CARD_WIDTH.lowResolution,
+    height: CARD_HEIGHT.lowResolution
+  },
   borderRadius: 8,
   display: 'flex',
   flexDirection: 'column',
@@ -89,11 +93,18 @@ const Container = styled('div', {
 const TopSection = styled('div', {
   position: 'relative',
   width: '100%',
-  height: CARD_TOPBAR_HEIGHT,
-  padding: '0 8px',
+  height: CARD_TOPBAR_HEIGHT.highResolution,
+  paddingRight: '$tiny',
+  paddingLeft: '$tiny',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  
+  '@lowResolution': {
+    height: CARD_TOPBAR_HEIGHT.lowResolution,
+    paddingRight: '$microscopic',
+    paddingLeft: '$microscopic',
+  },
 })
 
 const TopSectionBackground = styled('div', {
@@ -112,17 +123,29 @@ const CardValue = styled('span', {
   color: '#000',
   fontSize: '$normal',
   fontWeight: 'bold',
+
+  '@lowResolution': {
+    fontSize: '$small'
+  }
 })
 
 const Prices = styled('div', {
   padding: '0 0 8px 8px',
   display: 'flex',
   flexDirection: 'column',
-  rowGap: 8
+  rowGap: '$tiny',
+  '@lowResolution': {
+    padding: '0 0 4px 4px',
+    rowGap: '$microscopic'
+  }
 })
 
 const Price = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  gap: 8
+  gap: '$tiny',
+  '@lowResolution': {
+    gap: '$microscopic',
+    fontSize: '$tiny'
+  }
 })

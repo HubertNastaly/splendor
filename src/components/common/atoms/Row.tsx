@@ -10,16 +10,19 @@ export const Row = styled('div', {
         columnGap: '$tiny'
       },
       small: {
-        columnGap: '$small'
+        columnGap: '$small',
       },
       medium: {
-        columnGap: '$medium'
+        columnGap: '$medium',
       },
       big: {
-        columnGap: '$big'
+        columnGap: '$big',
       },
       large: {
-        columnGap: '$large'
+        columnGap: '$large',
+      },
+      enormous: {
+        columnGap: '$enormous',
       }
     },
     align: {

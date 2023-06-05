@@ -6,7 +6,19 @@ export const MAX_TOKENS_LIMIT = 10
 export const MAX_RESERVED_CARDS_LIMIT = 3
 export const DEFAULT_NAMES = ['Adam', 'Bob', 'Cindy']
 
-export const TOKEN_SIZE = 72
-export const CARD_WIDTH = 128
-export const CARD_HEIGHT = 196
-export const CARD_TOPBAR_HEIGHT = 48
+export const TOKEN_SIZE = {
+  lowResolution: 36,
+  highResolution: 72
+}
+export const CARD_WIDTH = {
+  lowResolution: 80,
+  highResolution: 128
+}
+export const CARD_HEIGHT = {
+  lowResolution: 122,
+  highResolution: 196
+}
+export const CARD_TOPBAR_HEIGHT = {
+  lowResolution: 32,
+  highResolution: 48
+}

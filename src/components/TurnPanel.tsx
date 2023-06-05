@@ -26,7 +26,15 @@ export const TurnPanel = ({ className }: Props) => {
 const Container = styled(Column, {
   alignItems: 'stretch',
   rowGap: '$small',
-  width: 256
+  width: 256,
+
+  '@lowResolution': {
+    width: 192
+  }
 })
 
-const CurrentPlayer = styled('span')
+const CurrentPlayer = styled('span', {
+  '@lowResolution': {
+    fontSize: '$small'
+  }
+})

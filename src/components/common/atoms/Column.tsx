@@ -14,16 +14,25 @@ export const Column = styled('div', {
         rowGap: '$tiny'
       },
       small: {
-        rowGap: '$small'
+        rowGap: '$small',
+        '@lowResolution': {
+          rowGap: '$tiny'
+        }
       },
       medium: {
-        rowGap: '$medium'
+        rowGap: '$medium',
+        '@lowResolution': {
+          rowGap: '$small'
+        }
       },
       big: {
-        rowGap: '$big'
+        rowGap: '$big',
+        '@lowResolution': {
+          rowGap: '$medium'
+        }
       },
-      large: {
-        rowGap: '$large'
+      enormous: {
+        rowGap: '$enormous'
       }
     }
   },

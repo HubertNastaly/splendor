@@ -46,7 +46,11 @@ export const PlayerPanel = () => {
 }
 
 const Container = styled(Panel, {
-  minHeight: 348
+  height: 1, // workaround
+  minHeight: 348,
+  '@lowResolution': {
+    minHeight: 192
+  }
 })
 
 const RowStyled = styled(Row, {
