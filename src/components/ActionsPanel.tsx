@@ -10,7 +10,7 @@ interface Props {
 
 export const ActionsPanel = ({ className }: Props) => {
   const dispatch = useAppDispatch()
-  const { movePhase } = useCurrentPlayer()
+  const { movePhase, reservedCards } = useCurrentPlayer()
   const shouldShowActionsPanel = movePhase.type === 'CARD_SELECTED'
 
   if(!shouldShowActionsPanel) {
@@ -19,10 +19,12 @@ export const ActionsPanel = ({ className }: Props) => {
 
   const reserveCard = () => dispatch(reserveCardAction(movePhase.selectedCard))
   const startPurchase = () => dispatch(startPurchaseAction(movePhase.selectedCard))
+
+  const reserveCardDisabled = reservedCards.some(card => card.id === movePhase.selectedCard.id)
   
   return (
     <Container className={className} gap="tiny">
-      <Button onClick={reserveCard}>Reserve card</Button>
+      <Button onClick={reserveCard} disabled={reserveCardDisabled}>Reserve card</Button>
       <Button onClick={startPurchase}>Buy card</Button>
     </Container>
   )
