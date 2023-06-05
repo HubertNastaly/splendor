@@ -17,10 +17,12 @@ export const ActionsPanel = ({ className }: Props) => {
     return <></>
   }
 
-  const reserveCard = () => dispatch(reserveCardAction(movePhase.selectedCard))
-  const startPurchase = () => dispatch(startPurchaseAction(movePhase.selectedCard))
+  const { selectedCard } = movePhase
 
-  const reserveCardDisabled = reservedCards.some(card => card.id === movePhase.selectedCard.id)
+  const reserveCard = () => dispatch(reserveCardAction(selectedCard))
+  const startPurchase = () => dispatch(startPurchaseAction(selectedCard))
+
+  const reserveCardDisabled = reservedCards.some(card => card.id === selectedCard.card.id)
   
   return (
     <Container className={className} gap="tiny">

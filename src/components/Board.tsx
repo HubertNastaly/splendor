@@ -22,7 +22,7 @@ export const Board = ({ className }: Props) => {
 
   const allCards = [...cardsByLevel[3], ...cardsByLevel[2], ...cardsByLevel[1]]
 
-  const select = (card: CardData) => dispatch(selectCardAction(card))
+  const select = (card: CardData) => dispatch(selectCardAction({ card, location: 'board' }))
   const canSelect = canSelectCard(currentPlayer)
 
   return (
@@ -32,7 +32,7 @@ export const Board = ({ className }: Props) => {
           <Card
             key={`card-${index}`}
             card={card}
-            isSelected={selectedCard ? selectedCard.id === card.id : false}
+            isSelected={selectedCard ? selectedCard.card.id === card.id : false}
             onSelect={canSelect ? () => select(card) : undefined}
           />
         ) : (

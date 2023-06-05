@@ -18,7 +18,7 @@ export const GoldGroup = ({ goldCount, reservedCards, onGoldClick }: Props) => {
   const dispatch = useAppDispatch()
   const cardPlaceholders = [...new Array(MAX_RESERVED_CARDS_LIMIT - reservedCards.length)]
 
-  const selectCard = (card: CardData) => dispatch(selectCardAction(card)) 
+  const selectCard = (card: CardData) => dispatch(selectCardAction({ card, location: 'player' })) 
 
   return (
     <Column>

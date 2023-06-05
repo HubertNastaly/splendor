@@ -1,9 +1,9 @@
 import { pickCardFromBoard, transfer } from '@/helpers';
-import { CardData, Store } from '@/types';
+import { SelectedCard, Store } from '@/types';
 import { clone } from '@/utils';
 import { createAction } from '@reduxjs/toolkit';
 
-export const reserveCardAction = createAction('RESERVE_CARD', (reservedCard: CardData) => ({ payload: { reservedCard }}))
+export const reserveCardAction = createAction('RESERVE_CARD', (reservedCard: SelectedCard) => ({ payload: { reservedCard } }))
 export type ReserveCardAction = ReturnType<typeof reserveCardAction>
 
 export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveCardAction): Store {
@@ -15,9 +15,9 @@ export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveC
   }
 
   currentPlayer.movePhase = { type: 'CARD_RESERVED' }
-  currentPlayer.reservedCards.push(reservedCard)
+  currentPlayer.reservedCards.push(reservedCard.card)
 
-  pickCardFromBoard(boardCardsByLevel, reservedCard)
+  pickCardFromBoard(boardCardsByLevel, reservedCard.card)
 
   if(bank.gold > 0) {
     transfer(bank, currentPlayer.tokens, 'gold', 1)

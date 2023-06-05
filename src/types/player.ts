@@ -1,4 +1,4 @@
-import { CardData, CardsByColor } from './card'
+import { CardData, CardsByColor, SelectedCard } from './card'
 import { BasicColor, Tokens } from './color'
 
 export type PlayerMovePhase = {
@@ -17,12 +17,12 @@ export type PlayerMovePhase = {
   tokenColors: [BasicColor, BasicColor, BasicColor]
 } | {
   type: 'CARD_SELECTED',
-  selectedCard: CardData
+  selectedCard: SelectedCard
 } | {
   type: 'CARD_RESERVED'
 } | {
   type: 'CARD_PURCHASE_STARTED'
-  selectedCard: CardData
+  selectedCard: SelectedCard
 } | {
   type: 'CARD_BOUGHT'
 }
