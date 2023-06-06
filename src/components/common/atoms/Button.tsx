@@ -6,10 +6,11 @@ interface Props {
   onClick?: () => void
   disabled?: boolean
   view?: 'primary' | 'secondary'
+  className?: string
 }
 
-export const Button = ({ onClick, disabled, view, children }: PropsWithChildren<Props>) => (
-  <ButtonComponent view={view} disabled={disabled} onClick={withStopPropagation(onClick)}>
+export const Button = ({ onClick, disabled, view, children, className }: PropsWithChildren<Props>) => (
+  <ButtonComponent className={className} view={view} disabled={disabled} onClick={withStopPropagation(onClick)}>
     {children}
   </ButtonComponent>
 )

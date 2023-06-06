@@ -38,11 +38,23 @@ export const Row = styled('div', {
       stretch: {
         alignItems: 'stretch'
       }
+    },
+    justify: {
+      center: {
+        justifyContent: 'center'
+      },
+      start: {
+        justifyContent: 'flex-start'
+      },
+      spaceBetween: {
+        justifyContent: 'space-between'
+      }
     }
   },
 
   defaultVariants: {
     gap: 'small',
-    align: 'center'
+    align: 'center',
+    justify: 'start'
   }
 })

@@ -35,6 +35,17 @@ export const Column = styled('div', {
         rowGap: '$enormous'
       }
     },
+    align: {
+      center: {
+        alignItems: 'center'
+      },
+      start: {
+        alignItems: 'flex-start'
+      },
+      stretch: {
+        alignItems: 'stretch'
+      }
+    },
     justify: {
       start: {
         justifyContent: 'flex-start'
