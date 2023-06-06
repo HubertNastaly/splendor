@@ -8,6 +8,11 @@ import { Color } from '@/types'
 import { pickTokens } from './utils/pickTokens'
 import { expectTokensAmount } from './utils'
 
+jest.mock('@/hooks', () => ({
+  ...jest.requireActual('@/hooks'),
+  useResolution: () => ({ isHighResolution: true })
+}))
+
 describe('pick tokens', () => {
   const defaultState = mockHistory()
   const { present } = defaultState
