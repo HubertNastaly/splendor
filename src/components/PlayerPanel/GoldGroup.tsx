@@ -1,7 +1,6 @@
-import { styled } from '@/theme'
 import { CardData } from '@/types'
-import { Card, Column, Row, TokenCounter } from '@/components/common'
-import { CARD_HEIGHT, CARD_WIDTH, MAX_RESERVED_CARDS_LIMIT } from '@/constants'
+import { Card, CardPlaceholder, Column, Row, TokenCounter } from '@/components/common'
+import { MAX_RESERVED_CARDS_LIMIT } from '@/constants'
 import { useCurrentPlayer } from '@/hooks'
 import { getSelectedCard } from '@/helpers'
 import { useAppDispatch } from '@/store/hooks'
@@ -43,15 +42,3 @@ export const GoldGroup = ({ goldCount, reservedCards, onGoldClick }: Props) => {
     </Column>
   )
 }
-
-const CardPlaceholder = styled('div', {
-  width: CARD_WIDTH.highResolution,
-  height: CARD_HEIGHT.highResolution,
-  '@lowResolution': {
-    width: CARD_WIDTH.lowResolution,
-    height: CARD_HEIGHT.lowResolution,
-  },
-  borderRadius: 8,
-  border: '2px solid white',
-  background: 'none'
-})

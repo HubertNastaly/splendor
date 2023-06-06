@@ -1,3 +1,4 @@
+import { Aristocrat } from './aristocrat'
 import { CardData, CardsByColor, SelectedCard } from './card'
 import { BasicColor, Tokens } from './color'
 
@@ -33,4 +34,5 @@ export interface Player {
   movePhase: PlayerMovePhase
   cards: CardsByColor
   reservedCards: CardData[]
+  aristocrats: Aristocrat[]
 }

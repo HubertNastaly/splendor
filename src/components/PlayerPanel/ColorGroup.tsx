@@ -1,6 +1,6 @@
 import { styled } from '@/theme'
 import { CardData, Color } from '@/types'
-import { Column, TokenCounter } from '@/components/common'
+import { CardPlaceholder, Column, TokenCounter } from '@/components/common'
 import { CardsPile } from './CardsPile'
 import { CARD_WIDTH } from '@/constants'
 
@@ -19,7 +19,11 @@ export const ColorGroup = ({ color, tokensCount, cards, onTokenClick }: Props) =
         count={tokensCount}
         onClick={onTokenClick}
       />
-      <CardsPile cards={cards} />
+      {cards.length > 0 ? (
+        <CardsPile cards={cards} />
+      ) : (
+        <CardPlaceholder />
+      )}
     </Container>
   )
 }

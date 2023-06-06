@@ -9,5 +9,6 @@ export function createPlayer(name: string): Player {
     tokens: createTokensCollection(),
     cards: createCardsByColorCollection(),
     reservedCards: [],
+    aristocrats: []
   }
 }
