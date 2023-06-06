@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function shuffle(array: any[]) {
+export function shuffle<T>(array: T[]): T[] {
   const shuffledArray = [...array]
 
   for(let i=array.length-1; i>=0; i--) {
