@@ -1,9 +1,9 @@
-import { TOKEN_SIZE } from '@/constants'
-import { css, styled } from '@/theme'
-import { Color } from '@/types'
-import { IconType } from 'react-icons'
 import { FaRegGem } from 'react-icons/fa'
 import { MdStar } from 'react-icons/md'
+import { TOKEN_SIZE } from '@/constants'
+import { useResolution } from '@/hooks'
+import { styled } from '@/theme'
+import { Color } from '@/types'
 
 type GemSize = 'small' | 'normal' | 'big'
 
@@ -17,12 +17,15 @@ interface Props {
 
 export const Gem = ({ size, color, disabled, outlined, className }: Props) => {
   const deducedColor = disabled ? 'disabled' : color
+  const { isHighResolution } = useResolution()
+  const iconSize = isHighResolution ? HIGH_RESOLUTION_ICON_SIZES[size] : LOW_RESOLUTION_ICON_SIZES[size]
+
   return (
     <GemBackground className={className} color={deducedColor} size={size} outlined={outlined}>
       {color === 'gold' ? (
-        <MdStar size={ICON_SIZES[size]} color={getIconColor('gold')} />
+        <MdStar size={iconSize} color={getIconColor('gold')} />
       ) : (
-        <FaRegGem size={ICON_SIZES[size]} color={getIconColor(deducedColor)} />
+        <FaRegGem size={iconSize} color={getIconColor(deducedColor)} />
       )}
     </GemBackground>
   )
@@ -95,10 +98,16 @@ const GemBackground = styled('div', {
   }
 })
 
-const ICON_SIZES: Record<GemSize, number> = {
+const HIGH_RESOLUTION_ICON_SIZES: Record<GemSize, number> = {
   small: 12,
   normal: 16,
   big: 42
+}
+
+const LOW_RESOLUTION_ICON_SIZES: Record<GemSize, number> = {
+  small: 8,
+  normal: 12,
+  big: 22
 }
 
 function getIconColor(color: Color | 'disabled') {

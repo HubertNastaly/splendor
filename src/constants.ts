@@ -6,6 +6,8 @@ export const MAX_TOKENS_LIMIT = 10
 export const MAX_RESERVED_CARDS_LIMIT = 3
 export const DEFAULT_NAMES = ['Adam', 'Bob', 'Cindy']
 
+export const HIGH_RESOLUTION_BREAKPOINT = 1600
+
 export const TOKEN_SIZE = {
   lowResolution: 36,
   highResolution: 72

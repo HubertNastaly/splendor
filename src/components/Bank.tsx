@@ -2,7 +2,6 @@ import { useCallback } from 'react'
 import { BasicColor, Color } from '@/types'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank, canCollectToken  } from '@/helpers'
-import { styled } from '@/theme'
 import { Column, TokenCounter } from './common'
 import { pickTokenAction } from '@/store/actions'
 
