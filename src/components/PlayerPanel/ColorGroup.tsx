@@ -25,5 +25,8 @@ export const ColorGroup = ({ color, tokensCount, cards, onTokenClick }: Props) =
 }
 
 const Container = styled(Column, {
-  width: CARD_WIDTH
+  width: CARD_WIDTH.highResolution,
+  '@lowResolution': {
+    width: CARD_WIDTH.lowResolution
+  }
 })

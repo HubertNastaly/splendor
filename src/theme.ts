@@ -1,6 +1,10 @@
 import { createStitches } from '@stitches/react'
+import { HIGH_RESOLUTION_BREAKPOINT } from './constants'
 
 const { styled, theme } = createStitches({
+  media: {
+    lowResolution: `(max-width: ${HIGH_RESOLUTION_BREAKPOINT}px)`
+  },
   theme: {
     colors: {
       white: '#f7f7f7',
@@ -18,6 +22,8 @@ const { styled, theme } = createStitches({
       disabled: '#999999'
     },
     fontSizes: {
+      tiny: '12px',
+      small: '16px',
       normal: '18px',
       big: '32px'
     }, 
@@ -26,12 +32,14 @@ const { styled, theme } = createStitches({
       high: 2
     },
     space: {
+      microscopic: '4px',
       tiny: '8px',
       small: '16px',
       medium: '24px',
       big: '32px',
-      large: '96px'
-    }
+      large: '64px',
+      enormous: '96px'
+    },
   },
   utils: {
     size: (value: number) => ({

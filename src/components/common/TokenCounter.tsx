@@ -1,6 +1,6 @@
-import { Row } from './atoms/Row'
 import { Token, TokenProps } from './Token'
 import { styled } from '@/theme'
+import { Row } from './atoms'
 
 interface Props extends TokenProps {
   count: number
@@ -8,7 +8,7 @@ interface Props extends TokenProps {
 
 export const TokenCounter = ({ count, ...tokenProps }: Props) => {
   return (
-    <Row>
+    <Row gap={{ '@initial': 'small', '@lowResolution': 'tiny' }}>
       <Token {...tokenProps} />
       <Counter data-testid={`token-counter-${tokenProps.color}`}>{count}</Counter>
     </Row>
@@ -16,5 +16,8 @@ export const TokenCounter = ({ count, ...tokenProps }: Props) => {
 }
 
 const Counter = styled('span', {
-  fontSize: '$big'
+  fontSize: '$big',
+  '@lowResolution': {
+    fontSize: '$normal'
+  }
 })

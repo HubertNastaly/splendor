@@ -35,4 +35,8 @@ export const ActionsPanel = ({ className }: Props) => {
 const Container = styled(Column, {
   alignItems: 'stretch',
   width: 256,
+
+  '@lowResolution': {
+    width: 160
+  }
 })

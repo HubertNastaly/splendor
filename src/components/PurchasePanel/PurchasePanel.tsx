@@ -53,7 +53,13 @@ const Container = styled(Panel, {
 const TokensGrid = styled('div', {
   flex: 1,
   display: 'grid',
-  gridTemplateColumns: `${TOKEN_SIZE}px `.repeat(3),
-  gridAutoRows: TOKEN_SIZE,
+  gridTemplateColumns: `${TOKEN_SIZE.highResolution}px `.repeat(3),
+  gridAutoRows: TOKEN_SIZE.highResolution,
   gridGap: '$small',
+
+  '@lowResolution': {
+    gridTemplateColumns: `${TOKEN_SIZE.lowResolution}px `.repeat(3),
+    gridAutoRows: TOKEN_SIZE.lowResolution,
+    gridGap: '$tiny'
+  }
 })

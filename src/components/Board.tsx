@@ -44,8 +44,13 @@ export const Board = ({ className }: Props) => {
 }
 
 const Grid = styled('div', {
+  height: 'fit-content',
   width: 'fit-content',
   display: 'grid',
   gridTemplateColumns: 'auto auto auto auto',
-  gap: 16
+  gap: '$small',
+
+  '@lowResolution': {
+    gap: '$tiny'
+  }
 })

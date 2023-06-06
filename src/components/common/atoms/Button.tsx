@@ -21,10 +21,14 @@ const ButtonComponent = styled('button', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  fontSize: '$normal',
   border: 'none',
   borderRadius: 4,
   cursor: 'pointer',
+
+  fontSize: '$normal',
+  '@lowResolution': {
+    fontSize: '$small'
+  },
 
   '&[disabled]': {
     background: '$disabled',
