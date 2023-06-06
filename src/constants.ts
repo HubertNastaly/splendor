@@ -4,6 +4,8 @@ export const CARDS_PER_LEVEL = 4
 export const MIN_BANK_TOKENS_TO_PICK_TWO = 4
 export const MAX_TOKENS_LIMIT = 10
 export const MAX_RESERVED_CARDS_LIMIT = 3
+export const ARISTOCRAT_VALUE = 3
+
 export const DEFAULT_NAMES = ['Adam', 'Bob', 'Cindy']
 
 export const HIGH_RESOLUTION_BREAKPOINT = 1600
@@ -26,3 +28,8 @@ export const CARD_TOPBAR_HEIGHT: ElementSize = {
   lowResolution: 32,
   highResolution: 48
 }
+export const ARISTOCRAT_TILE_SIZE: ElementSize = {
+  lowResolution: 80,
+  highResolution: 128
+}
+

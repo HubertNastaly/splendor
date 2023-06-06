@@ -6,6 +6,9 @@ export const Row = styled('div', {
 
   variants: {
     gap: {
+      microscopic: {
+        columnGap: '$microscopic'
+      },
       tiny: {
         columnGap: '$tiny'
       },

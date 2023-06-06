@@ -34,10 +34,22 @@ export const Column = styled('div', {
       enormous: {
         rowGap: '$enormous'
       }
-    }
+    },
+    justify: {
+      start: {
+        justifyContent: 'flex-start'
+      },
+      center: {
+        justifyContent: 'center'
+      },
+      spaceBetween: {
+        justifyContent: 'space-between'
+      }
+    },
   },
 
   defaultVariants: {
-    gap: 'small'
+    gap: 'small',
+    justify: 'start'
   }
 })

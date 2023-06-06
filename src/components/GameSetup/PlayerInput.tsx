@@ -1,5 +1,6 @@
-import { styled } from '@/theme'
 import { MdMan } from 'react-icons/md'
+import { styled } from '@/theme'
+import { Row } from '@/components/common'
 
 interface Props {
   name: string
@@ -9,20 +10,13 @@ interface Props {
 export const PlayerInput = ({ name, setName }: Props) => {
   const iconColor = name ? '#4ee602' : 'black'
   return (
-    <Wrapper>
+    <Row gap="tiny">
       <MdMan color={iconColor} size={32} />
       <Input value={name} onChange={event => setName(event.target.value)} placeholder="Player name" />
-    </Wrapper>
+    </Row>
   )
 }
 
-const Wrapper = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  columnGap: 8
-
-})
-
 const Input = styled('input', {
-  padding: 8
+  padding: '$tiny'
 })

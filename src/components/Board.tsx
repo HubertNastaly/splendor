@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { Card } from './common'
+import { AristocratTile, Card, Column, Row } from './common'
 import { styled } from '@/theme'
 import { CardData } from '@/types'
 import { canSelectCard, getSelectedCard } from '@/helpers'
@@ -10,12 +10,13 @@ interface Props {
 }
 
 export const Board = ({ className }: Props) => {
-  const { cardsByLevel, selectedCard, currentPlayer } = useAppSelector(({ boardCardsByLevel, players, currentPlayerIndex }) => {
+  const { cardsByLevel, selectedCard, currentPlayer, aristocrats } = useAppSelector(({ boardCardsByLevel, players, aristocrats, currentPlayerIndex }) => {
     const currentPlayer = players[currentPlayerIndex]
     return {
       cardsByLevel: boardCardsByLevel,
       selectedCard: getSelectedCard(currentPlayer),
-      currentPlayer
+      currentPlayer,
+      aristocrats
     }
   })
   const dispatch = useAppDispatch()
@@ -26,20 +27,27 @@ export const Board = ({ className }: Props) => {
   const canSelect = canSelectCard(currentPlayer)
 
   return (
-    <Grid className={className}>
-      {allCards.map((card, index) => (
-        card ? (
-          <Card
-            key={`card-${index}`}
-            card={card}
-            isSelected={selectedCard ? selectedCard.card.id === card.id : false}
-            onSelect={canSelect ? () => select(card) : undefined}
-          />
-        ) : (
-          <div key={`card-${index}`}/>
-        )
-      ))}
-    </Grid>
+    <Column className={className}>
+      <Row gap="tiny">
+        {aristocrats.map(aristocrat => (
+          <AristocratTile key={`aristocrat-${aristocrat.id}`} aristocrat={aristocrat} />
+        ))}
+      </Row>
+      <Grid>
+        {allCards.map((card, index) => (
+          card ? (
+            <Card
+              key={`card-${index}`}
+              card={card}
+              isSelected={selectedCard ? selectedCard.card.id === card.id : false}
+              onSelect={canSelect ? () => select(card) : undefined}
+            />
+          ) : (
+            <div key={`card-${index}`}/>
+          )
+        ))}
+      </Grid>
+    </Column>
   )
 }
 
