@@ -8,19 +8,21 @@ export const DEFAULT_NAMES = ['Adam', 'Bob', 'Cindy']
 
 export const HIGH_RESOLUTION_BREAKPOINT = 1600
 
-export const TOKEN_SIZE = {
+type ElementSize = Record<'lowResolution' | 'highResolution', number>
+
+export const TOKEN_SIZE: ElementSize = {
   lowResolution: 36,
   highResolution: 72
 }
-export const CARD_WIDTH = {
+export const CARD_WIDTH: ElementSize = {
   lowResolution: 80,
   highResolution: 128
 }
-export const CARD_HEIGHT = {
+export const CARD_HEIGHT: ElementSize = {
   lowResolution: 122,
   highResolution: 196
 }
-export const CARD_TOPBAR_HEIGHT = {
+export const CARD_TOPBAR_HEIGHT: ElementSize = {
   lowResolution: 32,
   highResolution: 48
 }
