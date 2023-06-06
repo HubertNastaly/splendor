@@ -1,5 +1,5 @@
-import { useCurrentPlayer } from '@/hooks'
-import { Panel, Row } from '@/components/common'
+import { useCurrentPlayer, useResolution } from '@/hooks'
+import { Panel, Row, Separator } from '@/components/common'
 import { useAppDispatch } from '@/store/hooks'
 import { BasicColor, Color } from '@/types'
 import { canPayToken, isOverTokensLimit } from '@/helpers'
@@ -9,6 +9,7 @@ import { ColorGroup } from './ColorGroup'
 import { GoldGroup } from './GoldGroup'
 
 export const PlayerPanel = () => {
+  const { isHighResolution } = useResolution()
   const dispatch = useAppDispatch()
   const currentPlayer = useCurrentPlayer()
   const { tokens: { gold, ...basicTokens }, cards, reservedCards } = currentPlayer
@@ -34,31 +35,42 @@ export const PlayerPanel = () => {
             onTokenClick={getOnTokenClick(color)}
           />
         ))}
-        <Separator />
-        <GoldGroup
-          reservedCards={reservedCards}
-          goldCount={gold}
-          onGoldClick={getOnTokenClick('gold')}
-        />
+        {isHighResolution && (
+          <>
+            <Separator orientation="vertical" />
+            <GoldGroup
+              reservedCards={reservedCards}
+              goldCount={gold}
+              onGoldClick={getOnTokenClick('gold')}
+            />
+          </>
+        )}
       </RowStyled>
+      {!isHighResolution && (
+        <>
+          <Separator orientation="horizontal" />
+          <GoldGroup
+            reservedCards={reservedCards}
+            goldCount={gold}
+            onGoldClick={getOnTokenClick('gold')}
+          />
+        </>
+      )}
     </Container>
   )
 }
 
 const Container = styled(Panel, {
-  height: 1, // workaround
+  height: 'fit-content',
+  display: 'flex',
+  flexDirection: 'column',
+  rowGap: '$small'
+})
+
+const RowStyled = styled(Row, {
+  height: 'fit-content',
   minHeight: 348,
   '@lowResolution': {
     minHeight: 192
   }
-})
-
-const RowStyled = styled(Row, {
-  height: '100%'
-})
-
-const Separator = styled('div', {
-  height: '100%',
-  width: 2,
-  background: 'white'
 })

@@ -9,24 +9,33 @@ import { ActionsPanel } from './ActionsPanel'
 import { PurchasePanel } from './PurchasePanel'
 import { deselectCardAction } from '@/store/actions'
 import { HistoryNavigation } from './HistoryNavigation'
+import { useResolution } from '@/hooks'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
+  const { isHighResolution } = useResolution()
 
   return (
     <Page onClick={() => dispatch(deselectCardAction())}>
       <ActionsPanelStyled />
       <Row gap={{ '@initial': 'enormous', '@lowResolution': 'big' }} align="stretch">
-        <Board />
-        <Bank />
-        <PurchasePanel />
+        {!isHighResolution && <PlayerPanel />}
+        <MainContent />
       </Row>
-      <PlayerPanel />
+      {isHighResolution && <PlayerPanel />}
       <HistoryNavigationStyled />
       <TurnPanelStyled />
     </Page>
   )
 }
+
+const MainContent = () => (
+  <>
+    <Board />
+    <Bank />
+    <PurchasePanel />
+  </>
+)
 
 const TurnPanelStyled = styled(TurnPanel, {
   position: 'fixed',
