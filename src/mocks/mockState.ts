@@ -1,10 +1,13 @@
 import { DEFAULT_NAMES } from '@/constants';
-import { createPlayer, createTokensCollection, generateBank, generateBoard } from '@/helpers';
+import { createPlayer, createTokensCollection, generateAristocrats, generateBank, generateBoard } from '@/helpers';
 import { Store, History } from '@/types';
+
+const playersNumber = DEFAULT_NAMES.length
 
 export const mockState = (): Store => ({
   ...generateBoard(),
-  bank: generateBank(DEFAULT_NAMES.length),
+  aristocrats: generateAristocrats(playersNumber),
+  bank: generateBank(playersNumber),
   players: DEFAULT_NAMES.map(createPlayer),
   gameState: 'started',
   currentPlayerIndex: 0,
