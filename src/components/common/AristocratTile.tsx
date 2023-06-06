@@ -1,3 +1,4 @@
+import { GiQueenCrown } from 'react-icons/gi'
 import { ARISTOCRAT_TILE_SIZE, ARISTOCRAT_VALUE } from '@/constants'
 import { styled } from '@/theme'
 import { Aristocrat, BasicColor } from '@/types'
@@ -12,7 +13,10 @@ export const AristocratTile = ({ aristocrat: { requiredCards } }: Props) => {
 
   return (
     <Tile justify="spaceBetween">
-      <AristocratValue>{ARISTOCRAT_VALUE}</AristocratValue>
+      <AristocratValue>
+        <GiQueenCrown size={16} />
+        {ARISTOCRAT_VALUE}
+      </AristocratValue>
       <Row gap="microscopic">
         {requiredCardsEntries.map(([color, amount]) => (
           <CardIndicator key={`card-indicator-${color}`} color={color}>{amount}</CardIndicator>
@@ -35,9 +39,12 @@ const Tile = styled(Column, {
 const AristocratValue = styled('div', {
   flex: 1,
   width: '100%',
+
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  columnGap: '$tiny',
+
   fontSize: '$normal',
   fontWeight: 'bold',
 
