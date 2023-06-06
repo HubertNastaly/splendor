@@ -20,7 +20,9 @@ export const Tabletop = () => {
       <ActionsPanelStyled />
       <Row gap={{ '@initial': 'enormous', '@lowResolution': 'big' }} align="stretch">
         {!isHighResolution && <PlayerPanel />}
-        <MainContent />
+        <Board />
+        <Bank />
+        <PurchasePanel />
       </Row>
       {isHighResolution && <PlayerPanel />}
       <HistoryNavigationStyled />
@@ -28,14 +30,6 @@ export const Tabletop = () => {
     </Page>
   )
 }
-
-const MainContent = () => (
-  <>
-    <Board />
-    <Bank />
-    <PurchasePanel />
-  </>
-)
 
 const TurnPanelStyled = styled(TurnPanel, {
   position: 'fixed',
