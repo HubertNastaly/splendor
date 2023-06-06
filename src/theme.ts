@@ -1,7 +1,7 @@
 import { createStitches } from '@stitches/react'
 import { HIGH_RESOLUTION_BREAKPOINT } from './constants'
 
-const { styled, theme, css } = createStitches({
+const { styled, theme } = createStitches({
   media: {
     lowResolution: `(max-width: ${HIGH_RESOLUTION_BREAKPOINT}px)`
   },
@@ -49,4 +49,4 @@ const { styled, theme, css } = createStitches({
   }
 })
 
-export { styled, theme, css }
+export { styled, theme }
