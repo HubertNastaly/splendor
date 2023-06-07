@@ -8,14 +8,11 @@ export type PlayerMovePhase = {
   type: '1_TOKEN_COLLECTED',
   tokenColor: BasicColor
 } | {
-  type: '2_SAME_TOKENS_COLLECTED',
-  tokenColor: BasicColor
-} | {
   type: '2_DIFFERENT_TOKENS_COLLECTED',
   tokenColors: [BasicColor, BasicColor]
 } | {
-  type: '3_TOKENS_COLLECTED',
-  tokenColors: [BasicColor, BasicColor, BasicColor]
+  type: 'ALL_TOKENS_COLLECTED',
+  tokenColors: BasicColor[]
 } | {
   type: 'CARD_SELECTED',
   selectedCard: SelectedCard
