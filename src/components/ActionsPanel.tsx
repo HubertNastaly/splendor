@@ -14,7 +14,7 @@ export const ActionsPanel = ({ className }: Props) => {
   const shouldShowActionsPanel = movePhase.type === 'CARD_SELECTED'
 
   if(!shouldShowActionsPanel) {
-    return <div/>
+    return <></>
   }
 
   const { selectedCard } = movePhase

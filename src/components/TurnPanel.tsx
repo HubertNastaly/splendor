@@ -24,7 +24,11 @@ export const TurnPanel = ({ className }: Props) => {
   return (
     <Container align="stretch" gap="none" className={className}>
       {players.map((player, index) => (
-        <PlayerInfo justify="spaceBetween" currentPlayer={index === currentPlayerIndex}>
+        <PlayerInfo
+          key={`player-info-${index}`}
+          justify="spaceBetween"
+          currentPlayer={index === currentPlayerIndex}
+        >
           <span>{player.name}</span>
           <span>{playersPoints[index]}</span>
         </PlayerInfo>
@@ -45,11 +49,7 @@ function calculatePlayersPoints({ cards, aristocrats }: Player) {
 }
 
 const Container = styled(Column, {
-  width: 256,
-
-  '@lowResolution': {
-    width: 192
-  }
+  width: '100%'
 })
 
 const PlayerInfo = styled(Row, {

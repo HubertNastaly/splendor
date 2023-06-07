@@ -8,7 +8,7 @@ import { PlayerPanel } from './PlayerPanel'
 import { ActionsPanel } from './ActionsPanel'
 import { PurchasePanel } from './PurchasePanel'
 import { deselectCardAction } from '@/store/actions'
-import { HistoryNavigation } from './HistoryNavigation'
+import { AdditionalOptions } from './AdditionalOptions'
 import { useResolution } from '@/providers'
 
 export const Tabletop = () => {
@@ -23,64 +23,58 @@ export const Tabletop = () => {
 }
 
 const SmallScreenLayout = () => (
-  <>
-    <RowStyled gap="big" align="stretch">
-      <MainSection gap="big" justify="center">
-        <Bank />
-        <Board />
-        <PlayerPanel />
-      </MainSection>
-      <Column gap="small" align="end" justify="spaceBetween">
-        <ActionsPanel />
-        <PurchasePanelStyled />
-        <TurnPanel />
-      </Column>
-    </RowStyled>
-    <HistoryNavigationStyled />
-  </>
+  <FullSizeRow gap="big" align="stretch">
+    <Row wide gap="big" justify="center">
+      <Bank />
+      <Board />
+      <PlayerPanel />
+    </Row>
+    <SideSection />
+  </FullSizeRow>
 )
 
 const BigScreenLayout = () => (
-  <>
-    <ActionsPanelStyled />
-    <Row gap="enormous" align="stretch">
-      <Bank />
-      <Board />
-      <PurchasePanel />
-    </Row>
-    <PlayerPanel />
-    <HistoryNavigationStyled />
-    <TurnPanelStyled />
-  </>
+  <FullSizeRow gap="big">
+    <Column wide gap="enormous" align="center">
+      <Row gap="enormous" align="stretch">
+        <Bank />
+        <Board />
+        <PurchasePanel />
+      </Row>
+      <PlayerPanel />
+    </Column>
+    <SideSection />
+  </FullSizeRow>
 )
 
-const MainSection = styled(Row, {
-  flex: 1
+const SideSection = () => (
+  <SideSectionColumn gap="small" align="stretch" justify="end">
+    <ActionsPanelStretched />
+    <PurchasePanelStretched />
+    <TurnPanel />
+    <AdditionalOptions />
+  </SideSectionColumn>
+)
+
+const SideSectionColumn = styled(Column, {
+  width: '100%',
+  height: '100%',
+  maxWidth: 256,
+
+  '@lowResolution': {
+    maxWidth: 192
+  }
 })
 
-const RowStyled = styled(Row, {
+const FullSizeRow = styled(Row, {
   height: '100%',
   width: '100%'
 })
 
-const PurchasePanelStyled = styled(PurchasePanel, {
+const PurchasePanelStretched = styled(PurchasePanel, {
   flex: 1
 })
 
-const TurnPanelStyled = styled(TurnPanel, {
-  position: 'fixed',
-  right: 32,
-  bottom: 32
-})
-
-const ActionsPanelStyled = styled(ActionsPanel, {
-  position: 'fixed',
-  top: 32,
-  right: 32,
-})
-
-const HistoryNavigationStyled = styled(HistoryNavigation, {
-  position: 'fixed',
-  left: 32,
-  bottom: 32
+const ActionsPanelStretched = styled(ActionsPanel, {
+  flex: 1
 })

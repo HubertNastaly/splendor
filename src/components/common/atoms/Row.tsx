@@ -48,6 +48,14 @@ export const Row = styled('div', {
       },
       spaceBetween: {
         justifyContent: 'space-between'
+      },
+      stretch: {
+        justifyContent: 'stretch'
+      }
+    },
+    wide: {
+      true: {
+        flex: 1
       }
     }
   },

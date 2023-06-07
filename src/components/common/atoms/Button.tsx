@@ -2,23 +2,33 @@ import { styled } from '@/theme';
 import { withStopPropagation } from '@/utils';
 import { PropsWithChildren } from 'react';
 
-interface Props {
+interface ButtonProps {
   onClick?: () => void
   disabled?: boolean
   view?: 'primary' | 'secondary'
   className?: string
 }
 
-export const Button = ({ onClick, disabled, view, children, className }: PropsWithChildren<Props>) => (
+export const Button = ({ onClick, disabled, view, children, className }: PropsWithChildren<ButtonProps>) => (
   <ButtonComponent className={className} view={view} disabled={disabled} onClick={withStopPropagation(onClick)}>
     {children}
   </ButtonComponent>
 )
 
+type LinkButtonProps = Omit<ButtonProps, 'onClick'> & { link: string }
+
+export const LinkButton = ({ link, children, className, ...buttonProps }: PropsWithChildren<LinkButtonProps>) => (
+  <Link href={link} target="_blank" className={className}>
+    <ButtonComponent {...buttonProps}>
+      {children}
+    </ButtonComponent>
+  </Link>
+)
+
 const ButtonComponent = styled('button', {
   height: 36,
-  paddingLeft: '$small',
-  paddingRight: '$small',
+  paddingLeft: '$tiny',
+  paddingRight: '$tiny',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -52,5 +62,11 @@ const ButtonComponent = styled('button', {
 
   defaultVariants: {
     view: 'primary'
+  }
+})
+
+const Link = styled('a', {
+  '& button': {
+    width: '100%'
   }
 })
