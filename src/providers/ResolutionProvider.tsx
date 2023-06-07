@@ -1,7 +1,12 @@
+import { ReactNode, useEffect, useState } from 'react';
+import { ResolutionContext } from './ResolutionContext';
 import { HIGH_RESOLUTION_BREAKPOINT } from '@/constants';
-import { useEffect, useState } from 'react';
 
-export function useResolution() {
+interface Props {
+  children?: ReactNode
+}
+
+export const ResolutionProvider = ({ children }: Props) => {
   const [rootWidth, setRootWidth] = useState(0)
 
   useEffect(() => {
@@ -18,5 +23,11 @@ export function useResolution() {
     return () => resizeObserver.unobserve(root)
   }, [])
 
-  return { isHighResolution: rootWidth > HIGH_RESOLUTION_BREAKPOINT }
+  const isHighResolution = rootWidth > HIGH_RESOLUTION_BREAKPOINT
+
+  return (
+    <ResolutionContext.Provider value={{ isHighResolution }}>
+      {children}
+    </ResolutionContext.Provider>
+  )
 }

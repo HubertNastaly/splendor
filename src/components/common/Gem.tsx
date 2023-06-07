@@ -1,7 +1,7 @@
 import { FaRegGem } from 'react-icons/fa'
 import { MdStar } from 'react-icons/md'
 import { TOKEN_SIZE } from '@/constants'
-import { useResolution } from '@/hooks'
+import { useResolution } from '@/providers'
 import { styled } from '@/theme'
 import { Color } from '@/types'
 
