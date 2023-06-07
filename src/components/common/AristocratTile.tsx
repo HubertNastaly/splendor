@@ -7,22 +7,27 @@ import { useResolution } from '@/providers'
 import { isAristocratCollectable } from '@/helpers'
 import { useMemo } from 'react'
 import { useCurrentPlayer } from '@/hooks'
+import { useAppDispatch } from '@/store/hooks'
+import { collectAristocratAction } from '@/store/actions'
 
 interface Props {
   aristocrat: Aristocrat
 }
 
-export const AristocratTile = ({ aristocrat}: Props) => {
+export const AristocratTile = ({ aristocrat }: Props) => {
   const { isHighResolution } = useResolution()
   const currentPlayer = useCurrentPlayer()
+  const dispatch = useAppDispatch()
   const requiredCardsEntries = Object.entries(aristocrat.requiredCards) as [BasicColor, number][]
+
+  const collect = () => dispatch(collectAristocratAction(aristocrat))
 
   const isCollectable = useMemo(() => (
     isAristocratCollectable(currentPlayer, aristocrat)
   ), [currentPlayer, aristocrat])
 
   return (
-    <Tile justify="spaceBetween" outlined={isCollectable}>
+    <Tile justify="spaceBetween" outlined={isCollectable} onClick={collect}>
       <AristocratValue>
         <GiQueenCrown size={isHighResolution ? 32 : 16} />
         {ARISTOCRAT_VALUE}

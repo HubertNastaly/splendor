@@ -1,4 +1,4 @@
-import { Aristocrat, BasicColor, Player } from "@/types";
+import { Aristocrat, BasicColor, Player } from '@/types';
 
 export function isAristocratCollectable(player: Player, aristocrat: Aristocrat) {
   const cardColors = Object.keys(aristocrat.requiredCards) as BasicColor[]

@@ -2,6 +2,7 @@ import { Store } from '@/types';
 import {
   GameAction,
   cancelPurchase,
+  collectAristocrat,
   deselectCard,
   finalizePurchase,
   finishTurn,
@@ -42,6 +43,9 @@ export function gameReducer (state: Store, action: GameAction): Store {
     }
     case 'FINALIZE_PURCHASE': {
       return finalizePurchase(state)
+    }
+    case 'COLLECT_ARISTOCRAT': {
+      return collectAristocrat(state, action)
     }
     case 'RETURN_TOKEN': {
       return returnToken(state, action)

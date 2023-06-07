@@ -4,6 +4,7 @@ import { styled } from '@/theme'
 import { CardData } from '@/types'
 import { canSelectCard, getSelectedCard } from '@/helpers'
 import { selectCardAction } from '@/store/actions'
+import { ARISTOCRAT_TILE_SIZE } from '@/constants'
 
 interface Props {
   className?: string
@@ -29,22 +30,22 @@ export const Board = ({ className }: Props) => {
   return (
     <Column className={className}>
       <Row gap={{ '@initial': 'small', '@lowResolution': 'tiny' }}>
-        {aristocrats.map(aristocrat => (
+        {aristocrats.map((aristocrat, index) => aristocrat ? (
           <AristocratTile key={`aristocrat-${aristocrat.id}`} aristocrat={aristocrat} />
+        ) : (
+          <EmptyAristocratTile key={`empty-aristocrat-${index}`} />
         ))}
       </Row>
       <Grid>
-        {allCards.map((card, index) => (
-          card ? (
-            <Card
-              key={`card-${index}`}
-              card={card}
-              isSelected={selectedCard ? selectedCard.card.id === card.id : false}
-              onSelect={canSelect ? () => select(card) : undefined}
-            />
-          ) : (
-            <div key={`card-${index}`}/>
-          )
+        {allCards.map((card, index) => card ? (
+          <Card
+            key={`card-${index}`}
+            card={card}
+            isSelected={selectedCard ? selectedCard.card.id === card.id : false}
+            onSelect={canSelect ? () => select(card) : undefined}
+          />
+        ) : (
+          <div key={`card-${index}`}/>
         ))}
       </Grid>
     </Column>
@@ -60,5 +61,12 @@ const Grid = styled('div', {
 
   '@lowResolution': {
     gap: '$tiny'
+  }
+})
+
+const EmptyAristocratTile = styled('div', {
+  size: ARISTOCRAT_TILE_SIZE.highResolution,
+  '@lowResolution': {
+    size: ARISTOCRAT_TILE_SIZE.lowResolution
   }
 })
