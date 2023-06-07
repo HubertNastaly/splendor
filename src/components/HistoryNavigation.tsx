@@ -18,7 +18,7 @@ export const HistoryNavigation = ({ className }: Props) => {
   const redo = () => dispatch(redoAction())
 
   return (
-    <Row className={className}>
+    <Row className={className} gap="tiny">
       <Button onClick={undo} disabled={undoDisabled}>
         <FaUndo />
       </Button>

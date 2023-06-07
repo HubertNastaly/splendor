@@ -1,6 +1,6 @@
 import { styled } from '@/theme'
 import { Board } from './Board'
-import { Page, Row } from './common'
+import { Column, Page, Row } from './common'
 import { Bank } from './Bank'
 import { TurnPanel } from './TurnPanel'
 import { useAppDispatch } from '@/store/hooks'
@@ -17,19 +17,55 @@ export const Tabletop = () => {
 
   return (
     <Page onClick={() => dispatch(deselectCardAction())}>
-      <ActionsPanelStyled />
-      <Row gap={{ '@initial': 'enormous', '@lowResolution': 'big' }} align="stretch">
-        {!isHighResolution && <PlayerPanel />}
-        <Board />
-        <Bank />
-        <PurchasePanel />
-      </Row>
-      {isHighResolution && <PlayerPanel />}
-      <HistoryNavigationStyled />
-      <TurnPanelStyled />
+      {isHighResolution ? <BigScreenLayout /> : <SmallScreenLayout />}
     </Page>
   )
 }
+
+const SmallScreenLayout = () => (
+  <>
+    <RowStyled gap="big" align="stretch">
+      <MainSection gap="big" justify="center">
+        <Bank />
+        <Board />
+        <PlayerPanel />
+      </MainSection>
+      <Column gap="small" align="end" justify="spaceBetween">
+        <ActionsPanel />
+        <PurchasePanelStyled />
+        <TurnPanel />
+      </Column>
+    </RowStyled>
+    <HistoryNavigationStyled />
+  </>
+)
+
+const BigScreenLayout = () => (
+  <>
+    <ActionsPanelStyled />
+    <Row gap="enormous" align="stretch">
+      <Bank />
+      <Board />
+      <PurchasePanel />
+    </Row>
+    <PlayerPanel />
+    <HistoryNavigationStyled />
+    <TurnPanelStyled />
+  </>
+)
+
+const MainSection = styled(Row, {
+  flex: 1
+})
+
+const RowStyled = styled(Row, {
+  height: '100%',
+  width: '100%'
+})
+
+const PurchasePanelStyled = styled(PurchasePanel, {
+  flex: 1
+})
 
 const TurnPanelStyled = styled(TurnPanel, {
   position: 'fixed',

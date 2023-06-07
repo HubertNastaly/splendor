@@ -28,7 +28,7 @@ export const Board = ({ className }: Props) => {
 
   return (
     <Column className={className}>
-      <Row gap="tiny">
+      <Row gap={{ '@initial': 'small', '@lowResolution': 'tiny' }}>
         {aristocrats.map(aristocrat => (
           <AristocratTile key={`aristocrat-${aristocrat.id}`} aristocrat={aristocrat} />
         ))}

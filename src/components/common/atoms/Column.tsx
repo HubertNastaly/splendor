@@ -15,21 +15,12 @@ export const Column = styled('div', {
       },
       small: {
         rowGap: '$small',
-        '@lowResolution': {
-          rowGap: '$tiny'
-        }
       },
       medium: {
         rowGap: '$medium',
-        '@lowResolution': {
-          rowGap: '$small'
-        }
       },
       big: {
         rowGap: '$big',
-        '@lowResolution': {
-          rowGap: '$medium'
-        }
       },
       enormous: {
         rowGap: '$enormous'
@@ -41,6 +32,9 @@ export const Column = styled('div', {
       },
       start: {
         alignItems: 'flex-start'
+      },
+      end: {
+        alignItems: 'flex-end'
       },
       stretch: {
         alignItems: 'stretch'

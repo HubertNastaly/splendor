@@ -3,23 +3,31 @@ import { ARISTOCRAT_TILE_SIZE, ARISTOCRAT_VALUE } from '@/constants'
 import { styled } from '@/theme'
 import { Aristocrat, BasicColor } from '@/types'
 import { Column, Row } from './atoms'
+import { useResolution } from '@/providers'
 
 interface Props {
   aristocrat: Aristocrat
 }
 
 export const AristocratTile = ({ aristocrat: { requiredCards } }: Props) => {
+  const { isHighResolution } = useResolution()
   const requiredCardsEntries = Object.entries(requiredCards) as [BasicColor, number][]
 
   return (
     <Tile justify="spaceBetween">
       <AristocratValue>
-        <GiQueenCrown size={16} />
+        <GiQueenCrown size={isHighResolution ? 32 : 16} />
         {ARISTOCRAT_VALUE}
       </AristocratValue>
       <Row gap="microscopic">
         {requiredCardsEntries.map(([color, amount]) => (
-          <CardIndicator key={`card-indicator-${color}`} color={color}>{amount}</CardIndicator>
+          <CardIndicator
+            key={`card-indicator-${color}`}
+            color={color}
+            size={{ '@initial': 'big', '@lowResolution': 'small' }}
+          >
+            {amount}
+          </CardIndicator>
         ))}
       </Row>
     </Tile>
@@ -54,14 +62,22 @@ const AristocratValue = styled('div', {
 })
 
 const CardIndicator = styled('div', {
-  width: 20,
-  height: 30,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: 4,
 
   variants: {
+    size: {
+      small: {
+        width: 20,
+        height: 30,
+      },
+      big: {
+        width: 30,
+        height: 45
+      }
+    },
     color: {
       white: {
         background: '$white',
