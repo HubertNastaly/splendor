@@ -10,5 +10,5 @@ export const store = configureStore<History<Store>, Action>({
     present: { state: getDefaultState() },
     future: []
   },
-  reducer: mainReducer,
+  reducer: mainReducer
 })
