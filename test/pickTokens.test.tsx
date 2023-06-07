@@ -1,12 +1,13 @@
 import { render } from '@testing-library/react'
 import { Game } from '@/components'
-import { mockHistory } from '@/mocks'
+import { mockInitialState } from '@/mocks'
 import { mainReducer } from '@/store/mainReducer'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import { Color } from '@/types'
 import { pickTokens } from './utils/pickTokens'
 import { expectTokensAmount } from './utils'
+import { toHistory } from '@/utils'
 
 jest.mock('@/hooks', () => ({
   ...jest.requireActual('@/hooks'),
@@ -14,7 +15,7 @@ jest.mock('@/hooks', () => ({
 }))
 
 describe('pick tokens', () => {
-  const defaultState = mockHistory()
+  const defaultState = toHistory(mockInitialState())
   const { present } = defaultState
 
   const renderGame = (preloadedState = defaultState) => {
