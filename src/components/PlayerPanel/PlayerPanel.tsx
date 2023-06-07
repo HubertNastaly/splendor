@@ -1,10 +1,11 @@
-import { useCurrentPlayer, useResolution } from '@/hooks'
+import { useCurrentPlayer } from '@/hooks'
 import { Panel, Row, Separator } from '@/components/common'
 import { useAppDispatch } from '@/store/hooks'
 import { BasicColor, Color } from '@/types'
 import { canPayToken, isOverTokensLimit } from '@/helpers'
 import { styled } from '@/theme'
 import { payTokenAction, returnTokenAction } from '@/store/actions'
+import { useResolution } from '@/providers'
 import { ColorGroup } from './ColorGroup'
 import { GoldGroup } from './GoldGroup'
 

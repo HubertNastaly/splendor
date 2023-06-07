@@ -1,11 +1,14 @@
 import { Provider } from 'react-redux'
 import { store } from '@/store'
 import { Game } from './components'
+import { ResolutionProvider } from './providers'
 
 const App = () => {
   return (
     <Provider store={store}>
-      <Game />
+      <ResolutionProvider>
+        <Game />
+      </ResolutionProvider>
     </Provider>
   )
 }

@@ -9,7 +9,7 @@ import { ActionsPanel } from './ActionsPanel'
 import { PurchasePanel } from './PurchasePanel'
 import { deselectCardAction } from '@/store/actions'
 import { HistoryNavigation } from './HistoryNavigation'
-import { useResolution } from '@/hooks'
+import { useResolution } from '@/providers'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
