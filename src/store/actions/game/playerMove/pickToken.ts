@@ -39,12 +39,12 @@ function getNextMovePhase({ movePhase }: Player, tokenColor: BasicColor): Player
       return { type: '1_TOKEN_COLLECTED', tokenColor }
     case '1_TOKEN_COLLECTED':
       if(movePhase.tokenColor === tokenColor) {
-        return { type: '2_SAME_TOKENS_COLLECTED', tokenColor }
+        return { type: 'ALL_TOKENS_COLLECTED', tokenColors: [tokenColor, tokenColor] }
       } else {
         return { type: '2_DIFFERENT_TOKENS_COLLECTED', tokenColors: [movePhase.tokenColor, tokenColor] }
       }
     case '2_DIFFERENT_TOKENS_COLLECTED':
-      return { type: '3_TOKENS_COLLECTED', tokenColors: [...movePhase.tokenColors, tokenColor] }
+      return { type: 'ALL_TOKENS_COLLECTED', tokenColors: [...movePhase.tokenColors, tokenColor] }
     default:
       throw new Error('Forbidden move phase achieved')
   }
