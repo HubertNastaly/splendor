@@ -6,7 +6,11 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { styled } from '@/theme'
 import { Color, Tokens } from '@/types'
 
-export const PurchasePanel = () => {
+interface Props {
+  className?: string
+}
+
+export const PurchasePanel = ({ className }: Props) => {
   const dispatch = useAppDispatch()
   const { purchaseTokens, currentPlayer } = useAppSelector(({ purchaseTokens, players, currentPlayerIndex }) => ({
     purchaseTokens,
@@ -26,7 +30,7 @@ export const PurchasePanel = () => {
   const finalizePurchase = () => dispatch(finalizePurchaseAction())
 
   return (
-    <Container>
+    <Container className={className}>
       <TokensGrid>
         {tokensArray.map((color, idx) => (
           <Token key={`purchase-token-${idx}`} color={color} />

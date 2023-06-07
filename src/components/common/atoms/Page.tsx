@@ -3,6 +3,7 @@ import { styled } from '@/theme';
 export const Page = styled('div', {
   position: 'relative',
   width: '100vw',
+  height: '100vh',
   minHeight: '100vh',
   paddingTop: '$large',
   paddingBottom: '$large',
