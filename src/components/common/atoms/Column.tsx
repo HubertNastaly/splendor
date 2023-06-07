@@ -44,13 +44,24 @@ export const Column = styled('div', {
       start: {
         justifyContent: 'flex-start'
       },
+      end: {
+        justifyContent: 'flex-end'
+      },
       center: {
         justifyContent: 'center'
       },
       spaceBetween: {
         justifyContent: 'space-between'
+      },
+      stretch: {
+        justifyContent: 'stretch'
       }
     },
+    wide: {
+      true: {
+        flex: 1
+      }
+    }
   },
 
   defaultVariants: {

@@ -16,8 +16,8 @@ export const Page = styled('div', {
   backgroundColor: '#faf1d7',
 
   '@lowResolution': {
-    paddingTop: '$big',
-    paddingBottom: '$big',
+    paddingTop: '$medium',
+    paddingBottom: '$medium',
     rowGap: '$big'
   }
 })
