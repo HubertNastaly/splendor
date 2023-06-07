@@ -25,9 +25,11 @@ export const Tabletop = () => {
 const SmallScreenLayout = () => (
   <>
     <RowStyled gap="big" align="stretch">
-      <Bank />
-      <Board />
-      <PlayerPanel />
+      <MainSection gap="big" justify="center">
+        <Bank />
+        <Board />
+        <PlayerPanel />
+      </MainSection>
       <Column gap="small" align="end" justify="spaceBetween">
         <ActionsPanel />
         <PurchasePanelStyled />
@@ -52,8 +54,13 @@ const BigScreenLayout = () => (
   </>
 )
 
+const MainSection = styled(Row, {
+  flex: 1
+})
+
 const RowStyled = styled(Row, {
-  height: '100%'
+  height: '100%',
+  width: '100%'
 })
 
 const PurchasePanelStyled = styled(PurchasePanel, {

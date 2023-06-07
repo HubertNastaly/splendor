@@ -7,6 +7,8 @@ export const Page = styled('div', {
   minHeight: '100vh',
   paddingTop: '$large',
   paddingBottom: '$large',
+  paddingLeft: '$medium',
+  paddingRight: '$medium',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
