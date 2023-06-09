@@ -1,6 +1,6 @@
 import { Aristocrat, Player } from '@/types';
 import { isOverTokensLimit } from './isOverTokensLimit';
-import { isAristocratCollectable } from '.';
+import { isAristocratCollectable } from './isAristocratCollectable';
 
 export function canFinishTurn(player: Player, aristocrats: Aristocrat[]) {
   switch(player.movePhase.type) {
