@@ -27,10 +27,10 @@ const Pile = styled(Column, {
 
 const positiveIndexVariants = Object.fromEntries(
   [...new Array(9)].map((_, idx) => [idx + 1, {
-    marginTop: -CARD_HEIGHT.highResolution + CARD_TOPBAR_HEIGHT.highResolution + 1,
+    marginTop: calculateMarginTop(CARD_HEIGHT.highResolution, CARD_TOPBAR_HEIGHT.highResolution),
     zIndex: idx + 1,
     '@lowResolution': {
-      marginTop: -CARD_HEIGHT.lowResolution + CARD_TOPBAR_HEIGHT.lowResolution + 1
+      marginTop: calculateMarginTop(CARD_HEIGHT.lowResolution, CARD_TOPBAR_HEIGHT.lowResolution)
     }
   }])
 )
@@ -38,10 +38,14 @@ const positiveIndexVariants = Object.fromEntries(
 const CardStyled = styled(Card, {
   variants: {
     index: {
-      0: {
+      '0': {
         zIndex: 0
       },
       ...positiveIndexVariants
     }
   }
 })
+
+function calculateMarginTop(cardHeight: number, cardTopbarHeight: number) {
+  return -cardHeight + cardTopbarHeight + 1
+}
