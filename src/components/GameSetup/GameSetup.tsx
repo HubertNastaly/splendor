@@ -6,7 +6,7 @@ import { styled } from '@/theme'
 import { Page, Button, Column } from '@/components/common'
 import { startGameAction } from '@/store/actions'
 import { PredefinedStates } from './PredefinedStates'
-import { isDevMode } from '@/utils'
+import { MODE } from '@/envConstants'
 
 const DEFAULT_NAMES = new Array(MAX_PLAYERS_NUMBER).fill('')
 
@@ -39,7 +39,7 @@ export const GameSetup = () => {
           ))}
           <Button disabled={!canPlay}>Play</Button>
         </Form>
-        {isDevMode() && <PredefinedStates />}
+        {MODE === 'dev' && <PredefinedStates />}
       </Column>
     </Page>
   )

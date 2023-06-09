@@ -14,6 +14,10 @@ jest.mock('@/hooks', () => ({
   useResolution: () => ({ isHighResolution: true })
 }))
 
+jest.mock('@/envConstants', () => ({
+  MODE: 'test'
+}))
+
 describe('pick tokens', () => {
   const defaultState = toHistory(mockInitialState())
   const { present } = defaultState
