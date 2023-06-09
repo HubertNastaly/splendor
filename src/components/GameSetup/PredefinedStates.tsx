@@ -17,7 +17,7 @@ export const PredefinedStates = () => {
       <span>Or pick predefined state:</span>
       <Column gap="tiny" align="stretch">
         {PREDEFINED_STATES.map(({ name, mockState }) => (
-          <Button onClick={() => loadState(mockState())}>{name}</Button>
+          <Button view="secondary" onClick={() => loadState(mockState())}>{name}</Button>
         ))}
       </Column>
     </Column>
