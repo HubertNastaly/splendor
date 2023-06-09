@@ -14,12 +14,18 @@ interface Props {
 
 export const TurnPanel = ({ className }: Props) => {
   const dispatch = useAppDispatch()
-  const { players, currentPlayerIndex } = useAppSelector(({ players, currentPlayerIndex }) => ({ players, currentPlayerIndex }))
+  const { players, aristocrats, currentPlayerIndex } = useAppSelector(({ players, currentPlayerIndex, aristocrats }) => ({
+    players,
+    aristocrats,
+    currentPlayerIndex
+  }))
   const currentPlayer = players[currentPlayerIndex]
 
   const playersPoints = useMemo(() => players.map(calculatePlayersPoints), [players])
 
+  
   const finishTurn = () => dispatch(finishTurnAction())
+  const isFinishTurnDisabled = !canFinishTurn(currentPlayer, aristocrats)
 
   return (
     <Container align="stretch" gap="none" className={className}>
@@ -33,7 +39,7 @@ export const TurnPanel = ({ className }: Props) => {
           <span>{playersPoints[index]}</span>
         </PlayerInfo>
       ))}
-      <FinishTurnButton onClick={finishTurn} disabled={!canFinishTurn(currentPlayer)}>
+      <FinishTurnButton onClick={finishTurn} disabled={isFinishTurnDisabled}>
         Finish turn
       </FinishTurnButton>
     </Container>

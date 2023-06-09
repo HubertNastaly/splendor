@@ -21,8 +21,11 @@ export function collectAristocrat(state: Store, { payload: { pickedAristocrat }}
     throw new Error('Picked aristocrat does not exist')
   }
 
+  const currentPlayer = players[state.currentPlayerIndex]
+
   aristocrats.splice(aristocratIndex, 1)
-  players[state.currentPlayerIndex].aristocrats.push(pickedAristocrat)
+  currentPlayer.aristocrats.push(pickedAristocrat)
+  currentPlayer.movePhase = { type: 'ARISTOCRAT_COLLECTED' }
 
   return { ...state, players, aristocrats }
 }
