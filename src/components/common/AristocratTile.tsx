@@ -59,6 +59,7 @@ const Tile = styled(Column, {
   variants: {
     outlined: {
       true: {
+        cursor: 'pointer',
         outline: '2px solid $violet'
       }
     }

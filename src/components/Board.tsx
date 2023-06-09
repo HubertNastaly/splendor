@@ -29,13 +29,13 @@ export const Board = ({ className }: Props) => {
 
   return (
     <Column className={className}>
-      <Row gap={{ '@initial': 'small', '@lowResolution': 'tiny' }}>
+      <Aristocrats gap={{ '@initial': 'small', '@lowResolution': 'tiny' }} justify="start">
         {aristocrats.map((aristocrat, index) => aristocrat ? (
           <AristocratTile key={`aristocrat-${aristocrat.id}`} aristocrat={aristocrat} />
         ) : (
           <EmptyAristocratTile key={`empty-aristocrat-${index}`} />
         ))}
-      </Row>
+      </Aristocrats>
       <Grid>
         {allCards.map((card, index) => card ? (
           <Card
@@ -51,6 +51,10 @@ export const Board = ({ className }: Props) => {
     </Column>
   )
 }
+
+const Aristocrats = styled(Row, {
+  width: '100%'
+})
 
 const Grid = styled('div', {
   height: 'fit-content',
