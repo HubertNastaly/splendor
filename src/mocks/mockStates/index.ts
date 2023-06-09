@@ -1,1 +1,2 @@
-export * from './mockState'
+export * from './mockInitialState'
+export * from './mockCollectableAristocratState'
