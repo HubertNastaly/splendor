@@ -3,8 +3,10 @@ import { MAX_PLAYERS_NUMBER, MIN_PLAYERS_NUMBER } from '@/constants'
 import { PlayerInput } from './PlayerInput'
 import { useAppDispatch } from '@/store/hooks'
 import { styled } from '@/theme'
-import { Page, Button } from '@/components/common'
+import { Page, Button, Column } from '@/components/common'
 import { startGameAction } from '@/store/actions'
+import { PredefinedStates } from './PredefinedStates'
+import { MODE } from '@/envConstants'
 
 const DEFAULT_NAMES = new Array(MAX_PLAYERS_NUMBER).fill('')
 
@@ -30,12 +32,15 @@ export const GameSetup = () => {
 
   return (
     <Page>
-      <Form onSubmit={submit}>
-        {names.map((name, index) => (
-          <PlayerInput key={`player-${index}`} name={name} setName={newName => setName(newName, index)} />
-        ))}
-        <Button disabled={!canPlay}>Play</Button>
-      </Form>
+      <Column gap="large" align="stretch">
+        <Form onSubmit={submit}>
+          {names.map((name, index) => (
+            <PlayerInput key={`player-${index}`} name={name} setName={newName => setName(newName, index)} />
+          ))}
+          <Button disabled={!canPlay}>Play</Button>
+        </Form>
+        {MODE === 'dev' && <PredefinedStates />}
+      </Column>
     </Page>
   )
 }

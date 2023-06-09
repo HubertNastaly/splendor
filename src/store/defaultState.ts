@@ -1,5 +1,6 @@
-import { Store, History } from '@/types';
+import { Store } from '@/types';
 import { createCardsByLevelCollection, createTokensCollection } from '@/helpers';
+import { toHistory } from '@/utils';
 
 export const getDefaultState = (): Store => ({
   decksByLevel: createCardsByLevelCollection(),
@@ -12,8 +13,4 @@ export const getDefaultState = (): Store => ({
   purchaseTokens: createTokensCollection()
 })
 
-export const getDefaultHistory = (): History<Store> => ({
-  past: [],
-  present: { state: getDefaultState() },
-  future: []
-})
+export const getDefaultHistory = () => toHistory(getDefaultState())
