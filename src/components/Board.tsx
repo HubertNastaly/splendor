@@ -28,28 +28,30 @@ export const Board = ({ className }: Props) => {
 
   return (
     <Column className={className}>
-      <Row gap={{ '@initial': 'small', '@lowResolution': 'tiny' }}>
+      <Aristocrats gap={{ '@initial': 'small', '@lowResolution': 'tiny' }} justify="start">
         {aristocrats.map(aristocrat => (
           <AristocratTile key={`aristocrat-${aristocrat.id}`} aristocrat={aristocrat} />
         ))}
-      </Row>
+      </Aristocrats>
       <Grid>
-        {allCards.map((card, index) => (
-          card ? (
-            <Card
-              key={`card-${index}`}
-              card={card}
-              isSelected={selectedCard ? selectedCard.card.id === card.id : false}
-              onSelect={canSelect ? () => select(card) : undefined}
-            />
-          ) : (
-            <div key={`card-${index}`}/>
-          )
+        {allCards.map((card, index) => card ? (
+          <Card
+            key={`card-${index}`}
+            card={card}
+            isSelected={selectedCard ? selectedCard.card.id === card.id : false}
+            onSelect={canSelect ? () => select(card) : undefined}
+          />
+        ) : (
+          <EmptyCardPlace key={`card-${index}`}/>
         ))}
       </Grid>
     </Column>
   )
 }
+
+const Aristocrats = styled(Row, {
+  width: '100%'
+})
 
 const Grid = styled('div', {
   height: 'fit-content',
@@ -62,3 +64,5 @@ const Grid = styled('div', {
     gap: '$tiny'
   }
 })
+
+const EmptyCardPlace = styled('div')

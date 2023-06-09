@@ -4,17 +4,30 @@ import { styled } from '@/theme'
 import { Aristocrat, BasicColor } from '@/types'
 import { Column, Row } from './atoms'
 import { useResolution } from '@/providers'
+import { isAristocratCollectable } from '@/helpers'
+import { useMemo } from 'react'
+import { useCurrentPlayer } from '@/hooks'
+import { useAppDispatch } from '@/store/hooks'
+import { collectAristocratAction } from '@/store/actions'
 
 interface Props {
   aristocrat: Aristocrat
 }
 
-export const AristocratTile = ({ aristocrat: { requiredCards } }: Props) => {
+export const AristocratTile = ({ aristocrat }: Props) => {
   const { isHighResolution } = useResolution()
-  const requiredCardsEntries = Object.entries(requiredCards) as [BasicColor, number][]
+  const currentPlayer = useCurrentPlayer()
+  const dispatch = useAppDispatch()
+  const requiredCardsEntries = Object.entries(aristocrat.requiredCards) as [BasicColor, number][]
+
+  const collect = () => dispatch(collectAristocratAction(aristocrat))
+
+  const isCollectable = useMemo(() => (
+    isAristocratCollectable(currentPlayer, aristocrat)
+  ), [currentPlayer, aristocrat])
 
   return (
-    <Tile justify="spaceBetween">
+    <Tile justify="spaceBetween" outlined={isCollectable} onClick={collect}>
       <AristocratValue>
         <GiQueenCrown size={isHighResolution ? 32 : 16} />
         {ARISTOCRAT_VALUE}
@@ -40,8 +53,17 @@ const Tile = styled(Column, {
   '@lowResolution': {
     size: ARISTOCRAT_TILE_SIZE.lowResolution
   },
-  background: '$aristocrat',
-  borderRadius: 8
+  background: '$bgViolet',
+  borderRadius: 8,
+
+  variants: {
+    outlined: {
+      true: {
+        cursor: 'pointer',
+        outline: '2px solid $violet'
+      }
+    }
+  }
 })
 
 const AristocratValue = styled('div', {

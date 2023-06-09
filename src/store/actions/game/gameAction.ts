@@ -8,7 +8,8 @@ import {
   SelectCardAction,
   StartPurchaseAction,
   PayTokenAction,
-  FinalizePurchaseAction
+  FinalizePurchaseAction,
+  CollectAristocratAction
 } from './playerMove';
 import { StartGameAction } from './startGame';
 
@@ -22,5 +23,6 @@ export type GameAction =
   | PayTokenAction
   | CancelPurchaseAction
   | FinalizePurchaseAction
+  | CollectAristocratAction
   | ReturnTokenAction
   | FinishTurnAction

@@ -9,11 +9,7 @@ export const Bank = () => {
   const dispatch = useAppDispatch()
   const { bank, currentPlayer } = useAppSelector(({ bank, players, currentPlayerIndex }) => {
     const currentPlayer = players[currentPlayerIndex]
-    return {
-      bank,
-      currentPlayer,
-      movePhase: currentPlayer.movePhase.type
-    }
+    return { bank, currentPlayer }
   })
 
   const isTokenDisabled = useCallback((tokenColor: BasicColor) => {

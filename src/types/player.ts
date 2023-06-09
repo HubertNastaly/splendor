@@ -23,6 +23,8 @@ export type PlayerMovePhase = {
   selectedCard: SelectedCard
 } | {
   type: 'CARD_BOUGHT'
+} | {
+  type: 'ARISTOCRAT_COLLECTED'
 }
 
 export interface Player {
