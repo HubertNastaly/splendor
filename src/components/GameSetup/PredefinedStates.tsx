@@ -1,11 +1,19 @@
 import { Button, Column } from '@/components/common'
-import { mockInitialState } from '@/mocks'
+import { mockCollectableAristocratState, mockInitialState } from '@/mocks'
 import { loadStateAction } from '@/store/actions'
 import { useAppDispatch } from '@/store/hooks'
 import { Store } from '@/types'
 
-const PREDEFINED_STATES: { name: string, mockState: () => Store }[] = [
-  { name: 'Initial state', mockState: mockInitialState }
+interface PredefinedState {
+  name: string
+  mockState: () => Store
+}
+
+const predefinedState = (name: string, mockState: () => Store): PredefinedState => ({ name, mockState })
+
+const PREDEFINED_STATES = [
+  predefinedState('Initial state', mockInitialState),
+  predefinedState('Collectable aristocrat', mockCollectableAristocratState)
 ]
 
 export const PredefinedStates = () => {
