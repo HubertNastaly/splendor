@@ -2,11 +2,9 @@ import { useMemo } from 'react'
 import { Button, Column, Row } from './common'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { styled } from '@/theme'
-import { canFinishTurn } from '@/helpers'
+import { calculateScore, canFinishTurn } from '@/helpers'
 import { finishTurnAction } from '@/store/actions'
-import { Player } from '@/types'
-import { sum } from '@/utils'
-import { ARISTOCRAT_VALUE, ENDING_GAME_SCORE } from '@/constants'
+import { ENDING_GAME_SCORE } from '@/constants'
 
 interface Props {
   className?: string
@@ -21,7 +19,7 @@ export const TurnPanel = ({ className }: Props) => {
   }))
   const currentPlayer = players[currentPlayerIndex]
 
-  const playersPoints = useMemo(() => players.map(calculatePlayersPoints), [players])
+  const playersPoints = useMemo(() => players.map(calculateScore), [players])
   const currentWinnersIndices = getCurrentWinnersIndices(playersPoints)
 
   const finishTurn = () => dispatch(finishTurnAction())
@@ -45,14 +43,6 @@ export const TurnPanel = ({ className }: Props) => {
       </FinishTurnButton>
     </Container>
   )
-}
-
-function calculatePlayersPoints({ cards, aristocrats }: Player) {
-  const allCards = Object.values(cards).flat()
-  const pointsFromCards = sum(allCards.map(({ value }) => value))
-  const pointsFromAristocrats = aristocrats.length * ARISTOCRAT_VALUE
-
-  return pointsFromCards + pointsFromAristocrats
 }
 
 function getCurrentWinnersIndices(playersPoints: number[]) {

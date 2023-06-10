@@ -9,8 +9,9 @@ export const Game = () => {
     case 'setup':
       return <GameSetup />
     case 'started':
+    case 'lastRound':
       return <Tabletop />
     case 'ended':
-      return null
+      return <span>Game ended</span>
   }
 }

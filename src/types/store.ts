@@ -8,6 +8,9 @@ export type GameState = {
 } | {
   type: 'started'
 } | {
+  type: 'lastRound',
+  endingPlayerIndex: number
+} | {
   type: 'ended'
 }
 
