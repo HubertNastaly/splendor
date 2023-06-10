@@ -6,7 +6,7 @@ import { canFinishTurn } from '@/helpers'
 import { finishTurnAction } from '@/store/actions'
 import { Player } from '@/types'
 import { sum } from '@/utils'
-import { ARISTOCRAT_VALUE } from '@/constants'
+import { ARISTOCRAT_VALUE, ENDING_GAME_SCORE } from '@/constants'
 
 interface Props {
   className?: string
@@ -22,8 +22,8 @@ export const TurnPanel = ({ className }: Props) => {
   const currentPlayer = players[currentPlayerIndex]
 
   const playersPoints = useMemo(() => players.map(calculatePlayersPoints), [players])
+  const currentWinnersIndices = getCurrentWinnersIndices(playersPoints)
 
-  
   const finishTurn = () => dispatch(finishTurnAction())
   const isFinishTurnDisabled = !canFinishTurn(currentPlayer, aristocrats)
 
@@ -34,6 +34,7 @@ export const TurnPanel = ({ className }: Props) => {
           key={`player-info-${index}`}
           justify="spaceBetween"
           currentPlayer={index === currentPlayerIndex}
+          currentWinner={currentWinnersIndices.includes(index)}
         >
           <span>{player.name}</span>
           <span>{playersPoints[index]}</span>
@@ -54,6 +55,19 @@ function calculatePlayersPoints({ cards, aristocrats }: Player) {
   return pointsFromCards + pointsFromAristocrats
 }
 
+function getCurrentWinnersIndices(playersPoints: number[]) {
+  const maxScore = Math.max(...playersPoints)
+  if(maxScore < ENDING_GAME_SCORE) {
+    return []
+  }
+
+  const currentWinnersIndices = [...new Array(playersPoints.length)]
+    .map((_, index) => index)
+    .filter(index => playersPoints[index] === maxScore)
+
+  return currentWinnersIndices
+}
+
 const Container = styled(Column, {
   width: '100%'
 })
@@ -69,6 +83,11 @@ const PlayerInfo = styled(Row, {
       true: {
         border: '1px solid black',
         borderRadius: 4
+      }
+    },
+    currentWinner: {
+      true: {
+        color: '$pink'
       }
     }
   }

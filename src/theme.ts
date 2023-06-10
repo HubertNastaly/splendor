@@ -22,6 +22,7 @@ const { styled, theme } = createStitches({
       disabled: '#999999',
       violet: '#b500bb',
       bgViolet: '#e997f0',
+      pink: '#d00089'
     },
     fontSizes: {
       tiny: '12px',
