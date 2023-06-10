@@ -3,7 +3,13 @@ import { CardsByLevel, NullableCardsByLevel } from './card'
 import { Player } from './player'
 import { Aristocrat } from './aristocrat'
 
-export type GameState = 'setup' | 'started' | 'ended'
+export type GameState = {
+  type: 'setup'
+} | {
+  type: 'started'
+} | {
+  type: 'ended'
+}
 
 export interface Store {
   decksByLevel: CardsByLevel

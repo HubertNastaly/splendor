@@ -10,7 +10,7 @@ export function startGame(state: Store, { payload: { names }}: StartGameAction):
   const { decksByLevel, boardCardsByLevel } = generateBoard()
   const aristocrats = generateAristocrats(players.length)
   const bank = generateBank(state.players.length)
-  const gameState: GameState = 'started'
+  const gameState: GameState = { type: 'started' }
   const purchaseTokens = createTokensCollection()
 
   return {
