@@ -20,7 +20,7 @@ export const TurnPanel = ({ className }: Props) => {
   const currentPlayer = players[currentPlayerIndex]
 
   const playersPoints = useMemo(() => players.map(calculateScore), [players])
-  const currentWinnersIndices = getCurrentWinnersIndices(playersPoints)
+  const currentWinnersIndices = useMemo(() => getCurrentWinnersIndices(playersPoints), [playersPoints])
 
   const finishTurn = () => dispatch(finishTurnAction())
   const isFinishTurnDisabled = !canFinishTurn(currentPlayer, aristocrats)
