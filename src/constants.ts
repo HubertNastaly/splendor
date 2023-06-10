@@ -5,6 +5,7 @@ export const MIN_BANK_TOKENS_TO_PICK_TWO = 4
 export const MAX_TOKENS_LIMIT = 10
 export const MAX_RESERVED_CARDS_LIMIT = 3
 export const ARISTOCRAT_VALUE = 3
+export const ENDING_GAME_SCORE = 15
 
 export const DEFAULT_NAMES = ['Adam', 'Bob', 'Cindy']
 

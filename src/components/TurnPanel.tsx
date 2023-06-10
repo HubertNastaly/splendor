@@ -2,11 +2,9 @@ import { useMemo } from 'react'
 import { Button, Column, Row } from './common'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { styled } from '@/theme'
-import { canFinishTurn } from '@/helpers'
+import { calculateScore, canFinishTurn } from '@/helpers'
 import { finishTurnAction } from '@/store/actions'
-import { Player } from '@/types'
-import { sum } from '@/utils'
-import { ARISTOCRAT_VALUE } from '@/constants'
+import { ENDING_GAME_SCORE } from '@/constants'
 
 interface Props {
   className?: string
@@ -21,9 +19,9 @@ export const TurnPanel = ({ className }: Props) => {
   }))
   const currentPlayer = players[currentPlayerIndex]
 
-  const playersPoints = useMemo(() => players.map(calculatePlayersPoints), [players])
+  const playersPoints = useMemo(() => players.map(calculateScore), [players])
+  const currentWinnersIndices = useMemo(() => getCurrentWinnersIndices(playersPoints), [playersPoints])
 
-  
   const finishTurn = () => dispatch(finishTurnAction())
   const isFinishTurnDisabled = !canFinishTurn(currentPlayer, aristocrats)
 
@@ -34,6 +32,7 @@ export const TurnPanel = ({ className }: Props) => {
           key={`player-info-${index}`}
           justify="spaceBetween"
           currentPlayer={index === currentPlayerIndex}
+          currentWinner={currentWinnersIndices.includes(index)}
         >
           <span>{player.name}</span>
           <span>{playersPoints[index]}</span>
@@ -46,12 +45,17 @@ export const TurnPanel = ({ className }: Props) => {
   )
 }
 
-function calculatePlayersPoints({ cards, aristocrats }: Player) {
-  const allCards = Object.values(cards).flat()
-  const pointsFromCards = sum(allCards.map(({ value }) => value))
-  const pointsFromAristocrats = aristocrats.length * ARISTOCRAT_VALUE
+function getCurrentWinnersIndices(playersPoints: number[]) {
+  const maxScore = Math.max(...playersPoints)
+  if(maxScore < ENDING_GAME_SCORE) {
+    return []
+  }
 
-  return pointsFromCards + pointsFromAristocrats
+  const currentWinnersIndices = [...new Array(playersPoints.length)]
+    .map((_, index) => index)
+    .filter(index => playersPoints[index] === maxScore)
+
+  return currentWinnersIndices
 }
 
 const Container = styled(Column, {
@@ -69,6 +73,11 @@ const PlayerInfo = styled(Row, {
       true: {
         border: '1px solid black',
         borderRadius: 4
+      }
+    },
+    currentWinner: {
+      true: {
+        color: '$pink'
       }
     }
   }

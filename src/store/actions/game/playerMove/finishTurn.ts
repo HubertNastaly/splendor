@@ -1,6 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CARD_LEVELS, CardLevel, NullableCardsByLevel, Store } from '@/types';
+import { CARD_LEVELS, CardLevel, GameState, NullableCardsByLevel, Player, Store } from '@/types';
 import { clone } from '@/utils';
+import { calculateScore } from '@/helpers';
+import { ENDING_GAME_SCORE } from '@/constants';
 
 export const finishTurnAction = createAction('FINISH_TURN')
 export type FinishTurnAction = ReturnType<typeof finishTurnAction>
@@ -13,9 +15,11 @@ export function finishTurn(state: Store): Store {
   currentPlayer.movePhase = { type: 'NONE' }
 
   const nextPlayerIndex = (currentPlayerIndex + 1) % players.length
+  const gameState = getGameState(state.gameState, currentPlayer, currentPlayerIndex, nextPlayerIndex)
 
   return {
     ...state,
+    gameState,
     ...fillBoard(state),
     players,
     currentPlayerIndex: nextPlayerIndex,
@@ -55,5 +59,20 @@ function findEmptyPlace(boardCards: NullableCardsByLevel): [CardLevel, number] |
         return [level, i]
       }
     }
+  }
+}
+
+function getGameState(currentGameState: GameState, currentPlayer: Player, currentPlayerIndex: number, nextPlayerIndex: number): GameState {
+  switch(currentGameState.type) {
+    case 'started': {
+      const shouldStartLastRound = calculateScore(currentPlayer) >= ENDING_GAME_SCORE
+      return shouldStartLastRound ? { type: 'lastRound', endingPlayerIndex: currentPlayerIndex } : currentGameState
+    }
+    case 'lastRound': {
+      const shouldEndGame = nextPlayerIndex === currentGameState.endingPlayerIndex
+      return shouldEndGame ? { type: 'ended' } : currentGameState
+    }
+    default:
+      return currentGameState
   }
 }
