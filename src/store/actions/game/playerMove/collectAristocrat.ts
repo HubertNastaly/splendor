@@ -1,3 +1,4 @@
+import { canCollectAristocrat } from '@/helpers/verifiers';
 import { Aristocrat, Store } from '@/types';
 import { clone } from '@/utils';
 import { createAction } from '@reduxjs/toolkit';
@@ -12,6 +13,11 @@ export type CollectAristocratAction = ReturnType<typeof collectAristocratAction>
 export function collectAristocrat(state: Store, { payload: { pickedAristocrat }}: CollectAristocratAction): Store {
   const aristocrats = clone(state.aristocrats)
   const players = clone(state.players)
+  const currentPlayer = players[state.currentPlayerIndex]
+
+  if(!canCollectAristocrat(currentPlayer)) {
+    throw new Error('Cannot collect aristocrat in current move phase')
+  }
 
   const aristocratIndex = aristocrats.findIndex(maybeAristocrat => (
     maybeAristocrat && maybeAristocrat.id === pickedAristocrat.id
@@ -21,7 +27,6 @@ export function collectAristocrat(state: Store, { payload: { pickedAristocrat }}
     throw new Error('Picked aristocrat does not exist')
   }
 
-  const currentPlayer = players[state.currentPlayerIndex]
 
   aristocrats.splice(aristocratIndex, 1)
   currentPlayer.aristocrats.push(pickedAristocrat)

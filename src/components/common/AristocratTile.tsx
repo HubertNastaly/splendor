@@ -21,11 +21,16 @@ export const AristocratTile = ({ aristocrat }: Props) => {
   const dispatch = useAppDispatch()
   const requiredCardsEntries = Object.entries(aristocrat.requiredCards) as [BasicColor, number][]
 
-  const collect = () => dispatch(collectAristocratAction(aristocrat))
-
   const isCollectable = useMemo(() => (
+    canCollectAristocrat(currentPlayer) &&
     isAristocratCollectable(currentPlayer, aristocrat)
   ), [currentPlayer, aristocrat])
+
+  const collect = () => {
+    if(isCollectable) {
+      dispatch(collectAristocratAction(aristocrat))
+    }
+  }
 
   return (
     <Tile justify="spaceBetween" outlined={isCollectable} onClick={collect}>
