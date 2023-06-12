@@ -46,6 +46,7 @@ export const GameSetup = () => {
 }
 
 const Form = styled('form', {
+  marginTop: '$large',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'stretch',

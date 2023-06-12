@@ -1,5 +1,8 @@
+import { useMemo } from 'react'
+import { GiQueenCrown } from 'react-icons/gi'
+import { FaRegGem } from 'react-icons/fa'
 import { useCurrentPlayer } from '@/hooks'
-import { Panel, Row, Separator } from '@/components/common'
+import { PointsIndicator, Panel, Row, Separator } from '@/components/common'
 import { useAppDispatch } from '@/store/hooks'
 import { BasicColor, Color } from '@/types'
 import { canPayToken, isOverTokensLimit } from '@/helpers'
@@ -7,11 +10,12 @@ import { styled } from '@/theme'
 import { payTokenAction, returnTokenAction } from '@/store/actions'
 import { ColorGroup } from './ColorGroup'
 import { GoldGroup } from './GoldGroup'
+import { sumAristocratsPoints, sumCardsPoints } from '@/helpers/score'
 
 export const PlayerPanel = () => {
   const dispatch = useAppDispatch()
   const currentPlayer = useCurrentPlayer()
-  const { tokens: { gold, ...basicTokens }, cards, reservedCards } = currentPlayer
+  const { tokens: { gold, ...basicTokens }, cards, reservedCards, aristocrats } = currentPlayer
   const basicTokensEntries = Object.entries(basicTokens) as [BasicColor, number][]
 
   const returnToken = (tokenColor: Color) => dispatch(returnTokenAction(tokenColor))
@@ -22,9 +26,12 @@ export const PlayerPanel = () => {
     isOverTokensLimit(currentPlayer) ? () => returnToken(color) :
     undefined
 
+  const cardsPoints = useMemo(() => sumCardsPoints(cards), [cards])
+  const aristocratsPoints = useMemo(() => sumAristocratsPoints(aristocrats), [aristocrats])
+
   return (
     <Container data-testid="player-panel">
-      <RowStyled gap="medium" align="start">
+      <TopSection gap="medium" align="start">
         {basicTokensEntries.map(([color, count]) => (
           <ColorGroup
             key={`${color}-group`}
@@ -34,13 +41,23 @@ export const PlayerPanel = () => {
             onTokenClick={getOnTokenClick(color)}
           />
         ))}
-      </RowStyled>
+      </TopSection>
       <Separator orientation="horizontal" />
-      <GoldGroup
-        reservedCards={reservedCards}
-        goldCount={gold}
-        onGoldClick={getOnTokenClick('gold')}
-      />
+      <BottomSection justify="spaceBetween" align="end">
+        <GoldGroup
+          reservedCards={reservedCards}
+          goldCount={gold}
+          onGoldClick={getOnTokenClick('gold')}
+        />
+        <Points gap="tiny" align="end">
+          <PointsIndicator type="card" size="large" color="neutral" column>
+            <FaRegGem size={16} /> {cardsPoints}
+          </PointsIndicator>
+          <PointsIndicator type="tile" size="large" color="neutral" column>
+            <GiQueenCrown size={16} /> {aristocratsPoints}
+          </PointsIndicator>
+        </Points>
+      </BottomSection>
     </Container>
   )
 }
@@ -52,10 +69,14 @@ const Container = styled(Panel, {
   rowGap: '$small'
 })
 
-const RowStyled = styled(Row, {
+const TopSection = styled(Row, {
   height: 'fit-content',
   minHeight: 348,
   '@lowResolution': {
     minHeight: 192
   }
 })
+
+const BottomSection = styled(Row)
+
+const Points = styled(Row)
