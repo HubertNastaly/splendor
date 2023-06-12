@@ -1,5 +1,5 @@
 import { fireEvent, screen, within } from '@testing-library/react'
-import { Color } from "@/types";
+import { Color } from '@/types'
 
 export function pickTokens(tokenColors: Color[]) {
   const bank = screen.getByTestId('bank')

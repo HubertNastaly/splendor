@@ -7,6 +7,7 @@ const config: JestConfigWithTsJest = {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
   testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/test/setup.ts']
 };
 
 export default config

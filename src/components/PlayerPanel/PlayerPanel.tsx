@@ -49,14 +49,16 @@ export const PlayerPanel = () => {
           goldCount={gold}
           onGoldClick={getOnTokenClick('gold')}
         />
-        <Points gap="tiny" align="end">
+        <PointsIndicators gap="tiny" align="end">
           <PointsIndicator type="card" size="large" color="neutral" column>
-            <FaRegGem size={16} /> {cardsPoints}
+            <FaRegGem size={16} /> 
+            <Points>{cardsPoints}</Points>
           </PointsIndicator>
-          <PointsIndicator type="tile" size="large" color="neutral" column>
-            <GiQueenCrown size={16} /> {aristocratsPoints}
+          <PointsIndicator type="tile" size="large" color="neutral" column data-testid="aristocrats-indicator">
+            <GiQueenCrown size={16} />
+            <Points data-testid="aristocrats-points">{aristocratsPoints}</Points>
           </PointsIndicator>
-        </Points>
+        </PointsIndicators>
       </BottomSection>
     </Container>
   )
@@ -79,4 +81,6 @@ const TopSection = styled(Row, {
 
 const BottomSection = styled(Row)
 
-const Points = styled(Row)
+const PointsIndicators = styled(Row)
+
+const Points = styled('span')

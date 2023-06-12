@@ -1,11 +1,15 @@
 import allAristocrats from '@/data/aristocrats.json'
 import { DEFAULT_NAMES } from '@/constants';
 import { createPlayer, createTokensCollection, generateBank, generateBoard } from '@/helpers';
-import { Aristocrat, BasicColor, CARD_LEVELS, CardData, Store } from '@/types';
+import { Aristocrat, BASIC_COLORS, CARD_LEVELS, CardData, Store } from '@/types';
 import { shuffle } from '@/utils';
 
-const COLLECTABLE_ARISTOCRAT_ID = 0 // 3 blues, 3 greens, 3 reds
-const REQUIRED_COLORS = ['blue', 'green', 'red'] as BasicColor[]
+// 0: 3 blues, 3 greens, 3 reds
+// 5: 3 blues, 3 greens, 3 whites
+export const COLLECTABLE_ARISTOCRAT_IDS = [0, 5]
+
+// 2: 4 whites, 4 blacks
+export const UNCOLLECTABLE_ARISTOCRAT_ID = 2
 
 export const mockCollectableAristocratState = (): Store => {
   const { decksByLevel, boardCardsByLevel } = generateBoard()
@@ -13,7 +17,7 @@ export const mockCollectableAristocratState = (): Store => {
   const aristocrats = generateAristocrats(players.length + 1)
   const favourizedPlayer = players[0]
 
-  for(const requiredColor of REQUIRED_COLORS) {
+  for(const requiredColor of BASIC_COLORS) {
     const cardsInColor: CardData[] = []
 
     for(const level of CARD_LEVELS) {
@@ -25,6 +29,8 @@ export const mockCollectableAristocratState = (): Store => {
 
     favourizedPlayer.cards[requiredColor].push(...cardsInColor)
   }
+
+  favourizedPlayer.movePhase = { type: 'CARD_BOUGHT' }
 
   return {
     decksByLevel,
@@ -39,9 +45,28 @@ export const mockCollectableAristocratState = (): Store => {
 }
 
 function generateAristocrats(aristocratsNumber: number) {
-  const shuffledAristocrats = shuffle(allAristocrats as Aristocrat[])
-  const collectableAristocratIdx = shuffledAristocrats.findIndex(({ id }) => id === COLLECTABLE_ARISTOCRAT_ID)
-  const collectableAristocrat = shuffledAristocrats[collectableAristocratIdx]
-  shuffledAristocrats.splice(collectableAristocratIdx, 1)
-  return [collectableAristocrat, ...shuffledAristocrats.slice(0, aristocratsNumber - 1)]
+  const { collectableAristocrats, otherAristocrats } = pickCollectableAristocrats(allAristocrats as Aristocrat[])
+  const uncollectableAristocrat = pickAristocratById(otherAristocrats, UNCOLLECTABLE_ARISTOCRAT_ID)
+  const fixedAristocrats = [...collectableAristocrats, uncollectableAristocrat]
+  const shuffledAristocrats = shuffle(otherAristocrats)
+  return [...fixedAristocrats, ...shuffledAristocrats.slice(0, aristocratsNumber - fixedAristocrats.length)]
+}
+
+function pickCollectableAristocrats(aristocrats: Aristocrat[]): { collectableAristocrats: Aristocrat[], otherAristocrats: Aristocrat [] } {
+  const collectableAristocrats: Aristocrat[] = []
+  const otherAristocrats: Aristocrat[] = [...aristocrats]
+
+  for(const collectableAristocratId of COLLECTABLE_ARISTOCRAT_IDS) {
+    const collectableAristocrat = pickAristocratById(aristocrats, collectableAristocratId)
+    collectableAristocrats.push(collectableAristocrat)
+  }
+
+  return { collectableAristocrats, otherAristocrats }
+}
+
+function pickAristocratById(aristocrats: Aristocrat[], aristocratId: number) {
+  const collectableAristocratIndex = aristocrats.findIndex(({ id }) => id === aristocratId)
+  const collectableAristocrat = aristocrats[collectableAristocratIndex]
+  aristocrats.splice(collectableAristocratIndex, 1)
+  return collectableAristocrat
 }
