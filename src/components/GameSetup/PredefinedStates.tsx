@@ -1,5 +1,5 @@
 import { Button, Column } from '@/components/common'
-import { mockCollectableAristocratState, mockInitialState } from '@/mocks'
+import { mockOnePointFromWinState, mockCollectableAristocratState, mockInitialState } from '@/mocks'
 import { loadStateAction } from '@/store/actions'
 import { useAppDispatch } from '@/store/hooks'
 import { Store } from '@/types'
@@ -13,7 +13,8 @@ const predefinedState = (name: string, mockState: () => Store): PredefinedState 
 
 const PREDEFINED_STATES = [
   predefinedState('Initial state', mockInitialState),
-  predefinedState('Collectable aristocrat', mockCollectableAristocratState)
+  predefinedState('Collectable aristocrat', mockCollectableAristocratState),
+  predefinedState('One point from win', mockOnePointFromWinState)
 ]
 
 export const PredefinedStates = () => {

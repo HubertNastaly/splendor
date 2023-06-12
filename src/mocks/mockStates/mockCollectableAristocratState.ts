@@ -11,7 +11,7 @@ export const COLLECTABLE_ARISTOCRAT_IDS = [0, 5]
 // 2: 4 whites, 4 blacks
 export const UNCOLLECTABLE_ARISTOCRAT_ID = 2
 
-export const mockCollectableAristocratState = (): Store => {
+export function mockCollectableAristocratState(): Store {
   const { decksByLevel, boardCardsByLevel } = generateBoard()
   const players = DEFAULT_NAMES.map(createPlayer)
   const aristocrats = generateAristocrats(players.length + 1)
