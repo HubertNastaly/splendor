@@ -1,12 +1,7 @@
-import { render } from '@testing-library/react'
-import { Game } from '@/components'
 import { mockInitialState } from '@/mocks'
-import { mainReducer } from '@/store/mainReducer'
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
 import { Color } from '@/types'
 import { pickTokens } from './utils/pickTokens'
-import { expectTokensAmount } from './utils'
+import { expectTokensAmount, renderGame } from './utils'
 import { toHistory } from '@/utils'
 
 jest.mock('@/hooks', () => ({
@@ -14,6 +9,7 @@ jest.mock('@/hooks', () => ({
   useResolution: () => ({ isHighResolution: true })
 }))
 
+// TODO: mock it globally
 jest.mock('@/envConstants', () => ({
   MODE: 'test'
 }))
@@ -22,22 +18,9 @@ describe('pick tokens', () => {
   const defaultState = toHistory(mockInitialState())
   const { present } = defaultState
 
-  const renderGame = (preloadedState = defaultState) => {
-    const store = configureStore({
-      preloadedState,
-      reducer: mainReducer
-    })
-
-    render(
-      <Provider store={store}>
-        <Game />
-      </Provider>
-    )
-  }
+  beforeEach(() => renderGame(defaultState))
 
   test('can pick 3 different tokens', () => {
-    renderGame()
-
     const tokenColors: Color[] = ['white', 'red', 'green']
     pickTokens(tokenColors)
 
@@ -51,8 +34,6 @@ describe('pick tokens', () => {
   })
 
   test('can pick 2 same tokens', () => {
-    renderGame()
-
     const tokenColor: Color = 'green'
     pickTokens([tokenColor, tokenColor])
 
@@ -61,8 +42,6 @@ describe('pick tokens', () => {
   })
 
   test('cannot pick 3 tokens with 2 of same color', () => {
-    renderGame()
-
     pickTokens(['green', 'red', 'green'])
 
     expectTokensAmount('bank', 'green', present.state.bank.green - 1)
@@ -73,8 +52,6 @@ describe('pick tokens', () => {
   })
 
   test('cannot pick 4 different tokens', () => {
-    renderGame()
-
     const tokenColors: Color[] = ['white', 'red', 'green', 'blue']
     pickTokens(tokenColors)
 
@@ -92,8 +69,6 @@ describe('pick tokens', () => {
   })
 
   test('cannot pick gold', () => {
-    renderGame()
-
     const tokenColor: Color = 'gold'
     pickTokens([tokenColor])
 
