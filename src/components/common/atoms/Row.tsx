@@ -35,6 +35,9 @@ export const Row = styled('div', {
       start: {
         alignItems: 'flex-start'
       },
+      end: {
+        alignItems: 'flex-end'
+      },
       stretch: {
         alignItems: 'stretch'
       }

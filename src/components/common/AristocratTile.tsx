@@ -9,6 +9,7 @@ import { useMemo } from 'react'
 import { useCurrentPlayer } from '@/hooks'
 import { useAppDispatch } from '@/store/hooks'
 import { collectAristocratAction } from '@/store/actions'
+import { PointsIndicator } from './PointsIndicator'
 
 interface Props {
   aristocrat: Aristocrat
@@ -34,13 +35,14 @@ export const AristocratTile = ({ aristocrat }: Props) => {
       </AristocratValue>
       <Row gap="microscopic">
         {requiredCardsEntries.map(([color, amount]) => (
-          <CardIndicator
+          <PointsIndicator
+            type="card"
             key={`card-indicator-${color}`}
             color={color}
             size={{ '@initial': 'big', '@lowResolution': 'small' }}
           >
             {amount}
-          </CardIndicator>
+          </PointsIndicator>
         ))}
       </Row>
     </Tile>
@@ -82,57 +84,3 @@ const AristocratValue = styled('div', {
     fontSize: '$small'
   }
 })
-
-const CardIndicator = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: 4,
-
-  variants: {
-    size: {
-      small: {
-        width: 20,
-        height: 30,
-      },
-      big: {
-        width: 30,
-        height: 45
-      }
-    },
-    color: {
-      white: {
-        background: '$white',
-        color: getCardIndicatorTextColor('white')
-      },
-      blue: {
-        background: '$blue',
-        color: getCardIndicatorTextColor('blue')
-      },
-      green: {
-        background: '$green',
-        color: getCardIndicatorTextColor('green')
-      },
-      red: {
-        background: '$red',
-        color: getCardIndicatorTextColor('red')
-      },
-      black: {
-        background: '$black',
-        color: getCardIndicatorTextColor('black')
-      }
-    }
-  }
-})
-
-function getCardIndicatorTextColor(color: BasicColor) {
-  switch(color) {
-    case 'blue':
-    case 'green':
-    case 'red':
-    case 'black':
-      return 'white'
-    case 'white':
-      return 'black'
-  }
-}
