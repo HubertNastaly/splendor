@@ -8,7 +8,7 @@ import { Provider } from "react-redux"
 export const renderGame = (state: History<Store>) => {
   const store = configureStore({
     preloadedState: state,
-    reducer: mainReducer
+    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware({ immutableCheck: false })]
   })
 
   render(
