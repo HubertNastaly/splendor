@@ -10,6 +10,7 @@ import { useCurrentPlayer } from '@/hooks'
 import { useAppDispatch } from '@/store/hooks'
 import { collectAristocratAction } from '@/store/actions'
 import { PointsIndicator } from './PointsIndicator'
+import { canCollectAristocrat } from '@/helpers/verifiers'
 
 interface Props {
   aristocrat: Aristocrat
@@ -33,7 +34,12 @@ export const AristocratTile = ({ aristocrat }: Props) => {
   }
 
   return (
-    <Tile justify="spaceBetween" outlined={isCollectable} onClick={collect}>
+    <Tile
+      justify="spaceBetween"
+      outlined={isCollectable}
+      onClick={collect}
+      data-testid={`aristocrat-${aristocrat.id}`}
+    >
       <AristocratValue>
         <GiQueenCrown size={isHighResolution ? 32 : 16} />
         {ARISTOCRAT_VALUE}

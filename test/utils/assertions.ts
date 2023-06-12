@@ -6,3 +6,8 @@ export function expectTokensAmount(containerName: 'bank' | 'player', tokenColor:
   const tokenCounter = within(container).getByTestId(`token-counter-${tokenColor}`)
   expect(tokenCounter.textContent).toEqual(amount.toString())
 }
+
+export function expectAristocratsPoints(expectedPoints: number) {
+  const aristocratsPoints = screen.getByTestId('aristocrats-points')
+  expect(aristocratsPoints).toHaveTextContent(expectedPoints.toString())
+}
