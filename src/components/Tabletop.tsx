@@ -9,42 +9,27 @@ import { ActionsPanel } from './ActionsPanel'
 import { PurchasePanel } from './PurchasePanel'
 import { deselectCardAction } from '@/store/actions'
 import { AdditionalOptions } from './AdditionalOptions'
-import { useResolution } from '@/providers'
 
 export const Tabletop = () => {
   const dispatch = useAppDispatch()
-  const { isHighResolution } = useResolution()
+  const deselectCard = () => dispatch(deselectCardAction())
 
   return (
-    <Page onClick={() => dispatch(deselectCardAction())}>
-      {isHighResolution ? <BigScreenLayout /> : <SmallScreenLayout />}
+    <Page onClick={deselectCard}>
+      <FullSizeRow gap="big">
+        <MainSection />
+        <SideSection />
+      </FullSizeRow>
     </Page>
   )
 }
 
-const SmallScreenLayout = () => (
-  <FullSizeRow gap="big" align="stretch">
-    <Row wide gap="big" justify="center">
-      <Bank />
-      <Board />
-      <PlayerPanel />
-    </Row>
-    <SideSection />
-  </FullSizeRow>
-)
-
-const BigScreenLayout = () => (
-  <FullSizeRow gap="big">
-    <Column wide gap="enormous" align="center">
-      <Row gap="enormous" align="stretch">
-        <Bank />
-        <Board />
-        <PurchasePanel />
-      </Row>
-      <PlayerPanel />
-    </Column>
-    <SideSection />
-  </FullSizeRow>
+const MainSection = () => (
+  <MainSectionWrapper gap={{ '@initial': 'enormous', '@lowResolution': 'big' }} justify="center">
+    <Bank />
+    <Board />
+    <PlayerPanel />
+  </MainSectionWrapper>
 )
 
 const SideSection = () => (
@@ -55,6 +40,10 @@ const SideSection = () => (
     <AdditionalOptions />
   </SideSectionColumn>
 )
+
+const MainSectionWrapper = styled(Row, {
+  flex: 1,
+})
 
 const SideSectionColumn = styled(Column, {
   width: '100%',

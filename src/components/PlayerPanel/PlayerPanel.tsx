@@ -5,12 +5,10 @@ import { BasicColor, Color } from '@/types'
 import { canPayToken, isOverTokensLimit } from '@/helpers'
 import { styled } from '@/theme'
 import { payTokenAction, returnTokenAction } from '@/store/actions'
-import { useResolution } from '@/providers'
 import { ColorGroup } from './ColorGroup'
 import { GoldGroup } from './GoldGroup'
 
 export const PlayerPanel = () => {
-  const { isHighResolution } = useResolution()
   const dispatch = useAppDispatch()
   const currentPlayer = useCurrentPlayer()
   const { tokens: { gold, ...basicTokens }, cards, reservedCards } = currentPlayer
@@ -36,27 +34,13 @@ export const PlayerPanel = () => {
             onTokenClick={getOnTokenClick(color)}
           />
         ))}
-        {isHighResolution && (
-          <>
-            <Separator orientation="vertical" />
-            <GoldGroup
-              reservedCards={reservedCards}
-              goldCount={gold}
-              onGoldClick={getOnTokenClick('gold')}
-            />
-          </>
-        )}
       </RowStyled>
-      {!isHighResolution && (
-        <>
-          <Separator orientation="horizontal" />
-          <GoldGroup
-            reservedCards={reservedCards}
-            goldCount={gold}
-            onGoldClick={getOnTokenClick('gold')}
-          />
-        </>
-      )}
+      <Separator orientation="horizontal" />
+      <GoldGroup
+        reservedCards={reservedCards}
+        goldCount={gold}
+        onGoldClick={getOnTokenClick('gold')}
+      />
     </Container>
   )
 }
