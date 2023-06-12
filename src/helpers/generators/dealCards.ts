@@ -1,6 +1,6 @@
-import { CardLevel, CardsByLevel } from "@/types"
-import { createCardsByLevelCollection } from "@/helpers/createEntity"
-import { CARDS_PER_LEVEL } from "@/constants"
+import { CardLevel, CardsByLevel } from '@/types'
+import { createCardsByLevelCollection } from '@/helpers/createEntity'
+import { CARDS_PER_LEVEL } from '@/constants'
 
 export function dealCards(decks: CardsByLevel, boardCards = createCardsByLevelCollection()): [decks: CardsByLevel, boardCards: CardsByLevel] {
   for(const key in decks) {

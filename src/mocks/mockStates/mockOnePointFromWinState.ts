@@ -1,6 +1,6 @@
-import { DEFAULT_NAMES } from "@/constants";
-import { createCardsByLevelCollection, createPlayer, createTokensCollection, dealCards, generateAristocrats, generateBank, generateDecks, shuffleDecks, transfer } from "@/helpers";
-import { BasicColor, CardData, CardLevel, CardsByLevel, Player, Store, Tokens } from "@/types";
+import { DEFAULT_NAMES } from '@/constants';
+import { createCardsByLevelCollection, createPlayer, createTokensCollection, dealCards, generateAristocrats, generateBank, generateDecks, shuffleDecks, transfer } from '@/helpers';
+import { BasicColor, CardData, CardLevel, CardsByLevel, Player, Store, Tokens } from '@/types';
 
 const COLLECTED_CARDS_LEVEL: CardLevel = 3
 const COLLECTED_CARD_IDS = [77, 80, 81] // 14 points in total
