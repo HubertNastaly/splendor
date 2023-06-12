@@ -57,7 +57,7 @@ function pickCollectableAristocrats(aristocrats: Aristocrat[]): { collectableAri
   const otherAristocrats: Aristocrat[] = [...aristocrats]
 
   for(const collectableAristocratId of COLLECTABLE_ARISTOCRAT_IDS) {
-    const collectableAristocrat = pickAristocratById(aristocrats, collectableAristocratId)
+    const collectableAristocrat = pickAristocratById(otherAristocrats, collectableAristocratId)
     collectableAristocrats.push(collectableAristocrat)
   }
 
