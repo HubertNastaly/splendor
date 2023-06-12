@@ -1,13 +1,8 @@
-import { COLLECTABLE_ARISTOCRAT_IDS, UNCOLLECTABLE_ARISTOCRAT_ID, mockCollectableAristocratState } from "@/mocks"
-import { toHistory } from "@/utils"
-import { expectAristocratsPoints, renderGame } from "./utils"
-import { ARISTOCRAT_VALUE } from "@/constants"
-import { pickAristocratById } from "./utils/pickAristocratById"
-
-// TODO: mock it globally
-jest.mock('@/envConstants', () => ({
-  MODE: 'test'
-}))
+import { COLLECTABLE_ARISTOCRAT_IDS, UNCOLLECTABLE_ARISTOCRAT_ID, mockCollectableAristocratState } from '@/mocks'
+import { toHistory } from '@/utils'
+import { expectAristocratsPoints, renderGame } from './utils'
+import { ARISTOCRAT_VALUE } from '@/constants'
+import { pickAristocratById } from './utils/pickAristocratById'
 
 describe('aristocrats', () => {
   const state = toHistory(mockCollectableAristocratState())
