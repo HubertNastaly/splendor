@@ -1,11 +1,11 @@
 import { styled } from '@/theme'
-import { CardData, Color } from '@/types'
-import { CardPlaceholder, Column, TokenCounter } from '@/components/common'
+import { BasicColor, CardData } from '@/types'
+import { Column, TokenCounter } from '@/components/common'
 import { CardsPile } from './CardsPile'
 import { CARD_WIDTH } from '@/constants'
 
 interface Props {
-  color: Color
+  color: BasicColor
   cards: CardData[]
   tokensCount: number
   onTokenClick?: () => void
@@ -19,11 +19,7 @@ export const ColorGroup = ({ color, tokensCount, cards, onTokenClick }: Props) =
         count={tokensCount}
         onClick={onTokenClick}
       />
-      {cards.length > 0 ? (
-        <CardsPile cards={cards} />
-      ) : (
-        <CardPlaceholder />
-      )}
+      <CardsPile cards={cards} color={color} />
     </Container>
   )
 }
