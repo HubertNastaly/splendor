@@ -18,7 +18,7 @@ import {
 export function gameReducer (state: Store, action: GameAction): Store {
   switch(action.type) {
     case 'START_GAME': {
-      return startGame(state, action)
+      return startGame(action)
     }
     case 'PICK_TOKEN': {
       return pickToken(state, action)
