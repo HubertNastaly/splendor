@@ -1,8 +1,7 @@
 import { mockInitialState } from '@/mocks'
 import { Color } from '@/types'
-import { pickTokens } from './utils/pickTokens'
-import { expectTokensAmount, renderGame } from './utils'
 import { toHistory } from '@/utils'
+import { expectTokensAmount, renderGame, pickTokens } from './utils'
 
 jest.mock('@/hooks', () => ({
   ...jest.requireActual('@/hooks'),
