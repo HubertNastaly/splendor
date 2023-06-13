@@ -55,9 +55,10 @@ const Container = styled(Panel, {
 })
 
 const TokensGrid = styled('div', {
+  margin: '0 auto',
   flex: 1,
   display: 'grid',
-  gridTemplateColumns: `${TOKEN_SIZE.highResolution}px `.repeat(3),
+  gridTemplateColumns: `${TOKEN_SIZE.highResolution}px `.repeat(2),
   gridAutoRows: TOKEN_SIZE.highResolution,
   gridGap: '$small',
 
