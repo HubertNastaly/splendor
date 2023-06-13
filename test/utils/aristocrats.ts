@@ -1,6 +1,3 @@
-import { screen, fireEvent } from '@testing-library/react'
+import { clickElement } from './common'
 
-export function pickAristocratById(aristocratId: number) {
-  const aristocrat = screen.getByTestId(`aristocrat-${aristocratId}`)
-  fireEvent.click(aristocrat)
-}
+export const pickAristocratById = (aristocratId: number) => clickElement(`aristocrat-${aristocratId}`)

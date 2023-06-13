@@ -1,15 +1,13 @@
-import { fireEvent, screen, within } from '@testing-library/react'
 import { Color } from '@/types'
+import { clickElement } from './common'
 
 export const pickTokens = getManageTokens('bank')
 export const payTokens = getManageTokens('player-panel')
 
-function getManageTokens(areaTestId: string) {
-  return function(tokenColors: Color[]) {
-    const area = within(screen.getByTestId(areaTestId))
+function getManageTokens (areaTestId: string) {
+  return (tokenColors: Color[]) => {
     tokenColors.forEach((color) => {
-      const token = area.getByTestId(`token-${color}`)
-      fireEvent.click(token)
+      clickElement(`token-${color}`, areaTestId)
     })
   }
 }
