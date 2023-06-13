@@ -5,7 +5,7 @@ import { BasicColor, CardData, CardLevel, CardsByLevel, Player, Store, Tokens } 
 const COLLECTED_CARDS_LEVEL: CardLevel = 3
 const COLLECTED_CARD_IDS = [77, 80, 81] // 14 points in total
 
-const MISSING_POINT_CARD_ID = 7
+export const MISSING_POINT_CARD_ID = 7
 const MISSING_POINT_CARD_LEVEL: CardLevel = 1
 
 export function mockOnePointFromWinState(): Store {

@@ -28,6 +28,7 @@ export const TurnPanel = ({ className }: Props) => {
       {players.map((player, index) => (
         <PlayerInfo
           key={`player-info-${index}`}
+          data-testid={index === currentPlayerIndex ? 'current-player-info' : `player-info-${player.name}`}
           justify="spaceBetween"
           currentPlayer={index === currentPlayerIndex}
           currentWinner={index === currentWinnerIndex}
