@@ -1,15 +1,16 @@
 import { styled } from '@/theme'
-import { CardData } from '@/types'
-import { Card, Column } from '@/components/common'
+import { BasicColor, CardData } from '@/types'
+import { Card, CardPlaceholder, Column } from '@/components/common'
 import { CARD_HEIGHT, CARD_TOPBAR_HEIGHT } from '@/constants'
 
 interface Props {
   cards: CardData[]
+  color: BasicColor
 }
 
-export const CardsPile = ({ cards }: Props) => {
-  return (
-    <Pile gap="none">
+export const CardsPile = ({ cards, color }: Props) => {
+  return cards.length > 0 ? (
+    <Pile gap="none" data-testid={`pile-${color}`}>
       {cards.map((card, index) => (
         <CardStyled
           key={`pile-card-${card.id}`}
@@ -18,6 +19,8 @@ export const CardsPile = ({ cards }: Props) => {
         />
       ))}
     </Pile>
+  ) : (
+    <CardPlaceholder data-testid={`pile-${color}`} />
   )
 }
 

@@ -11,3 +11,8 @@ export function expectAristocratsPoints(expectedPoints: number) {
   const aristocratsPoints = screen.getByTestId('aristocrats-points')
   expect(aristocratsPoints).toHaveTextContent(expectedPoints.toString())
 }
+
+export function expectCurrentPlayer(playerName: string) {
+  const currentPlayerInfo = screen.getByTestId('current-player-info')
+  expect(currentPlayerInfo).toHaveTextContent(playerName)
+}

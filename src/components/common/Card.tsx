@@ -23,7 +23,14 @@ export const Card = ({ card, isSelected, onSelect, className }: Props) => {
   }
 
   return (
-    <Container className={className} color={color} selected={isSelected} clickable={!!onSelect} onClick={withStopPropagation(onSelect)}>
+    <Container
+      className={className}
+      color={color}
+      selected={isSelected}
+      clickable={!!onSelect}
+      onClick={withStopPropagation(onSelect)}
+      data-testid={`card-${card.id}`}
+    >
       <TopSection>
         <TopSectionBackground />
         <CardValue>
