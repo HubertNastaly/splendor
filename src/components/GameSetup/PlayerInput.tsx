@@ -12,7 +12,12 @@ export const PlayerInput = ({ name, setName }: Props) => {
   return (
     <Row gap="tiny">
       <MdMan color={iconColor} size={32} />
-      <Input value={name} onChange={event => setName(event.target.value)} placeholder="Player name" />
+      <Input
+        value={name}
+        onChange={event => setName(event.target.value)}
+        placeholder="Player name"
+        data-testid="player-name-input"
+      />
     </Row>
   )
 }
