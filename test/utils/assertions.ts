@@ -1,18 +1,16 @@
-import { within, screen } from '@testing-library/react'
 import { Color } from '@/types'
+import { getAristocratsPoints, getBank, getCurrentPlayerInfo, getPlayerPanel, getTokenCounter } from './getters'
 
 export function expectTokensAmount(containerName: 'bank' | 'player', tokenColor: Color, amount: number) {
-  const container = screen.getByTestId(containerName === 'bank' ? 'bank' : 'player-panel')
-  const tokenCounter = within(container).getByTestId(`token-counter-${tokenColor}`)
+  const container = containerName === 'bank' ? getBank() : getPlayerPanel()
+  const tokenCounter = getTokenCounter(tokenColor, container)
   expect(tokenCounter.textContent).toEqual(amount.toString())
 }
 
 export function expectAristocratsPoints(expectedPoints: number) {
-  const aristocratsPoints = screen.getByTestId('aristocrats-points')
-  expect(aristocratsPoints).toHaveTextContent(expectedPoints.toString())
+  expect(getAristocratsPoints()).toHaveTextContent(expectedPoints.toString())
 }
 
 export function expectCurrentPlayer(playerName: string) {
-  const currentPlayerInfo = screen.getByTestId('current-player-info')
-  expect(currentPlayerInfo).toHaveTextContent(playerName)
+  expect(getCurrentPlayerInfo()).toHaveTextContent(playerName)
 }

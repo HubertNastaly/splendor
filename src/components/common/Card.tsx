@@ -2,7 +2,7 @@ import { CardData, BasicColor } from '@/types';
 import { styled } from '@/theme';
 import { Gem } from './Gem';
 import { withStopPropagation } from '@/utils';
-import { CARD_HEIGHT, CARD_TOPBAR_HEIGHT, CARD_WIDTH } from '@/constants';
+import { CARD_HEIGHT, CARD_TOPBAR_HEIGHT, CARD_WIDTH, testId } from '@/constants';
 
 interface Props {
   card: CardData
@@ -29,7 +29,7 @@ export const Card = ({ card, isSelected, onSelect, className }: Props) => {
       selected={isSelected}
       clickable={!!onSelect}
       onClick={withStopPropagation(onSelect)}
-      data-testid={`card-${card.id}`}
+      data-testid={testId.card(card.id)}
     >
       <TopSection>
         <TopSectionBackground />

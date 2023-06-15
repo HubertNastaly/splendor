@@ -1,3 +1,4 @@
-import { clickElement } from './common'
+import { fireEvent } from '@testing-library/dom'
+import { getAristocrat } from './getters'
 
-export const pickAristocratById = (aristocratId: number) => clickElement(`aristocrat-${aristocratId}`)
+export const pickAristocratById = (aristocratId: number) => fireEvent.click(getAristocrat(aristocratId))

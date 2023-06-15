@@ -5,8 +5,8 @@ export function clickButton(buttonText: string) {
   fireEvent.click(button)
 }
 
-export function clickElement(elementTestId: string, containerTestId?: string) {
-  const container = containerTestId ? within(screen.getByTestId(containerTestId)) : screen
+export function clickElementWithin(elementTestId: string, containerTestId: string) {
+  const container = within(screen.getByTestId(containerTestId))
   const element = container.getByTestId(elementTestId)
   fireEvent.click(element)
 }

@@ -2,6 +2,7 @@ import { getDefaultHistory } from '@/store/defaultState'
 import { clickButton, expectTokensAmount, fillPlayerNames, renderGame } from './utils'
 import { BASIC_COLORS } from '@/types'
 import { screen } from '@testing-library/react'
+import { testId } from '@/constants'
 
 describe('game setup', () => {
   const allPlayersNames = ['Adam', 'Bob', 'Cindy', 'David']
@@ -52,7 +53,7 @@ describe('game setup', () => {
 
     testForEachPlayer((playersNumber) => {
       startGame(playersNumber)
-      const aristocrats = screen.getByTestId('board-aristocrats')
+      const aristocrats = screen.getByTestId(testId.boardAristocrats)
       expect(aristocrats.children.length).toEqual(expectedAristocrats[playersNumber])
     })
   })
