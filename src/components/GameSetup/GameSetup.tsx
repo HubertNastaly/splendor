@@ -6,7 +6,7 @@ import { styled } from '@/theme'
 import { Page, Button, Column } from '@/components/common'
 import { startGameAction } from '@/store/actions'
 import { PredefinedStates } from './PredefinedStates'
-import { MODE } from '@/envConstants'
+import { MODE } from '@/constants/envConstants'
 
 const DEFAULT_NAMES = new Array(MAX_PLAYERS_NUMBER).fill('')
 

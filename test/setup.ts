@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
 
-jest.mock('@/envConstants', () => ({
+jest.mock('@/constants/envConstants', () => ({
   MODE: 'test'
 }))
