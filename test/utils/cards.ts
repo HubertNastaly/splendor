@@ -1,10 +1,11 @@
 import allCards from '@/data/cards.json'
 import { BasicColor } from '@/types'
-import { screen } from '@testing-library/react'
 import { payTokens } from './tokens'
-import { clickButton, clickElement } from './common'
+import { clickButton } from './common'
+import { getCard, getPile } from './getters'
+import { fireEvent } from '@testing-library/dom'
 
-const selectCard = (cardId: number) => clickElement(`card-${cardId}`)
+const selectCard = (cardId: number) => fireEvent.click(getCard(cardId))
 const startCardPurchase = () => clickButton('Buy card')
 const confirmCardPurchase = () => clickButton('Buy')
 
@@ -26,7 +27,7 @@ function payCardPrice(cardId: number) {
 }
 
 function getRequiredTokens(color: BasicColor, cardCost: number) {
-  const pile = screen.getByTestId(`pile-${color}`)
+  const pile = getPile(color)
   const cardsNumber = pile.children.length
   return Math.max(0, cardCost - cardsNumber)
 }

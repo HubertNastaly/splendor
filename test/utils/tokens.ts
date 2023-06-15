@@ -1,13 +1,14 @@
 import { Color } from '@/types'
-import { clickElement } from './common'
+import { clickElementWithin } from './common'
+import { testId } from '@/constants'
 
-export const pickTokens = getManageTokens('bank')
-export const payTokens = getManageTokens('player-panel')
+export const pickTokens = getManageTokens(testId.bank)
+export const payTokens = getManageTokens(testId.playerPanel)
 
 function getManageTokens (areaTestId: string) {
   return (tokenColors: Color[]) => {
     tokenColors.forEach((color) => {
-      clickElement(`token-${color}`, areaTestId)
+      clickElementWithin(testId.token(color), areaTestId)
     })
   }
 }

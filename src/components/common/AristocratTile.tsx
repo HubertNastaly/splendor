@@ -1,5 +1,5 @@
 import { GiQueenCrown } from 'react-icons/gi'
-import { ARISTOCRAT_TILE_SIZE, ARISTOCRAT_VALUE } from '@/constants'
+import { ARISTOCRAT_TILE_SIZE, ARISTOCRAT_VALUE, testId } from '@/constants'
 import { styled } from '@/theme'
 import { Aristocrat, BasicColor } from '@/types'
 import { Column, Row } from './atoms'
@@ -38,7 +38,7 @@ export const AristocratTile = ({ aristocrat }: Props) => {
       justify="spaceBetween"
       outlined={isCollectable}
       onClick={collect}
-      data-testid={`aristocrat-${aristocrat.id}`}
+      data-testid={testId.aristocrat(aristocrat.id)}
     >
       <AristocratValue>
         <GiQueenCrown size={isHighResolution ? 32 : 16} />

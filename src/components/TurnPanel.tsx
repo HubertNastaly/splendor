@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { styled } from '@/theme'
 import { canFinishTurn, getCurrentScore } from '@/helpers'
 import { finishTurnAction } from '@/store/actions'
+import { testId } from '@/constants'
 
 interface Props {
   className?: string
@@ -28,7 +29,7 @@ export const TurnPanel = ({ className }: Props) => {
       {players.map((player, index) => (
         <PlayerInfo
           key={`player-info-${index}`}
-          data-testid={index === currentPlayerIndex ? 'current-player-info' : `player-info-${player.name}`}
+          data-testid={index === currentPlayerIndex ? testId.currentPlayerInfo : testId.playerInfo(player.name)}
           justify="spaceBetween"
           currentPlayer={index === currentPlayerIndex}
           currentWinner={index === currentWinnerIndex}
