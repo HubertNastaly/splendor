@@ -4,7 +4,7 @@ import { styled } from '@/theme'
 import { CardData } from '@/types'
 import { canSelectCard, getSelectedCard } from '@/helpers'
 import { selectCardAction } from '@/store/actions'
-import { testId } from '@/constants'
+import { testIds } from '@/constants'
 
 interface Props {
   className?: string
@@ -29,7 +29,7 @@ export const Board = ({ className }: Props) => {
 
   return (
     <Column className={className}>
-      <Aristocrats gap={{ '@initial': 'small', '@lowResolution': 'tiny' }} justify="start" data-testid={testId.boardAristocrats}>
+      <Aristocrats gap={{ '@initial': 'small', '@lowResolution': 'tiny' }} justify="start" data-testid={testIds.boardAristocrats}>
         {aristocrats.map(aristocrat => (
           <AristocratTile key={`aristocrat-${aristocrat.id}`} aristocrat={aristocrat} />
         ))}

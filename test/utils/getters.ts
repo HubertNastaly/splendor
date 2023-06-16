@@ -1,13 +1,13 @@
 import { screen, within } from '@testing-library/react'
 import { BasicColor, Color } from '@/types';
-import { testId } from '@/constants';
+import { testIds } from '@/constants';
 
-export const getPile = (color: BasicColor) => screen.getByTestId(testId.pile(color))
-export const getPlayersInputs = () => screen.getAllByTestId(testId.playerNameInput)
-export const getAristocratsPoints = () => screen.getByTestId(testId.aristocratsPoints)
-export const getCurrentPlayerInfo = () => screen.getByTestId(testId.currentPlayerInfo)
-export const getBank = () => screen.getByTestId(testId.bank)
-export const getPlayerPanel = () => screen.getByTestId(testId.playerPanel)
-export const getTokenCounter = (color: Color, container: HTMLElement) => within(container).getByTestId(testId.tokenCounter(color))
-export const getAristocrat = (aristocratId: number) => screen.getByTestId(testId.aristocrat(aristocratId))
-export const getCard = (cardId: number) => screen.getByTestId(testId.card(cardId))
+export const getPile = (color: BasicColor) => screen.getByTestId(testIds.pile(color))
+export const getPlayersInputs = () => screen.getAllByTestId(testIds.playerNameInput)
+export const getAristocratsPoints = () => screen.getByTestId(testIds.aristocratsPoints)
+export const getCurrentPlayerInfo = () => screen.getByTestId(testIds.currentPlayerInfo)
+export const getBank = () => screen.getByTestId(testIds.bank)
+export const getPlayerPanel = () => screen.getByTestId(testIds.playerPanel)
+export const getTokenCounter = (color: Color, container: HTMLElement) => within(container).getByTestId(testIds.tokenCounter(color))
+export const getAristocrat = (aristocratId: number) => screen.getByTestId(testIds.aristocrat(aristocratId))
+export const getCard = (cardId: number) => screen.getByTestId(testIds.card(cardId))

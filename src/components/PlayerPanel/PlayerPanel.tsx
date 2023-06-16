@@ -11,7 +11,7 @@ import { payTokenAction, returnTokenAction } from '@/store/actions'
 import { ColorGroup } from './ColorGroup'
 import { GoldGroup } from './GoldGroup'
 import { sumAristocratsPoints, sumCardsPoints } from '@/helpers/score'
-import { testId } from '@/constants'
+import { testIds } from '@/constants'
 
 export const PlayerPanel = () => {
   const dispatch = useAppDispatch()
@@ -31,7 +31,7 @@ export const PlayerPanel = () => {
   const aristocratsPoints = useMemo(() => sumAristocratsPoints(aristocrats), [aristocrats])
 
   return (
-    <Container data-testid={testId.playerPanel}>
+    <Container data-testid={testIds.playerPanel}>
       <TopSection gap="medium" align="start">
         {basicTokensEntries.map(([color, count]) => (
           <ColorGroup
@@ -55,9 +55,9 @@ export const PlayerPanel = () => {
             <FaRegGem size={16} /> 
             <Points>{cardsPoints}</Points>
           </PointsIndicator>
-          <PointsIndicator type="tile" size="large" color="neutral" column data-testid={testId.aristocratsIndicator}>
+          <PointsIndicator type="tile" size="large" color="neutral" column data-testid={testIds.aristocratsIndicator}>
             <GiQueenCrown size={16} />
-            <Points data-testid={testId.aristocratsPoints}>{aristocratsPoints}</Points>
+            <Points data-testid={testIds.aristocratsPoints}>{aristocratsPoints}</Points>
           </PointsIndicator>
         </PointsIndicators>
       </BottomSection>

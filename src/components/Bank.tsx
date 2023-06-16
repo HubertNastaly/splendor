@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { isToCollectDuplicatedThirdToken, isEnoughTokensInBank, canCollectToken  } from '@/helpers'
 import { Column, TokenCounter } from './common'
 import { pickTokenAction } from '@/store/actions'
-import { testId } from '@/constants'
+import { testIds } from '@/constants'
 
 export const Bank = () => {
   const dispatch = useAppDispatch()
@@ -28,7 +28,7 @@ export const Bank = () => {
   const tokenEntries = Object.entries(bank) as [Color, number][]
 
   return (
-    <Column data-testid={testId.bank}>
+    <Column data-testid={testIds.bank}>
       {tokenEntries.map(([color, count]) => (
         <TokenCounter
           key={`token-row-${color}`}

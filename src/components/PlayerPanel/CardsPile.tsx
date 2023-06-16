@@ -1,7 +1,7 @@
 import { styled } from '@/theme'
 import { BasicColor, CardData } from '@/types'
 import { Card, CardPlaceholder, Column } from '@/components/common'
-import { CARD_HEIGHT, CARD_TOPBAR_HEIGHT, testId } from '@/constants'
+import { CARD_HEIGHT, CARD_TOPBAR_HEIGHT, testIds } from '@/constants'
 
 interface Props {
   cards: CardData[]
@@ -10,7 +10,7 @@ interface Props {
 
 export const CardsPile = ({ cards, color }: Props) => {
   return cards.length > 0 ? (
-    <Pile gap="none" data-testid={testId.pile(color)}>
+    <Pile gap="none" data-testid={testIds.pile(color)}>
       {cards.map((card, index) => (
         <CardStyled
           key={`pile-card-${card.id}`}
@@ -20,7 +20,7 @@ export const CardsPile = ({ cards, color }: Props) => {
       ))}
     </Pile>
   ) : (
-    <CardPlaceholder data-testid={testId.pile(color)} />
+    <CardPlaceholder data-testid={testIds.pile(color)} />
   )
 }
 

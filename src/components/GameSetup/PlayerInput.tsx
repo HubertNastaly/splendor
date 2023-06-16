@@ -1,7 +1,7 @@
 import { MdMan } from 'react-icons/md'
 import { styled } from '@/theme'
 import { Row } from '@/components/common'
-import { testId } from '@/constants'
+import { testIds } from '@/constants'
 
 interface Props {
   name: string
@@ -17,7 +17,7 @@ export const PlayerInput = ({ name, setName }: Props) => {
         value={name}
         onChange={event => setName(event.target.value)}
         placeholder="Player name"
-        data-testid={testId.playerNameInput}
+        data-testid={testIds.playerNameInput}
       />
     </Row>
   )
