@@ -1,6 +1,6 @@
 import { Color } from '@/types';
 
-export const testId = {
+export const testIds = {
   bank: 'bank',
   boardAristocrats: 'board-aristocrats',
   currentPlayerInfo: 'current-player-info',
