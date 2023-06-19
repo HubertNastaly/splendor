@@ -1,11 +1,11 @@
+import { fireEvent } from '@testing-library/dom'
 import allCards from '@/data/cards.json'
 import { BasicColor } from '@/types'
 import { payTokens } from './tokens'
 import { clickButton } from './common'
 import { getCard, getPile } from './getters'
-import { fireEvent } from '@testing-library/dom'
 
-const selectCard = (cardId: number) => fireEvent.click(getCard(cardId))
+export const selectCard = (cardId: number) => fireEvent.click(getCard(cardId))
 const startCardPurchase = () => clickButton('Buy card')
 const confirmCardPurchase = () => clickButton('Buy')
 

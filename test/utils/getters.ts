@@ -43,6 +43,11 @@ export const getBoardAristocratsWithin = (container: HTMLElement) => within(cont
 export const queryBoardAristocrats = () => screen.queryByTestId('board-aristocrats')
 export const queryBoardAristocratsWithin = (container: HTMLElement) => within(container).queryByTestId('board-aristocrats')
 
+export const getBoardCards = () => screen.getByTestId('board-cards')
+export const getBoardCardsWithin = (container: HTMLElement) => within(container).getByTestId('board-cards')
+export const queryBoardCards = () => screen.queryByTestId('board-cards')
+export const queryBoardCardsWithin = (container: HTMLElement) => within(container).queryByTestId('board-cards')
+
 export const getCurrentPlayerInfo = () => screen.getByTestId('current-player-info')
 export const getCurrentPlayerInfoWithin = (container: HTMLElement) => within(container).getByTestId('current-player-info')
 export const queryCurrentPlayerInfo = () => screen.queryByTestId('current-player-info')
