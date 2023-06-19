@@ -33,4 +33,3 @@ export const ARISTOCRAT_TILE_SIZE: ElementSize = {
   lowResolution: 80,
   highResolution: 128
 }
-

@@ -1,5 +1,5 @@
 import { DEFAULT_NAMES } from '@/constants';
-import { createCardsByLevelCollection, createPlayer, createTokensCollection, dealCards, generateAristocrats, generateBank, generateDecks, shuffleDecks, transfer } from '@/helpers';
+import { createCardsByLevelCollection, createPlayer, createTokensCollection, dealCards, generateAristocrats, generateBank, generateDecks, pickCardFromDeck, shuffleDecks, transfer } from '@/helpers';
 import { BasicColor, CardData, CardLevel, CardsByLevel, Player, Store, Tokens } from '@/types';
 
 const COLLECTED_CARDS_LEVEL: CardLevel = 3
@@ -9,9 +9,8 @@ export const MISSING_POINT_CARD_ID = 7
 const MISSING_POINT_CARD_LEVEL: CardLevel = 1
 
 export function mockOnePointFromWinState(): Store {
-  const playersNumber = DEFAULT_NAMES.length
-  const bank = generateBank(playersNumber)
   const players = DEFAULT_NAMES.map(createPlayer)
+  const bank = generateBank(players.length)
   const favourizedPlayer = players[0]
 
   const decksByLevel = shuffleDecks(generateDecks())
@@ -28,24 +27,13 @@ export function mockOnePointFromWinState(): Store {
   return {
     decksByLevel,
     boardCardsByLevel,
-    aristocrats: generateAristocrats(playersNumber),
+    aristocrats: generateAristocrats(players.length),
     bank,
     players,
     gameState: { type: 'started' },
     currentPlayerIndex: 0,
     purchaseTokens: createTokensCollection()
   }
-}
-
-function pickCardFromDeck(deck: CardData[], cardId: number) {
-  const pickedCardIndex = deck.findIndex(({ id }) => id === cardId)
-  if(pickedCardIndex === -1) {
-    throw new Error('Card with given id not found in deck')
-  }
-  const pickedCard = deck[pickedCardIndex]
-  deck.splice(pickedCardIndex, 1)
-
-  return pickedCard
 }
 
 function pickCollectedCards(decksByLevel: CardsByLevel) {

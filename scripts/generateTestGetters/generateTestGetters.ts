@@ -3,7 +3,7 @@ import { printImport } from './utils'
 import { generateGettersWithArgs } from './generateGettersWithArgs'
 import { generateNoArgGetters } from './generateNoArgGetters'
 
-const OUTPUT_FILE_PATH = 'test/utils/generated.ts'
+const OUTPUT_FILE_PATH = 'test/utils/getters.ts'
 const WARNING = '// WARNING: This file is generated. Do not modify it manually.\n'
 
 export function generateTestGetters() {
@@ -11,7 +11,7 @@ export function generateTestGetters() {
 
   stream.write(WARNING)
   stream.write('\n')
-  stream.write(printImport('screen', '@testing-library/react'))
+  stream.write(printImport(['screen', 'within'], '@testing-library/react'))
 
   generateGettersWithArgs(stream)
   generateNoArgGetters(stream)

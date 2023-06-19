@@ -3,6 +3,7 @@ import { Color } from '@/types';
 export const testIds = {
   bank: 'bank',
   boardAristocrats: 'board-aristocrats',
+  boardCards: 'board-cards',
   currentPlayerInfo: 'current-player-info',
   playerInfo: (name: string) => `player-info-${name}`,
   aristocrat: (aristocratId: number) => `aristocrat-${aristocratId}`,
@@ -13,5 +14,5 @@ export const testIds = {
   pile: (color: Color) => `pile-${color}`,
   playerPanel: 'player-panel',
   aristocratsIndicator: 'aristocrats-indicator',
-  aristocratsPoints: 'aristocrats-points' 
+  aristocratsPoints: 'aristocrats-points'
 } as const

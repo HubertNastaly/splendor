@@ -34,7 +34,7 @@ export const Board = ({ className }: Props) => {
           <AristocratTile key={`aristocrat-${aristocrat.id}`} aristocrat={aristocrat} />
         ))}
       </Aristocrats>
-      <Grid>
+      <Grid data-testid={testIds.boardCards}>
         {allCards.map((card, index) => card ? (
           <Card
             key={`card-${index}`}

@@ -10,9 +10,13 @@ interface GetterWithArgsEntry {
   testId: string
 }
 
-const printGetterWithArgs = ({ propertyName, functionArguments, testId }: GetterWithArgsEntry) => `export const get${toPascalCase(propertyName)} = ${functionArguments} => screen.getByTestId(${testId})\n`
+const printGetterWithArgs = ({ propertyName, functionArguments, testId }: GetterWithArgsEntry) => `export const get${toPascalCase(propertyName)} = (${functionArguments}) => screen.getByTestId(${testId})\n`
+const printGetterWithArgsWithin = ({ propertyName, functionArguments, testId }: GetterWithArgsEntry) => 
+  `export const get${toPascalCase(propertyName)}Within = (${functionArguments}, container: HTMLElement) => within(container).getByTestId(${testId})\n`
 
-const printQueryWithArgs = ({ propertyName, functionArguments, testId }: GetterWithArgsEntry) => `export const query${toPascalCase(propertyName)} = ${functionArguments} => screen.queryByTestId(${testId})\n`
+const printQueryWithArgs = ({ propertyName, functionArguments, testId }: GetterWithArgsEntry) => `export const query${toPascalCase(propertyName)} = (${functionArguments}) => screen.queryByTestId(${testId})\n`
+const printQueryWithArgsWithin = ({ propertyName, functionArguments, testId }: GetterWithArgsEntry) =>
+  `export const query${toPascalCase(propertyName)}Within = (${functionArguments}, container: HTMLElement) => within(container).queryByTestId(${testId})\n`
 
 export function generateGettersWithArgs(stream: fs.WriteStream) {
   const gettersWithArgs = fs.readFileSync(SOURCE_FILE_PATH).toString().split('\n').filter(line => line.includes('=>'))
@@ -32,12 +36,14 @@ export function generateGettersWithArgs(stream: fs.WriteStream) {
     })
   }
 
-  missingTypes.forEach(missingType => stream.write(printImport(missingType, '@/types')))
+  stream.write(printImport(missingTypes, '@/types'))
   stream.write('\n')
 
   getterEntries.forEach(entry => {
     stream.write(printGetterWithArgs(entry))
+    stream.write(printGetterWithArgsWithin(entry))
     stream.write(printQueryWithArgs(entry))
+    stream.write(printQueryWithArgsWithin(entry))
     stream.write('\n')
   })
 }
@@ -46,13 +52,12 @@ function lineToGetterEntry (line: string): GetterWithArgsEntry {
   const semicolonIndex = line.indexOf(':')
   const propertyName = line.slice(0, semicolonIndex).trimStart()
   const functionDeclaration = line.slice(semicolonIndex +1).trimStart().replace(',', '')
-  const [functionArguments, testId] = functionDeclaration.split(' => ')
+  const [functionArguments, testId] = functionDeclaration.replaceAll(/[()]/g, '').split(' => ')
 
   return { propertyName, functionArguments, testId }
 }
 
 const retrieveArgumentsTypes = (argumentsString: string) => argumentsString
-  .replaceAll(/[()]/g, '')
   .split(/[:,]/)
   .filter((_, index) => index % 2 === 1)
   .map(name => name.trimStart())
