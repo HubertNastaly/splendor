@@ -25,6 +25,11 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "test"],
+  "include": ["src", "test", "scripts"],
   "references": [{ "path": "./tsconfig.node.json" }],
+  "ts-node": {
+    "esm": true,
+    "require": ["tsconfig-paths/register"],
+    "experimentalSpecifierResolution": "node"
+  }
 }

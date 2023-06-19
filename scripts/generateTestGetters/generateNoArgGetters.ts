@@ -1,6 +1,7 @@
 import fs from 'fs'
 // TODO: resolve absolute path
-import { testIds } from '@/constants'
+// eslint-disable-next-line no-restricted-imports
+import { testIds } from '../../src/constants'
 import { toPascalCase } from './utils'
 
 type TestIdKey = keyof typeof testIds
