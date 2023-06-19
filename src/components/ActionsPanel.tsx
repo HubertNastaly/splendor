@@ -1,8 +1,9 @@
 import { styled } from '@/theme'
-import { Button, Column } from './common'
 import { useAppDispatch } from '@/store/hooks'
 import { useCurrentPlayer } from '@/hooks'
 import { reserveCardAction, startPurchaseAction } from '@/store/actions'
+import { canReserveCard } from '@/helpers'
+import { Button, Column } from './common'
 
 interface Props {
   className?: string
@@ -10,7 +11,8 @@ interface Props {
 
 export const ActionsPanel = ({ className }: Props) => {
   const dispatch = useAppDispatch()
-  const { movePhase, reservedCards } = useCurrentPlayer()
+  const currentPlayer = useCurrentPlayer()
+  const { movePhase } = currentPlayer
   const shouldShowActionsPanel = movePhase.type === 'CARD_SELECTED'
 
   if(!shouldShowActionsPanel) {
@@ -22,7 +24,8 @@ export const ActionsPanel = ({ className }: Props) => {
   const reserveCard = () => dispatch(reserveCardAction(selectedCard))
   const startPurchase = () => dispatch(startPurchaseAction(selectedCard))
 
-  const reserveCardDisabled = reservedCards.some(card => card.id === selectedCard.card.id)
+  const isReservedCardSelected = currentPlayer.reservedCards.some(card => card.id === selectedCard.card.id)
+  const reserveCardDisabled = isReservedCardSelected || !canReserveCard(currentPlayer)
   
   return (
     <Container className={className} gap="tiny">

@@ -31,7 +31,7 @@ export const GoldGroup = ({ goldCount, reservedCards, onGoldClick }: Props) => {
           <Card
             key={`reserved-card-${index}`}
             card={card}
-            isSelected={!!getSelectedCard(currentPlayer)}
+            isSelected={getSelectedCard(currentPlayer)?.card.id === card.id}
             onSelect={() => selectCard(card)}
           />
         ))}

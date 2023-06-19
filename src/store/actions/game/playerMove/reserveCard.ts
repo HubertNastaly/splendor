@@ -1,4 +1,4 @@
-import { pickCardFromBoard, transfer } from '@/helpers';
+import { canReserveCard, pickCardFromBoard, transfer } from '@/helpers';
 import { SelectedCard, Store } from '@/types';
 import { clone } from '@/utils';
 import { createAction } from '@reduxjs/toolkit';
@@ -10,7 +10,7 @@ export function reserveCard(state: Store, { payload: { reservedCard }}: ReserveC
   const { players, boardCardsByLevel, bank } = clone(state)
   const currentPlayer = players[state.currentPlayerIndex]
 
-  if(currentPlayer.movePhase.type !== 'CARD_SELECTED') {
+  if(!canReserveCard(currentPlayer)) {
     throw new Error('No card selected')
   }
 

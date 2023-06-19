@@ -1,9 +1,12 @@
 import { DEFAULT_NAMES } from '@/constants';
 import { createCardsByLevelCollection, createPlayer, createTokensCollection, dealCards, generateAristocrats, generateBank, generateDecks, pickCardFromDeck, shuffleDecks } from '@/helpers';
-import { CardLevel, Store } from '@/types';
+import { CARD_LEVELS, CardLevel, Store } from '@/types';
 
-export const RESERVATION_TARGET_CARD_ID = 0
-const RESERVATION_TARGET_CARD_LEVEL: CardLevel = 1
+export const BOARD_CARDS_IDS: Record<CardLevel, number[]> = {
+  1: [0, 8, 16, 24],
+  2: [40, 46, 52, 58],
+  3: [70, 74, 78, 82]
+} 
 
 export function mockReservationTargetCardState(): Store {
   const players = DEFAULT_NAMES.map(createPlayer)
@@ -11,8 +14,12 @@ export function mockReservationTargetCardState(): Store {
   const boardCardsByLevel = createCardsByLevelCollection()
   const decksByLevel = shuffleDecks(generateDecks())
 
-  const targetCard = pickCardFromDeck(decksByLevel[RESERVATION_TARGET_CARD_LEVEL], RESERVATION_TARGET_CARD_ID)
-  boardCardsByLevel[RESERVATION_TARGET_CARD_LEVEL].push(targetCard)
+  for(const level of CARD_LEVELS) {
+    for(const cardId of BOARD_CARDS_IDS[level]) {
+      const card = pickCardFromDeck(decksByLevel[level], cardId)
+      boardCardsByLevel[level].push(card)
+    }
+  }
 
   dealCards(decksByLevel, boardCardsByLevel)
 
