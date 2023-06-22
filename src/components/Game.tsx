@@ -5,7 +5,7 @@ import { Tabletop } from './Tabletop'
 export const Game = () => {
   const gameState = useAppSelector(({ gameState }) => gameState)
 
-  switch(gameState.type) {
+  switch(gameState) {
     case 'setup':
       return <GameSetup />
     case 'started':

@@ -9,7 +9,7 @@ export const mockInitialState = (): Store => ({
   aristocrats: generateAristocrats(playersNumber),
   bank: generateBank(playersNumber),
   players: DEFAULT_NAMES.map(createPlayer),
-  gameState: { type: 'started' },
+  gameState: 'started',
   currentPlayerIndex: 0,
   purchaseTokens: createTokensCollection()
 })

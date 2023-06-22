@@ -14,15 +14,14 @@ export function finishTurn(state: Store): Store {
   const currentPlayer = players[currentPlayerIndex]
   currentPlayer.movePhase = { type: 'NONE' }
 
-  const nextPlayerIndex = (currentPlayerIndex + 1) % players.length
-  const gameState = getGameState(state.gameState, currentPlayer, currentPlayerIndex, nextPlayerIndex)
+  const gameState = getGameState(state.gameState, currentPlayer, currentPlayerIndex, players.length)
 
   return {
     ...state,
     gameState,
     ...fillBoard(state),
     players,
-    currentPlayerIndex: nextPlayerIndex,
+    currentPlayerIndex: (currentPlayerIndex + 1) % players.length,
   }
 }
 
@@ -62,15 +61,15 @@ function findEmptyPlace(boardCards: NullableCardsByLevel): [CardLevel, number] |
   }
 }
 
-function getGameState(currentGameState: GameState, currentPlayer: Player, currentPlayerIndex: number, nextPlayerIndex: number): GameState {
-  switch(currentGameState.type) {
+function getGameState(currentGameState: GameState, currentPlayer: Player, currentPlayerIndex: number, playersNumber: number): GameState {
+  switch(currentGameState) {
     case 'started': {
-      const shouldStartLastRound = calculateScore(currentPlayer) >= ENDING_GAME_SCORE
-      return shouldStartLastRound ? { type: 'lastRound', endingPlayerIndex: currentPlayerIndex } : currentGameState
+      const pointsThresholdReached = calculateScore(currentPlayer) >= ENDING_GAME_SCORE
+      return pointsThresholdReached ? 'lastRound' : currentGameState
     }
     case 'lastRound': {
-      const shouldEndGame = nextPlayerIndex === currentGameState.endingPlayerIndex
-      return shouldEndGame ? { type: 'ended' } : currentGameState
+      const isLastPlayer = currentPlayerIndex === playersNumber - 1
+      return isLastPlayer ? 'ended' : currentGameState
     }
     default:
       return currentGameState

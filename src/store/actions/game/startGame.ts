@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { GameState, Store } from '@/types'
+import { Store } from '@/types'
 import { createTokensCollection, generateAristocrats, generateBank, generateBoard, generatePlayers } from '@/helpers'
 
 export const startGameAction = createAction('START_GAME', (names: string[]) => ({ payload: { names }}))
@@ -10,7 +10,6 @@ export function startGame({ payload: { names }}: StartGameAction): Store {
   const { decksByLevel, boardCardsByLevel } = generateBoard()
   const aristocrats = generateAristocrats(players.length)
   const bank = generateBank(players.length)
-  const gameState: GameState = { type: 'started' }
   const purchaseTokens = createTokensCollection()
 
   return {
@@ -20,7 +19,7 @@ export function startGame({ payload: { names }}: StartGameAction): Store {
     boardCardsByLevel,
     bank,
     purchaseTokens,
-    gameState,
+    gameState: 'started',
     currentPlayerIndex: 0
   }
 }
