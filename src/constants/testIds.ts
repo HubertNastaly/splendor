@@ -14,5 +14,6 @@ export const testIds = {
   pile: (color: Color) => `pile-${color}`,
   playerPanel: 'player-panel',
   aristocratsIndicator: 'aristocrats-indicator',
-  aristocratsPoints: 'aristocrats-points'
+  aristocratsPoints: 'aristocrats-points',
+  purchasePanel: 'purchase-panel'
 } as const

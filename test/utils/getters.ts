@@ -73,3 +73,8 @@ export const getAristocratsPointsWithin = (container: HTMLElement) => within(con
 export const queryAristocratsPoints = () => screen.queryByTestId('aristocrats-points')
 export const queryAristocratsPointsWithin = (container: HTMLElement) => within(container).queryByTestId('aristocrats-points')
 
+export const getPurchasePanel = () => screen.getByTestId('purchase-panel')
+export const getPurchasePanelWithin = (container: HTMLElement) => within(container).getByTestId('purchase-panel')
+export const queryPurchasePanel = () => screen.queryByTestId('purchase-panel')
+export const queryPurchasePanelWithin = (container: HTMLElement) => within(container).queryByTestId('purchase-panel')
+
