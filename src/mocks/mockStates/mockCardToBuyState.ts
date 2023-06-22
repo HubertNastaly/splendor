@@ -11,14 +11,13 @@ import {
   shuffleDecks,
   transfer
 } from '@/helpers';
-import { BASIC_COLORS, CardData, CardLevel, Store } from '@/types';
+import { BASIC_COLORS, CardData, Store } from '@/types';
+import { CardLocation, FIXED_BOARD_CARDS_IDS } from './fixedBoardCards';
 
-interface CardLocation {
-  level: CardLevel
-  id: number
+export const PURCHASE_TARGET_CARD: CardLocation = {
+  level: 2,
+  id: FIXED_BOARD_CARDS_IDS[2][1]
 }
-
-export const PURCHASE_TARGET_CARD: CardLocation = { level: 2, id: 49 }
 
 export function mockCardToBuyState(): Store {
   const decksByLevel = shuffleDecks(generateDecks())

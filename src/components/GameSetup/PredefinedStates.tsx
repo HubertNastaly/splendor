@@ -1,5 +1,13 @@
 import { Button, Column } from '@/components/common'
-import { mockOnePointFromWinState, mockCollectableAristocratState, mockInitialState, mockReservationTargetCardState, mockMaxReservedCardsState, mockCardToBuyState } from '@/mocks'
+import {
+  mockOnePointFromWinState,
+  mockCollectableAristocratState,
+  mockInitialState,
+  mockReservationTargetCardState,
+  mockMaxReservedCardsState,
+  mockCardToBuyState,
+  mockPlayerWithCardState
+} from '@/mocks'
 import { loadStateAction } from '@/store/actions'
 import { useAppDispatch } from '@/store/hooks'
 import { Store } from '@/types'
@@ -17,7 +25,8 @@ const PREDEFINED_STATES = [
   predefinedState('One point from win', mockOnePointFromWinState),
   predefinedState('Fixed card to reserve', mockReservationTargetCardState),
   predefinedState('Max reserved cards', mockMaxReservedCardsState),
-  predefinedState('Before card purchase', mockCardToBuyState)
+  predefinedState('Before card purchase', mockCardToBuyState),
+  predefinedState('Player with card', mockPlayerWithCardState)
 ]
 
 export const PredefinedStates = () => {
