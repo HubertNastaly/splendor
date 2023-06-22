@@ -1,8 +1,8 @@
-import { BASIC_COLORS, CardsByColor, Tokens } from '@/types';
+import { BASIC_COLORS, CardPrice, CardsByColor, Tokens } from '@/types';
 import { sum } from '@/utils';
 import { createTokensCollection } from '..';
 
-export function isCardPriceFulfilled(playerCards: CardsByColor, purchaseTokens: Tokens, cardPrice: Tokens) {
+export function isCardPriceFulfilled(playerCards: CardsByColor, purchaseTokens: Tokens, cardPrice: CardPrice) {
   const reducedPrice = createTokensCollection()
 
   // use cards gems

@@ -1,15 +1,17 @@
-import { BasicColor, Tokens } from './color'
+import { BasicColor } from './color'
 
 export const CARD_LEVELS = [1, 2, 3] as const
 
 export type CardLevel = typeof CARD_LEVELS[number]
+
+export type CardPrice = Record<BasicColor, number>
 
 export interface CardData {
   id: number
   level: CardLevel,
   color: BasicColor,
   value: number,
-  price: Tokens
+  price: CardPrice
 }
 
 export type CardsByLevel = Record<CardLevel, CardData[]>

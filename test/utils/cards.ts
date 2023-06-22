@@ -1,27 +1,33 @@
 import { fireEvent } from '@testing-library/dom'
 import allCards from '@/data/cards.json'
-import { BasicColor } from '@/types'
+import { BasicColor, CardPrice } from '@/types'
 import { payTokens } from './tokens'
 import { clickButton } from './common'
 import { getCard, getPile } from './getters'
 
 export const selectCard = (cardId: number) => fireEvent.click(getCard(cardId))
-const startCardPurchase = () => clickButton('Buy card')
+export const startCardPurchase = () => clickButton('Buy card')
 const confirmCardPurchase = () => clickButton('Buy')
 
-function payCardPrice(cardId: number) {
-  const cardData = allCards.find(({ id }) => id === cardId)
-  if(!cardData) {
-    throw new Error('Invalid card ID')
-  }
-
-  const { price } = cardData
+export function cardPriceToTokensArray(price: CardPrice) {
   const requiredTokens: BasicColor[] = []
   for(const key in price) {
     const color = key as BasicColor
     const requiredTokensAmount = getRequiredTokens(color, price[color])
     requiredTokens.push(...new Array(requiredTokensAmount).fill(color))
   }
+
+  return requiredTokens
+}
+
+export function payCardPrice(cardId: number) {
+  const cardData = allCards.find(({ id }) => id === cardId)
+  if(!cardData) {
+    throw new Error('Invalid card ID')
+  }
+
+  const { price } = cardData
+  const requiredTokens = cardPriceToTokensArray(price)
 
   payTokens(requiredTokens)
 }
