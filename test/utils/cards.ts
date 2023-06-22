@@ -9,11 +9,11 @@ export const selectCard = (cardId: number) => fireEvent.click(getCard(cardId))
 export const startCardPurchase = () => clickButton('Buy card')
 const confirmCardPurchase = () => clickButton('Buy')
 
-export function cardPriceToTokensArray(price: CardPrice) {
+export function getRequiredTokens(price: CardPrice) {
   const requiredTokens: BasicColor[] = []
   for(const key in price) {
     const color = key as BasicColor
-    const requiredTokensAmount = getRequiredTokens(color, price[color])
+    const requiredTokensAmount = reducePriceByCards(color, price[color])
     requiredTokens.push(...new Array(requiredTokensAmount).fill(color))
   }
 
@@ -27,12 +27,12 @@ export function payCardPrice(cardId: number) {
   }
 
   const { price } = cardData
-  const requiredTokens = cardPriceToTokensArray(price)
+  const requiredTokens = getRequiredTokens(price)
 
   payTokens(requiredTokens)
 }
 
-function getRequiredTokens(color: BasicColor, cardCost: number) {
+function reducePriceByCards(color: BasicColor, cardCost: number) {
   const pile = getPile(color)
   const cardsNumber = pile.children.length
   return Math.max(0, cardCost - cardsNumber)

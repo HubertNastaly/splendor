@@ -15,6 +15,10 @@ export function expectCurrentPlayer(playerName: string) {
   expect(getCurrentPlayerInfo()).toHaveTextContent(playerName)
 }
 
+export function expectCurrentPlayerScore(score: number) {
+  expect(getCurrentPlayerInfo()).toHaveTextContent(score.toString())
+}
+
 export function expectCardInPlayerPanel(cardId: number) {
   const playerPanel = getPlayerPanel()
   const card = getCardWithin(cardId, playerPanel)
