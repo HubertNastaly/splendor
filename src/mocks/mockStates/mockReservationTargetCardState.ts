@@ -31,6 +31,6 @@ export function mockReservationTargetCardState(): Store {
     boardCardsByLevel,
     aristocrats: generateAristocrats(players.length),
     purchaseTokens: createTokensCollection(),
-    gameState: { type: 'started' }
+    gameState: 'started'
   }
 }

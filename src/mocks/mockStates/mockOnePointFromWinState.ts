@@ -30,7 +30,7 @@ export function mockOnePointFromWinState(): Store {
     aristocrats: generateAristocrats(players.length),
     bank,
     players,
-    gameState: { type: 'started' },
+    gameState: 'started',
     currentPlayerIndex: 0,
     purchaseTokens: createTokensCollection()
   }

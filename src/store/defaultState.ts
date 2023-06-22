@@ -7,7 +7,7 @@ export const getDefaultState = (): Store => ({
   boardCardsByLevel: createCardsByLevelCollection(),
   aristocrats: [],
   bank: createTokensCollection(),
-  gameState: { type: 'setup' },
+  gameState: 'setup',
   players: [],
   currentPlayerIndex: 0,
   purchaseTokens: createTokensCollection()

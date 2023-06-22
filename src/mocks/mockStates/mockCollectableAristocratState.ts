@@ -38,7 +38,7 @@ export function mockCollectableAristocratState(): Store {
     aristocrats,
     bank: generateBank(players.length),
     players,
-    gameState: { type: 'started' },
+    gameState: 'started',
     currentPlayerIndex: 0,
     purchaseTokens: createTokensCollection()
   }
