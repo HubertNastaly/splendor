@@ -1,4 +1,4 @@
-import { BOARD_CARDS_IDS, mockMaxReservedCardsState, mockReservationTargetCardState } from '@/mocks'
+import { FIXED_BOARD_CARDS_IDS, mockMaxReservedCardsState, mockReservationTargetCardState } from '@/mocks'
 import { clickButton, expectCardInPlayerPanel, expectCardNotInBoard, expectTokensAmount, pickTokens, renderGame, selectCard } from './utils'
 import { screen } from '@testing-library/react'
 import { toHistory } from '@/utils'
@@ -8,7 +8,7 @@ describe('reserve card', () => {
   const state = mockReservationTargetCardState()
   const history = toHistory(state)
 
-  const reservationTargetCardId = BOARD_CARDS_IDS[1][0]
+  const reservationTargetCardId = FIXED_BOARD_CARDS_IDS[1][0]
 
   test('enabled when no other move type has been started', () => {
     renderGame(history)
@@ -76,7 +76,7 @@ describe('reserve card', () => {
     selectCard(reservationTargetCardId)
     clickButton('Reserve card')
 
-    const anotherCardId = BOARD_CARDS_IDS[2][0]
+    const anotherCardId = FIXED_BOARD_CARDS_IDS[2][0]
     selectCard(anotherCardId)
 
     const reserveCardButton = screen.queryByText('Reserve card')

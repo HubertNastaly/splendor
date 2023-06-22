@@ -1,5 +1,5 @@
 import { Button, Panel, Token } from '@/components/common'
-import { TOKEN_SIZE } from '@/constants'
+import { TOKEN_SIZE, testIds } from '@/constants'
 import { isCardPriceFulfilled } from '@/helpers'
 import { cancelPurchaseAction, finalizePurchaseAction } from '@/store/actions'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
@@ -30,7 +30,7 @@ export const PurchasePanel = ({ className }: Props) => {
   const finalizePurchase = () => dispatch(finalizePurchaseAction())
 
   return (
-    <Container className={className}>
+    <Container className={className} data-testid={testIds.purchasePanel}>
       <TokensGrid>
         {tokensArray.map((color, idx) => (
           <Token key={`purchase-token-${idx}`} color={color} />
