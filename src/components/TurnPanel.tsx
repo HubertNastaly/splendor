@@ -1,4 +1,4 @@
-import { useMemo, memo, useDeferredValue } from 'react'
+import { useMemo } from 'react'
 import { Button, Column, Row } from './common'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { styled } from '@/theme'
