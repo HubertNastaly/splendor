@@ -1,16 +1,18 @@
-import { useMemo } from 'react'
+import { useMemo, memo, useDeferredValue } from 'react'
 import { Button, Column, Row } from './common'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { styled } from '@/theme'
 import { canFinishTurn, getCurrentScore } from '@/helpers'
 import { finishTurnAction } from '@/store/actions'
 import { testIds } from '@/constants'
+import { usePreviewPlayer } from '@/providers'
 
 interface Props {
   className?: string
 }
 
 export const TurnPanel = ({ className }: Props) => {
+  const { setPreviewPlayerIndex } = usePreviewPlayer()
   const dispatch = useAppDispatch()
   const { players, aristocrats, currentPlayerIndex } = useAppSelector(({ players, currentPlayerIndex, aristocrats }) => ({
     players,
@@ -21,11 +23,12 @@ export const TurnPanel = ({ className }: Props) => {
 
   const { playersPoints, currentWinnerIndex } = useMemo(() => getCurrentScore(players), [players])
 
+  const stopPlayerPreview = () => setPreviewPlayerIndex(undefined)
   const finishTurn = () => dispatch(finishTurnAction())
   const isFinishTurnDisabled = !canFinishTurn(currentPlayer, aristocrats)
 
   return (
-    <Container align="stretch" gap="none" className={className}>
+    <Container align="stretch" gap="none" className={className} onMouseOut={stopPlayerPreview}>
       {players.map((player, index) => (
         <PlayerInfo
           key={`player-info-${index}`}
@@ -33,6 +36,7 @@ export const TurnPanel = ({ className }: Props) => {
           justify="spaceBetween"
           currentPlayer={index === currentPlayerIndex}
           currentWinner={index === currentWinnerIndex}
+          onMouseOver={() => setPreviewPlayerIndex(index)}
         >
           <span>{player.name}</span>
           <span>{playersPoints[index]}</span>
@@ -54,12 +58,12 @@ const PlayerInfo = styled(Row, {
   '@lowResolution': {
     fontSize: '$small'
   },
+  borderRadius: 4,
 
   variants: {
     currentPlayer: {
       true: {
         border: '1px solid black',
-        borderRadius: 4
       }
     },
     currentWinner: {
@@ -67,6 +71,10 @@ const PlayerInfo = styled(Row, {
         color: '$pink'
       }
     }
+  },
+
+  '&:hover': {
+    background: '$white'
   }
 })
 

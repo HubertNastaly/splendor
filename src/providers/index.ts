@@ -1,2 +1,2 @@
-export * from './ResolutionProvider'
-export * from './ResolutionContext'
+export * from './resolutionProvider'
+export * from './previewPlayerProvider'

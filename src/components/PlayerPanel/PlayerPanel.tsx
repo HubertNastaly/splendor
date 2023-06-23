@@ -1,30 +1,31 @@
 import { useMemo } from 'react'
 import { GiQueenCrown } from 'react-icons/gi'
 import { FaRegGem } from 'react-icons/fa'
-import { useCurrentPlayer } from '@/hooks'
 import { PointsIndicator, Panel, Row, Separator } from '@/components/common'
 import { useAppDispatch } from '@/store/hooks'
 import { BasicColor, Color } from '@/types'
 import { canPayToken, isOverTokensLimit } from '@/helpers'
 import { styled } from '@/theme'
 import { payTokenAction, returnTokenAction } from '@/store/actions'
-import { ColorGroup } from './ColorGroup'
-import { GoldGroup } from './GoldGroup'
 import { sumAristocratsPoints, sumCardsPoints } from '@/helpers/score'
 import { testIds } from '@/constants'
+import { useDisplayedPlayer } from '@/hooks'
+import { ColorGroup } from './ColorGroup'
+import { GoldGroup } from './GoldGroup'
 
 export const PlayerPanel = () => {
   const dispatch = useAppDispatch()
-  const currentPlayer = useCurrentPlayer()
-  const { tokens: { gold, ...basicTokens }, cards, reservedCards, aristocrats } = currentPlayer
+  const displayedPlayer = useDisplayedPlayer()
+
+  const { tokens: { gold, ...basicTokens }, cards, reservedCards, aristocrats } = displayedPlayer
   const basicTokensEntries = Object.entries(basicTokens) as [BasicColor, number][]
 
   const returnToken = (tokenColor: Color) => dispatch(returnTokenAction(tokenColor))
   const payToken = (tokenColor: Color) => dispatch(payTokenAction(tokenColor))
 
   const getOnTokenClick = (color: Color) =>
-    canPayToken(currentPlayer) ? () => payToken(color) :
-    isOverTokensLimit(currentPlayer) ? () => returnToken(color) :
+    canPayToken(displayedPlayer) ? () => payToken(color) :
+    isOverTokensLimit(displayedPlayer) ? () => returnToken(color) :
     undefined
 
   const cardsPoints = useMemo(() => sumCardsPoints(cards), [cards])
