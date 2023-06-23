@@ -4,6 +4,7 @@ import { testIds } from '@/constants'
 
 export const pickTokens = getManageTokens(testIds.bank)
 export const payTokens = getManageTokens(testIds.playerPanel)
+export const returnTokens = payTokens
 
 function getManageTokens (areaTestId: string) {
   return (tokenColors: Color[]) => {

@@ -6,7 +6,8 @@ import {
   mockReservationTargetCardState,
   mockMaxReservedCardsState,
   mockCardToBuyState,
-  mockPlayerWithCardState
+  mockPlayerWithCardState,
+  mockNearTokensLimitState
 } from '@/mocks'
 import { loadStateAction } from '@/store/actions'
 import { useAppDispatch } from '@/store/hooks'
@@ -26,7 +27,8 @@ const PREDEFINED_STATES = [
   predefinedState('Fixed card to reserve', mockReservationTargetCardState),
   predefinedState('Max reserved cards', mockMaxReservedCardsState),
   predefinedState('Before card purchase', mockCardToBuyState),
-  predefinedState('Player with card', mockPlayerWithCardState)
+  predefinedState('Player with card', mockPlayerWithCardState),
+  predefinedState('Near tokens limit', mockNearTokensLimitState)
 ]
 
 export const PredefinedStates = () => {
