@@ -1,4 +1,4 @@
-import { getDefaultHistory } from '@/store/defaultState'
+import { getDefaultState } from '@/store/defaultState'
 import { clickButton, expectTokensAmount, fillPlayerNames, renderGame } from './utils'
 import { BASIC_COLORS } from '@/types'
 import { screen } from '@testing-library/react'
@@ -9,7 +9,7 @@ describe('game setup', () => {
   const playersNumbers = [2, 3, 4] as const
   type PlayersNumber = typeof playersNumbers[number]
 
-  const state = getDefaultHistory()
+  const state = getDefaultState()
   beforeEach(() => renderGame(state))
 
   function testForEachPlayer(callback: (playersNumber: PlayersNumber) => void) {

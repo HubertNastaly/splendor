@@ -1,17 +1,17 @@
 import allAristocrats from '@/data/aristocrats.json'
 import { DEFAULT_NAMES } from '@/constants';
 import { createPlayer, createTokensCollection, generateBank, generateBoard } from '@/helpers';
-import { Aristocrat, BASIC_COLORS, CARD_LEVELS, CardData, Store } from '@/types';
+import { Aristocrat, BASIC_COLORS, CARD_LEVELS, CardData, MockState, Store } from '@/types';
 import { shuffle } from '@/utils';
 
 // 0: 3 blues, 3 greens, 3 reds
 // 5: 3 blues, 3 greens, 3 whites
-export const COLLECTABLE_ARISTOCRAT_IDS = [0, 5]
+const COLLECTABLE_ARISTOCRAT_IDS = [0, 5]
 
 // 2: 4 whites, 4 blacks
-export const UNCOLLECTABLE_ARISTOCRAT_ID = 2
+const UNCOLLECTABLE_ARISTOCRAT_ID = 2
 
-export function mockCollectableAristocratState(): Store {
+function mockState(): Store {
   const { decksByLevel, boardCardsByLevel } = generateBoard()
   const players = DEFAULT_NAMES.map(createPlayer)
   const aristocrats = generateAristocrats(players.length + 1)
@@ -69,4 +69,13 @@ function pickAristocratById(aristocrats: Aristocrat[], aristocratId: number) {
   const collectableAristocrat = aristocrats[collectableAristocratIndex]
   aristocrats.splice(collectableAristocratIndex, 1)
   return collectableAristocrat
+}
+
+export const mockCollectableAristocratState: MockState & {
+  collectableAristocratsIds: number[],
+  uncollectableAristocratId: number
+} = {
+  mockState,
+  collectableAristocratsIds: COLLECTABLE_ARISTOCRAT_IDS,
+  uncollectableAristocratId: UNCOLLECTABLE_ARISTOCRAT_ID
 }

@@ -1,17 +1,32 @@
 import allCards from '@/data/cards.json'
-import { PURCHASE_TARGET_CARD, mockCardToBuyState, mockPlayerWithCardState } from '@/mocks'
-import { clone, toHistory } from '@/utils'
-import { buyCard, getRequiredTokens, clickButton, expectCardInPlayerPanel, expectCardNotInBoard, expectCurrentPlayerScore, expectTokensAmount, payCardPrice, payTokens, queryPurchasePanel, renderGame, selectCard, startCardPurchase } from './utils'
+import { mockCardToBuyState, mockPlayerWithCardState } from '@/mocks'
+import { clone } from '@/utils'
+import {
+  buyCard,
+  getRequiredTokens,
+  clickButton,
+  expectCardInPlayerPanel,
+  expectCardNotInBoard,
+  expectCurrentPlayerScore,
+  expectTokensAmount,
+  payCardPrice,
+  payTokens,
+  queryPurchasePanel,
+  renderGame,
+  selectCard,
+  startCardPurchase
+} from './utils'
 import { screen } from '@testing-library/react'
 import { BASIC_COLORS, CardData, Color, TOKEN_COLORS, Tokens } from '@/types'
 
 describe('buy card', () => {
-  const state = mockCardToBuyState()
+  const { mockState, purchaseTargetCardId } = mockCardToBuyState
+  const state = mockState()
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const purchaseTargetCard = allCards.find(({ id }) => id === PURCHASE_TARGET_CARD.id)! as CardData
+  const purchaseTargetCard = allCards.find(({ id }) => id === purchaseTargetCardId)! as CardData
 
-  const loadInitialState = () => renderGame(toHistory(state))
+  const loadInitialState = () => renderGame(state)
 
   test('cannot buy with insufficient tokens amount', () => {
     loadInitialState()
@@ -52,8 +67,8 @@ describe('buy card', () => {
   })
 
   test('reduces price by player\'s cards', () => {
-    const state = mockPlayerWithCardState()
-    renderGame(toHistory(state))
+    const state = mockPlayerWithCardState.mockState()
+    renderGame(state)
 
     selectCard(purchaseTargetCard.id)
     startCardPurchase()

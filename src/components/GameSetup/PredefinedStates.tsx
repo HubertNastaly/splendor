@@ -11,14 +11,14 @@ import {
 } from '@/mocks'
 import { loadStateAction } from '@/store/actions'
 import { useAppDispatch } from '@/store/hooks'
-import { Store } from '@/types'
+import { MockState, Store } from '@/types'
 
 interface PredefinedState {
   name: string
   mockState: () => Store
 }
 
-const predefinedState = (name: string, mockState: () => Store): PredefinedState => ({ name, mockState })
+const predefinedState = (name: string, { mockState }: MockState): PredefinedState => ({ name, mockState })
 
 const PREDEFINED_STATES = [
   predefinedState('Initial state', mockInitialState),

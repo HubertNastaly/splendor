@@ -1,15 +1,15 @@
-import { Store } from '@/types';
+import { MockState, Store } from '@/types';
 import { mockCardToBuyState } from './mockCardToBuyState';
 import { CardLocation } from '.';
 import { pickCardFromDeck } from '@/helpers';
 
-export const PLAYER_CARD: CardLocation = {
+const PLAYER_CARD: CardLocation = {
   level: 1,
   id: 26,
 }
 
-export function mockPlayerWithCardState(): Store {
-  const state = mockCardToBuyState()
+function mockState(): Store {
+  const state = mockCardToBuyState.mockState()
   const { decksByLevel, players, currentPlayerIndex } = state
   const currentPlayer = players[currentPlayerIndex]
 
@@ -17,4 +17,9 @@ export function mockPlayerWithCardState(): Store {
   currentPlayer.cards[playerCard.color].push(playerCard)
 
   return { ...state, players, decksByLevel }
+}
+
+export const mockPlayerWithCardState: MockState & { playerCardId: number } = {
+  mockState,
+  playerCardId: PLAYER_CARD.id
 }

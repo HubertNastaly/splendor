@@ -1,18 +1,17 @@
-import { MISSING_POINT_CARD_ID, mockOnePointFromWinState } from '@/mocks'
-import { toHistory } from '@/utils'
-import { buyCard, expectCurrentPlayer, finishTurn, pickTokens, renderGame } from './utils'
 import { screen } from '@testing-library/react'
+import { mockOnePointFromWinState } from '@/mocks'
+import { buyCard, expectCurrentPlayer, finishTurn, pickTokens, renderGame } from './utils'
 
 describe('game end', () => {
-  const state = toHistory(mockOnePointFromWinState())
-  const { present: { state: { players }}} = state
-  const playersNames = players.map(({ name }) => name)
+  const { mockState, missingPointCardId } = mockOnePointFromWinState
+  const state = mockState()
+  const playersNames = state.players.map(({ name }) => name)
 
   beforeEach(() => renderGame(state))
 
   test('game has one more round after points threshold is reached', () => {
     expectCurrentPlayer(playersNames[0])
-    buyCard(MISSING_POINT_CARD_ID)
+    buyCard(missingPointCardId)
     finishTurn()
 
     playersNames.slice(1).forEach(() => {

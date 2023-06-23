@@ -1,8 +1,8 @@
-import { Store, TOKEN_COLORS, Tokens } from '@/types';
-import { mockInitialState } from '.';
+import { MockState, Store, TOKEN_COLORS, Tokens } from '@/types';
+import { mockInitialState } from './mockInitialState';
 import { transfer } from '@/helpers';
 
-export const PLAYER_TOKENS: Tokens = {
+const PLAYER_TOKENS: Tokens = {
   black: 2,
   blue: 2,
   green: 2,
@@ -11,8 +11,8 @@ export const PLAYER_TOKENS: Tokens = {
   gold: 1
 }
 
-export function mockNearTokensLimitState(): Store {
-  const state = mockInitialState()
+function mockState(): Store {
+  const state = mockInitialState.mockState()
   const { players, currentPlayerIndex, bank } = state
   const currentPlayer = players[currentPlayerIndex]
 
@@ -21,4 +21,9 @@ export function mockNearTokensLimitState(): Store {
   }
 
   return { ...state, players, bank }
+}
+
+export const mockNearTokensLimitState: MockState & { playerTokens: Tokens } = {
+  mockState,
+  playerTokens: PLAYER_TOKENS
 }

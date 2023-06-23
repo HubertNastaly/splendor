@@ -11,15 +11,15 @@ import {
   shuffleDecks,
   transfer
 } from '@/helpers';
-import { BASIC_COLORS, CardData, Store } from '@/types';
+import { BASIC_COLORS, CardData, MockState, Store } from '@/types';
 import { CardLocation, FIXED_BOARD_CARDS_IDS } from './fixedBoardCards';
 
-export const PURCHASE_TARGET_CARD: CardLocation = {
+const PURCHASE_TARGET_CARD: CardLocation = {
   level: 2,
   id: FIXED_BOARD_CARDS_IDS[2][1]
 }
 
-export function mockCardToBuyState(): Store {
+function mockState(): Store {
   const decksByLevel = shuffleDecks(generateDecks())
   const boardCardsByLevel = createCardsByLevelCollection()
   const players = generatePlayers(DEFAULT_NAMES)
@@ -48,4 +48,9 @@ export function mockCardToBuyState(): Store {
     purchaseTokens: createTokensCollection(),
     gameState: 'started'
   }
+}
+
+export const mockCardToBuyState: MockState & { purchaseTargetCardId: number } = {
+  mockState,
+  purchaseTargetCardId: PURCHASE_TARGET_CARD.id
 }
