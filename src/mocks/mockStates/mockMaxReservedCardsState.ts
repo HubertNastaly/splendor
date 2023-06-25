@@ -1,18 +1,22 @@
-import { CardData, CardLevel, Store } from '@/types';
-import { mockReservationTargetCardState } from '.';
+import { CardData, MockState, Store } from '@/types';
+import { CardLocation, mockReservationTargetCardState } from '.';
 import { pickCardFromDeck, transfer } from '@/helpers';
 
-const RESERVED_CARD_IDS: [level: CardLevel, cardId: number][] = [[1, 1], [2, 41], [3, 71]]
+const RESERVED_CARD_IDS: CardLocation[] = [
+  { level: 1, id: 1 },
+  { level: 2, id: 41},
+  { level: 3, id: 71}
+]
 
-export function mockMaxReservedCardsState(): Store {
-  const state = mockReservationTargetCardState()
+function mockState(): Store {
+  const state = mockReservationTargetCardState.mockState()
   const { players, currentPlayerIndex, decksByLevel, bank } = state
 
   const currentPlayer = players[currentPlayerIndex]
 
   const reservedCards: CardData[] = []
-  for(const [level, cardId] of RESERVED_CARD_IDS) {
-    reservedCards.push(pickCardFromDeck(decksByLevel[level], cardId))
+  for(const { level, id } of RESERVED_CARD_IDS) {
+    reservedCards.push(pickCardFromDeck(decksByLevel[level], id))
   }
 
   currentPlayer.reservedCards = reservedCards
@@ -25,4 +29,9 @@ export function mockMaxReservedCardsState(): Store {
     bank,
     decksByLevel
   }
+}
+
+export const mockMaxReservedCardsState: MockState & { reservedCardsIds: CardLocation[] } = {
+  mockState,
+  reservedCardsIds: RESERVED_CARD_IDS
 }

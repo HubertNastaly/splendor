@@ -1,17 +1,16 @@
 import { FIXED_BOARD_CARDS_IDS, mockMaxReservedCardsState, mockReservationTargetCardState } from '@/mocks'
 import { clickButton, expectCardInPlayerPanel, expectCardNotInBoard, expectTokensAmount, pickTokens, renderGame, selectCard } from './utils'
 import { screen } from '@testing-library/react'
-import { toHistory } from '@/utils'
 import { Store } from '@/types'
 
 describe('reserve card', () => {
-  const state = mockReservationTargetCardState()
-  const history = toHistory(state)
+  const { mockState } = mockReservationTargetCardState
+  const state = mockState()
 
   const reservationTargetCardId = FIXED_BOARD_CARDS_IDS[1][0]
 
   test('enabled when no other move type has been started', () => {
-    renderGame(history)
+    renderGame(state)
 
     selectCard(reservationTargetCardId)
     const reserveButton = screen.getByText('Reserve card')
@@ -20,7 +19,7 @@ describe('reserve card', () => {
   })
 
   test('disabled when other move type has been started', () => {
-    renderGame(history)
+    renderGame(state)
 
     pickTokens(['red'])
     selectCard(reservationTargetCardId)
@@ -30,7 +29,7 @@ describe('reserve card', () => {
   })
 
   test('moves card to player\'s area', () => {
-    renderGame(history)
+    renderGame(state)
 
     selectCard(reservationTargetCardId)
     clickButton('Reserve card')
@@ -40,7 +39,7 @@ describe('reserve card', () => {
   })
 
   test('grabs one gold token', () => {
-    renderGame(history)
+    renderGame(state)
     const initialGoldBankAmount = state.bank.gold
 
     selectCard(reservationTargetCardId)
@@ -52,7 +51,7 @@ describe('reserve card', () => {
 
   test('can reserve when no gold available', () => {
     const noGoldState: Store = { ...state, bank: { ...state.bank, gold: 0 } }
-    renderGame(toHistory(noGoldState))
+    renderGame(noGoldState)
 
     selectCard(reservationTargetCardId)
     clickButton('Reserve card')
@@ -62,7 +61,8 @@ describe('reserve card', () => {
   })
 
   test('cannot reserve more than 3 cards', () => {
-    renderGame(toHistory(mockMaxReservedCardsState()))
+    const state = mockMaxReservedCardsState.mockState()
+    renderGame(state)
 
     selectCard(reservationTargetCardId)
     const reserveCardButton = screen.getByText('Reserve card')
@@ -71,7 +71,7 @@ describe('reserve card', () => {
   })
 
   test('cannot reserve twice in the same turn', () => {
-    renderGame(history)
+    renderGame(state)
 
     selectCard(reservationTargetCardId)
     clickButton('Reserve card')

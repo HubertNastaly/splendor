@@ -1,6 +1,6 @@
-import { PLAYER_TOKENS, mockInitialState, mockNearTokensLimitState } from '@/mocks'
+import { mockInitialState, mockNearTokensLimitState } from '@/mocks'
 import { Color } from '@/types'
-import { sum, toHistory } from '@/utils'
+import { sum } from '@/utils'
 import { expectTokensAmount, renderGame, pickTokens, returnTokens } from './utils'
 import { screen } from '@testing-library/react'
 
@@ -10,10 +10,9 @@ jest.mock('@/hooks', () => ({
 }))
 
 describe('pick tokens', () => {
-  const defaultState = toHistory(mockInitialState())
-  const { present } = defaultState
+  const initialState = mockInitialState.mockState()
 
-  const fixture = () => renderGame(defaultState)
+  const fixture = () => renderGame(initialState)
 
   test('can pick 3 different tokens', () => {
     fixture()
@@ -22,7 +21,7 @@ describe('pick tokens', () => {
     pickTokens(tokenColors)
 
     for(const tokenColor of tokenColors) {
-      expectTokensAmount('bank', tokenColor, present.state.bank[tokenColor] - 1)
+      expectTokensAmount('bank', tokenColor, initialState.bank[tokenColor] - 1)
     }
 
     for(const tokenColor of tokenColors) {
@@ -36,7 +35,7 @@ describe('pick tokens', () => {
     const tokenColor: Color = 'green'
     pickTokens([tokenColor, tokenColor])
 
-    expectTokensAmount('bank', 'green', present.state.bank.green - 2)
+    expectTokensAmount('bank', 'green', initialState.bank.green - 2)
     expectTokensAmount('player', 'green', 2)
   })
 
@@ -45,10 +44,10 @@ describe('pick tokens', () => {
 
     pickTokens(['green', 'red', 'green'])
 
-    expectTokensAmount('bank', 'green', present.state.bank.green - 1)
+    expectTokensAmount('bank', 'green', initialState.bank.green - 1)
     expectTokensAmount('player', 'green', 1)
 
-    expectTokensAmount('bank', 'red', present.state.bank.red - 1)
+    expectTokensAmount('bank', 'red', initialState.bank.red - 1)
     expectTokensAmount('player', 'red', 1)
   })
 
@@ -59,7 +58,7 @@ describe('pick tokens', () => {
     pickTokens(tokenColors)
 
     for(const tokenColor of tokenColors.slice(0, -1)) {
-      expectTokensAmount('bank', tokenColor, present.state.bank[tokenColor] - 1)
+      expectTokensAmount('bank', tokenColor, initialState.bank[tokenColor] - 1)
     }
 
     for(const tokenColor of tokenColors.slice(0, -1)) {
@@ -67,7 +66,7 @@ describe('pick tokens', () => {
     }
 
     const lastColor = tokenColors[tokenColors.length - 1]
-    expectTokensAmount('bank', lastColor, present.state.bank[lastColor])
+    expectTokensAmount('bank', lastColor, initialState.bank[lastColor])
     expectTokensAmount('player', lastColor, 0)
   })
 
@@ -77,14 +76,14 @@ describe('pick tokens', () => {
     const tokenColor: Color = 'gold'
     pickTokens([tokenColor])
 
-    expectTokensAmount('bank', tokenColor, present.state.bank.gold)
+    expectTokensAmount('bank', tokenColor, initialState.bank.gold)
     expectTokensAmount('player', tokenColor, 0)
   })
 
   test('can return tokens when over a tokens limit', () => {
-    const state = mockNearTokensLimitState()
-    renderGame(toHistory(state))
-    const totalTokens = sum(Object.values(PLAYER_TOKENS))
+    const { mockState, playerTokens } = mockNearTokensLimitState
+    renderGame(mockState())
+    const totalTokens = sum(Object.values(playerTokens))
     expect(totalTokens).toEqual(9)
 
     pickTokens(['black', 'blue', 'green'])

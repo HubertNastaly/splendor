@@ -1,30 +1,30 @@
-import { COLLECTABLE_ARISTOCRAT_IDS, UNCOLLECTABLE_ARISTOCRAT_ID, mockCollectableAristocratState } from '@/mocks'
-import { toHistory } from '@/utils'
+import { mockCollectableAristocratState } from '@/mocks'
 import { ARISTOCRAT_VALUE } from '@/constants'
 import { expectAristocratsPoints, renderGame, pickAristocratById } from './utils'
 
 describe('aristocrats', () => {
-  const state = toHistory(mockCollectableAristocratState())
+  const { mockState, collectableAristocratsIds, uncollectableAristocratId } = mockCollectableAristocratState
+  const state = mockState()
 
   beforeEach(() => renderGame(state))
 
   test.todo('apply special styles when collectable')
 
   test('can pick aristocrat when collectable', () => {
-    pickAristocratById(COLLECTABLE_ARISTOCRAT_IDS[0])
+    pickAristocratById(collectableAristocratsIds[0])
     expectAristocratsPoints(ARISTOCRAT_VALUE)
   })
 
   test('cannot pick two collectable aristocrats in one round', () => {
-    pickAristocratById(COLLECTABLE_ARISTOCRAT_IDS[0])
+    pickAristocratById(collectableAristocratsIds[0])
     expectAristocratsPoints(ARISTOCRAT_VALUE)
 
-    pickAristocratById(COLLECTABLE_ARISTOCRAT_IDS[1])
+    pickAristocratById(collectableAristocratsIds[1])
     expectAristocratsPoints(ARISTOCRAT_VALUE)
   })
 
   test('cannot pick uncollectable aristocrat', () => {
-    pickAristocratById(UNCOLLECTABLE_ARISTOCRAT_ID)
+    pickAristocratById(uncollectableAristocratId)
     expectAristocratsPoints(0)
   })
 })

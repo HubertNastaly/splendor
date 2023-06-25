@@ -1,9 +1,9 @@
 import { DEFAULT_NAMES } from '@/constants';
 import { createCardsByLevelCollection, createPlayer, createTokensCollection, dealCards, generateAristocrats, generateBank, generateDecks, pickCardFromDeck, shuffleDecks } from '@/helpers';
-import { CARD_LEVELS, Store } from '@/types';
+import { CARD_LEVELS, MockState, Store } from '@/types';
 import { FIXED_BOARD_CARDS_IDS } from './fixedBoardCards';
 
-export function mockReservationTargetCardState(): Store {
+export function mockState(): Store {
   const players = DEFAULT_NAMES.map(createPlayer)
 
   const boardCardsByLevel = createCardsByLevelCollection()
@@ -29,3 +29,5 @@ export function mockReservationTargetCardState(): Store {
     gameState: 'started'
   }
 }
+
+export const mockReservationTargetCardState: MockState = { mockState }

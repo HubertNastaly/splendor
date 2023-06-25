@@ -1,14 +1,14 @@
 import { DEFAULT_NAMES } from '@/constants';
 import { createCardsByLevelCollection, createPlayer, createTokensCollection, dealCards, generateAristocrats, generateBank, generateDecks, pickCardFromDeck, shuffleDecks, transfer } from '@/helpers';
-import { BasicColor, CardData, CardLevel, CardsByLevel, Player, Store, Tokens } from '@/types';
+import { BasicColor, CardData, CardLevel, CardsByLevel, MockState, Player, Store, Tokens } from '@/types';
 
 const COLLECTED_CARDS_LEVEL: CardLevel = 3
 const COLLECTED_CARD_IDS = [77, 80, 81] // 14 points in total
 
-export const MISSING_POINT_CARD_ID = 7
+const MISSING_POINT_CARD_ID = 7
 const MISSING_POINT_CARD_LEVEL: CardLevel = 1
 
-export function mockOnePointFromWinState(): Store {
+function mockState(): Store {
   const players = DEFAULT_NAMES.map(createPlayer)
   const bank = generateBank(players.length)
   const favourizedPlayer = players[0]
@@ -58,4 +58,9 @@ function supplyRequiredTokens(player: Player, card: CardData, bank: Tokens) {
   Object.entries(card.price).forEach(([color, amount]) => {
     transfer(bank, player.tokens, color as BasicColor, amount)
   })
+}
+
+export const mockOnePointFromWinState: MockState & { missingPointCardId: number } = {
+  mockState,
+  missingPointCardId: MISSING_POINT_CARD_ID
 }
